@@ -1,0 +1,63 @@
+.chat
+  &__item
+    height: 70px
+    padding: 5px 10px
+    width: 100%
+    flex-direction: column
+    color: $colorSecondary
+    @include centerFlex()
+    flex-direction: row
+    justify-content: space-between
+    box-sizing: border-box
+    &:hover
+      background: $colorHover
+    &_avatar
+      border-radius: 50px
+      width: 50px
+      height: 50px
+      background: $colorAvatar
+      min-width: 50px
+      margin-right: 10px
+    &_name
+      font-weight: 600
+      color: $colorMain
+    &_message
+      max-width: 200px
+      height: 35px
+      font-weight: 500
+      font-size: 12px
+      line-height: 15px
+      padding-right: 10px
+    &_time
+      max-width: 30px
+      max-height: 15px
+      font-weight: 500
+      font-size: 9px
+      line-height: 13px
+    &_newMessage
+      width: 20px
+      height: 20px
+      font-size: 11px
+      line-height: 12px
+      border-radius: 20px
+      display: inline-block
+      color: $colorDefault
+      @include centerFlex()
+      background: $colorPrimary
+      margin-top: 15px
+    &_centerBox
+      height: 100%
+      width: 100%
+      justify-content: center
+      display: flex
+      flex-direction: column
+    &_rightBox
+      display: flex
+      flex-direction: column
+      height: 100%
+      align-items: center
+
+.divider
+  width: 96%
+  margin: 2px 0
+  border-top: $borderDefault
