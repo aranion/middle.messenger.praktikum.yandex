@@ -4,9 +4,8 @@
   "description": "messenger",
   "scripts": {
     "start": "parcel -p 3000 ./static/index.hbs --open",
-    "build": "npm run rmdir -- .parcel-cache dist && parcel build ./static/index.hbs",
-    "server": "node ./server/index.ts",
-    "rmdir": "node -e \"var fs = require('fs'); process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true })); process.exit(0);\""
+    "build": "parcel build ./static/index.hbs",
+    "server": "node ./server/index.ts"
   },
   "engines": {
     "npm": "8.15.0",
