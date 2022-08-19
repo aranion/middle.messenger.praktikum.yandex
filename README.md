@@ -13,3 +13,7 @@ npm run build
 
 #### Запуск сервера
 node ./server/index.ts
+
+#### Сайт на Netlify
+https://deploy--gleeful-florentine-3e81be.netlify.app/
+https://gleeful-florentine-3e81be.netlify.app/
