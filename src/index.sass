@@ -1,0 +1,25 @@
+@import './constants/var/_vat.sass'
+@import './components/index.sass'
+@import './pages/index.sass'
+
+#root
+  position: relative
+  @include centerFlex()
+  width: 100vw
+  height: 100vh
+  font-family: sans-serif
+  background: $colorDefault
+  color: $colorMain
+  overflow-x: hidden
+
+.circleBtn
+  @include centerFlex()
+  width: 30px
+  height: 30px
+  min-width: 30px
+  border-radius: 30px
+  background: $colorPrimary
+
+.hidden
+  display: none
+  visibility: hidden

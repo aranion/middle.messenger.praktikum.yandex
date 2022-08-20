@@ -1,0 +1,137 @@
+---
+chats: [
+{ srcAvatar: "src", login: "User1", lastMessage: "...", dateMessage: "00:00", newMessage: "2" },
+{ srcAvatar: "src", login: "User2", lastMessage: "...", dateMessage: "00:00", newMessage: "2" },
+{ srcAvatar: "src", login: "User3", lastMessage: "...", dateMessage: "00:00", newMessage: "2" },
+{ srcAvatar: "src", login: "User4", lastMessage: "...", dateMessage: "00:00", newMessage: "2" },
+{ srcAvatar: "src", login: "User5", lastMessage: "...", dateMessage: "00:00", newMessage: "2" },
+{ srcAvatar: "src", login: "User6", lastMessage: "...", dateMessage: "00:00", newMessage: "2" },
+{ srcAvatar: "src", login: "User7", lastMessage: "...", dateMessage: "00:00", newMessage: "2" },
+{ srcAvatar: "src", login: "User8", lastMessage: "...", dateMessage: "00:00", newMessage: "4" },
+{ srcAvatar: "src", login: "User9", lastMessage: "...", dateMessage: "00:00", newMessage: "1" },
+{ srcAvatar: "src", login: "User10", lastMessage: "...", dateMessage: "00:00", newMessage: "2" },
+{ srcAvatar: "src", login: "User11", lastMessage: "...", dateMessage: "00:00", newMessage: "2" }
+]
+
+messages: [
+{textMessage: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент',
+createMessage: '11:56'},
+{textMessage: 'img', createMessage: '11:52'}
+]
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chats</title>
+  <script src="./index.ts" type="module"></script>
+</head>
+
+<body>
+  <div id="root">
+    <main class="chats">
+      <div class="chats__leftBox">
+        <div>
+          <div class="chats__topBox_profile">
+            <a href="#" alt="Профиль" class="chats__topBox_profile_link">Профиль</a>
+            <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 9L5 5L1 1" stroke="#999999" />
+            </svg>
+          </div>
+          <div class="chats__topBox_search">
+            <input class="chats__topBox_search_input" />
+            <div class="chats__topBox_search_placeholder">
+              <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M7.59239 8.41382C6.16047 9.84574 3.83886 9.84574 2.40694 8.41382C0.975017 6.9819 0.975017 4.6603 2.40694 3.22837C3.83886 1.79645 6.16047 1.79645 7.59239 3.22837C9.02431 4.6603 9.02431 6.9819 7.59239 8.41382ZM8.03277 9.79678C6.07255 11.2962 3.25696 11.1495 1.46413 9.35663C-0.488491 7.40401 -0.488491 4.23819 1.46413 2.28556C3.41675 0.332943 6.58258 0.332943 8.5352 2.28556C10.3279 4.07831 10.4747 6.89373 8.97555 8.85394L12.5423 12.4206L11.5994 13.3635L8.03277 9.79678Z"
+                  fill="#999999" />
+              </svg>
+              <span>Поиск</span>
+            </div>
+          </div>
+        </div>
+        <div class="chats__leftBox_list">
+          {{#each chats}}
+          {{> ChatItem
+          srcAvatar=this.srcAvatar
+          login=this.login
+          lastMessage=this.lastMessage
+          dateMessage=this.dateMessage
+          newMessage=this.newMessage
+          }}
+          {{/each}}
+        </div>
+      </div>
+      <div class="chats__correspondence">
+        <div class="hidden">Выберите чат чтобы отправить сообщение</div>
+        <div class="chats__correspondence_header ">
+          <div class="chats__correspondence_info ">
+            <div class="chats__correspondence_header_avatar"></div>
+            <div class="chats__correspondence_info_name ">Вадим</div>
+            <div>
+              <svg width="3" height="16" viewBox="0 0 3 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="1.5" cy="2" r="1.5" fill="#1E1E1E" />
+                <circle cx="1.5" cy="8" r="1.5" fill="#1E1E1E" />
+                <circle cx="1.5" cy="14" r="1.5" fill="#1E1E1E" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="chats__correspondence_messages">
+          <div class="chats__correspondence_messageDate">19 июня</div>
+          <div>
+            {{#each messages}}
+            {{> FriendMessage textMessage=this.textMessage createMessage=this.createMessage}}
+            {{/each}}
+            <div class="chats__correspondence_row chats__correspondence_row_my ">
+              <div class="chats__correspondence_message chats__correspondence_myMessage">
+                <p>Круто!</p>
+                <span class="chats__correspondence_time">11:56</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="chats__correspondence_footer">
+          <div><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.18662 13.5L14.7628 5.92389L15.7056 6.8667L8.12943 14.4428L7.18662 13.5Z" fill="#999999" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.70067 16.0141L17.2768 8.43793L18.2196 9.38074L10.6435 16.9569L9.70067 16.0141Z" fill="#999999" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.0433 21.3567L22.6195 13.7806L23.5623 14.7234L15.9861 22.2995L15.0433 21.3567Z" fill="#999999" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M17.5574 23.8708L25.1335 16.2946L26.0763 17.2374L18.5002 24.8136L17.5574 23.8708Z" fill="#999999" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M17.5574 23.8709C14.9423 26.486 10.7118 26.4954 8.10831 23.8919C5.50482 21.2884 5.51424 17.0579 8.12936 14.4428L7.18655 13.5C4.0484 16.6381 4.0371 21.7148 7.16129 24.839C10.2855 27.9632 15.3621 27.9518 18.5003 24.8137L17.5574 23.8709Z"
+                fill="#999999" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M22.6195 13.7806L23.5623 14.7234C26.003 12.2826 26.0118 8.3341 23.5819 5.90417C21.152 3.47424 17.2035 3.48303 14.7627 5.92381L15.7055 6.86662C17.6233 4.94887 20.7257 4.94196 22.6349 6.85119C24.5441 8.76042 24.5372 11.8628 22.6195 13.7806Z"
+                fill="#999999" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.70092 16.0144C7.95751 17.7578 7.95123 20.5782 9.68689 22.3138C11.4226 24.0495 14.2429 24.0432 15.9863 22.2998L15.0435 21.357C13.8231 22.5774 11.8489 22.5818 10.6339 21.3668C9.41894 20.1518 9.42334 18.1776 10.6437 16.9572L9.70092 16.0144Z"
+                fill="#999999" />
+            </svg>
+          </div>
+
+          <textarea class="chats__correspondence_footer_text" placeholder="Сообщение"></textarea>
+
+          <div class="circleBtn">
+            <svg width="11" height="2" viewBox="0 0 11 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect y="0.199951" width="11" height="1.6" fill="white" />
+            </svg>
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L5 6L1 11" stroke="white" stroke-width="1.6" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
