@@ -1,14 +1,12 @@
 <div class="divider"></div>
-<div class="chat__item">
-  <div class="chat__item_avatar">
+<div class="chatItem">
+  {{> Avatar}}
+  <div class="chatItem__centerBox">
+    <span class="chatItem__name">{{ login }}</span>
+    <span class="chatItem__message">{{ lastMessage }}</span>
   </div>
-  <div class="chat__item_centerBox">
-    <span class="chat__item_name">{{ login }}</span>
-    <span class="chat__item_message">{{ lastMessage }}</span>
-  </div>
-  <div class="chat__item_rightBox">
-    <span class="chat__item_time">{{ dateMessage}}</span>
-    <span class="chat__item_newMessage">{{ newMessage }}</span>
+  <div class="chatItem__rightBox">
+    <span class="chatItem__time">{{ dateMessage}}</span>
+    <span class="chatItem__newMessage">{{ newMessage }}</span>
   </div>
 </div>
-<div class="divider"></div>

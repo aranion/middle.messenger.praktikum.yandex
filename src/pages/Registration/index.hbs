@@ -1,63 +1,70 @@
 ---
 fields: [
-{
-name: 'email',
-label: 'Почта',
-id: 'email',
-type: 'email',
-placeholder: 'Почта',
-errorMessage: 'Ошибка'
-},
-{
-name: 'login',
-label: 'Логин',
-id: 'login',
-type: 'text',
-placeholder: 'Логин',
-errorMessage: 'Ошибка'
-},
-{
-name: 'first_name',
-label: 'Имя',
-id: 'first_name',
-type: 'text',
-placeholder: 'Имя',
-errorMessage: 'Ошибка'
-},
-{
-name: 'second_name',
-label: 'Фамилия',
-id: 'second_name',
-type: 'text',
-placeholder: 'Фамилия',
-errorMessage: 'Ошибка'
-},
-{
-name: 'phone',
-label: 'Телефон',
-id: 'phone',
-type: 'phone',
-placeholder: 'Телефон',
-errorMessage: 'Ошибка'
-},
-{
-name: 'password',
-label: 'Пароль',
-id: 'password',
-type: 'password',
-placeholder: 'Пароль',
-errorMessage: 'Ошибка'
-},
-{
-name: 'password',
-label: 'Пароль (ещё раз)',
-id: 'password',
-type: 'password',
-placeholder: 'Пароль (ещё раз)',
-errorMessage: 'Пароли не совпадают'
-},
+    {
+        name: 'email',
+        label: 'Почта',
+        id: 'email',
+        type: 'email',
+        placeholder: 'Почта',
+        errorMessage: 'Ошибка'
+    },
+    {
+            name: 'login',
+            label: 'Логин',
+            id: 'login',
+            type: 'text',
+            placeholder: 'Логин',
+            errorMessage: 'Ошибка'
+    },
+    {
+        name: 'first_name',
+        label: 'Имя',
+        id: 'first_name',
+        type: 'text',
+        placeholder: 'Имя',
+        errorMessage: 'Ошибка'
+    },
+    {
+        name: 'second_name',
+        label: 'Фамилия',
+        id: 'second_name',
+        type: 'text',
+        placeholder: 'Фамилия',
+        errorMessage: 'Ошибка'
+    },
+    {
+        name: 'display_name',
+        label: 'Отображаемое имя',
+        id: 'display_name',
+        type: 'text',
+        placeholder: 'Отображаемое имя',
+        errorMessage: 'Ошибка'
+    },
+    {
+        name: 'phone',
+        label: 'Телефон',
+        id: 'phone',
+        type: 'phone',
+        placeholder: 'Телефон',
+        errorMessage: 'Ошибка'
+    },
+    {
+        name: 'password',
+        label: 'Пароль',
+        id: 'password',
+        type: 'password',
+        placeholder: 'Пароль',
+        errorMessage: 'Ошибка'
+    },
+    {
+        name: 'password',
+        label: 'Пароль (ещё раз)',
+        id: 'password',
+        type: 'password',
+        placeholder: 'Пароль (ещё раз)',
+        errorMessage: 'Пароли не совпадают'
+    },
 ]
-
 ---
 
 <!DOCTYPE html>
@@ -86,11 +93,13 @@ errorMessage: 'Пароли не совпадают'
         errorMessage=this.errorMessage
         }}
         {{/each}}
-        {{> Button
-        label="Зарегистрироваться"
-        name="registration"
-        type="submit"
-        }}
+        <div class="registration__form_btn">
+          {{> Button
+          label="Зарегистрироваться"
+          name="registration"
+          type="submit"
+          }}
+        </div>
       </form>
       <section class="registration__row  registration__row_link">
         <a href="/login" alt="Регистрация">Войти</a>

@@ -10,14 +10,14 @@
     border-right: $borderDefault
     box-sizing: border-box
     @include centerFlex()
-    &_btn
-      transform: rotate(180deg)
   &__info
     width: calc( 100vw - 65px )
-    @include centerFlex()
+    display: flex
+    justify-content: center
     text-align: center
     overflow-y: auto
     height: 100vh
+    padding: 50px 0
     &_wrapper
       width: 510px
     &_row
@@ -32,6 +32,22 @@
       height: 130px
       border-radius: 130px
       background: $colorAvatar
+      @include centerFlex()
+      position: relative
+      overflow: hidden
+      &_add
+        visibility: hidden
+        position: absolute
+        height: 100%
+        width: 100%
+        @include centerFlex()
+        padding: 30px
+        background: #000
+        color: #fff
+      &:hover .profile__info_avatar_add
+        opacity: 0.5
+        visibility: visible
+        cursor: pointer
     &_name
       color: $colorMain
       margin-top: 20px

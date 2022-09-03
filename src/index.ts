@@ -1,5 +1,5 @@
-import './assets/normalize.sass'
-import './index.sass'
+import "./assets/normalize.sass"
+import "./index.sass"
 
 const root: HTMLDivElement | null = document.querySelector('#root')
 

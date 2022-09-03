@@ -1,0 +1,26 @@
+<div class="chatsLeftBox">
+    <div>
+        <div class="chatsLeftBox__top_profile">
+            <a href="#" alt="Профиль" class="chatsLeftBox__top_profile_link">Профиль</a>
+            <img src="../../assets/imgs/PolygonIcon.svg" alt="ссылка на профиль" />
+        </div>
+        <div class="chatsLeftBox__top_search">
+            <div class="chatsLeftBox__top_search_placeholder">
+                <img src="../../assets/imgs/SearchIcon.svg" alt="search" />
+                <span>Поиск</span>
+            </div>
+            <input class="chatsLeftBox__top_search_input" />
+        </div>
+    </div>
+    <div class="chatsLeftBox__list">
+        {{#each chats}}
+        {{> ChatItem
+        srcAvatar=this.srcAvatar
+        login=this.login
+        lastMessage=this.lastMessage
+        dateMessage=this.dateMessage
+        newMessage=this.newMessage
+        }}
+        {{/each}}
+    </div>
+</div>

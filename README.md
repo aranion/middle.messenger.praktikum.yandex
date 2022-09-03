@@ -11,9 +11,27 @@ npm run start
 #### Создать build
 npm run build
 
-#### Запуск сервера
-node ./server/index.ts
+#### Запуск сервера на 3000 порту OS-Windows
+npm run server
 
-#### Сайт на Netlify
+#### Запуск сервера на 3000 порту OS-Linux
+npm run serverLinux
+
+#### Проверка кода через ESlint
+npm run eslint
+
+#### Fix кода через ESlint и запуск dev проекта
+npm run go
+
+#### Проверка стилей в коде
+npm run lint:sass
+
+#### Fix стилей в коде
+npm run lint:sass:fix
+
+##### Сайт на Netlify
 https://deploy--gleeful-florentine-3e81be.netlify.app/
 https://gleeful-florentine-3e81be.netlify.app/
+
+##### Git pull
+sprint_1: https://github.com/aranion/middle.messenger.praktikum.yandex/pull/1

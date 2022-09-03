@@ -1,0 +1,20 @@
+<div class="modalSubMenu modalSubMenu__active">
+    <img src="{{srcImg}}" alt="{{srcAlt}}" />
+    <div 
+        class="modalSubMenu__wrapper" 
+        style="
+            top:    {{position.top}};    
+            bottom: {{position.bottom}}; 
+            left:   {{position.left}};   
+            right:  {{position.right}};  
+            "
+    >
+        {{#each menuItems }}
+        {{> ModalSubMenuItem 
+            srcImg = this.srcImg
+            title = this.title
+            rotateDeg = this.rotateDeg
+        }}
+        {{/each}}
+    </div>
+</div>
