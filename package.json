@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "messenger",
   "scripts": {
-    "start": "rm -rf .parcel-cache && rm -rf dist  && parcel -p 3000 ./static/index.html --open",
+    "start": "npm run build && parcel -p 3000 ./static/index.html --open",
     "go": "npx eslint . --fix && parcel -p 3000 ./static/index.html --open",
     "eslint": "npx eslint .",
     "eslint:fix": "npx eslint . --fix",
