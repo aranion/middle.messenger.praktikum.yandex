@@ -1,15 +1,7 @@
-<section class="fieldForm ">
-    <label for="{{fieldName}}" class="fieldForm__input_label hidden">
+<section class="fieldForm {{classes}}">
+    <label for="{{fieldName}}" class="fieldForm__label hidden">
         {{label}}
     </label>
-    <input
-        type="{{typeField}}"
-        id="{{id}}"
-        name="{{fieldName}}"
-        placeholder="{{label}}"
-        autocomplete="off"
-        class="fieldForm__input"
-        {{#if required}}required{{/if}}
-    />
-    <span class="fieldForm__validation_message destroy">{{errorMessage}}</span>
+    {{{Input}}}
+    {{{ErrorValidateInput}}}
 </section>

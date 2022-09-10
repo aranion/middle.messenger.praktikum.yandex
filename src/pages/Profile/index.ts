@@ -1,10 +1,11 @@
+import { Link } from './../../router/routePage'
 import { DefaultProps, Block } from './../../utils/Block'
-import template from './template.hbs'
-
-import './styles.sass'
-import { Button, ButtonCircle, FieldProfileProps, EditProfile, InfoProfile } from '../../components'
+import { ButtonCircle, FieldProfileProps, EditProfile, InfoProfile } from '../../components'
 import DefaultAvatar from '../../assets/imgs/AvatarNoneIcon.svg'
 import { ROUTE_LINK } from '../../router/routeLink'
+import { getAllValuesForm } from '../../utils/getAllElementForm'
+import template from './template.hbs'
+import './styles.sass'
 
 export class Profile extends Block<ProfileProps> {
   constructor(props: ProfileProps) {
@@ -14,34 +15,61 @@ export class Profile extends Block<ProfileProps> {
   protected init(): void {
     const { fields, typePage } = this.getProps()
 
+    const handleSubmit = (e: SubmitEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      getAllValuesForm(e)
+    }
+
+    const handleClickBack = () => {
+      Link('CHATS')
+    }
+
     switch (typePage) {
       case 'info':
-        this.children.InfoProfile = new InfoProfile({ fields })
+        this.children.Profile = new InfoProfile({ fields })
         break
       case 'edit':
-        this.children.InfoProfile = new EditProfile({ fields })
-        this.children.ButtonSaveInfo = new Button({ buttonName: 'saveInfo', label: 'Сохранить' })
+        this.children.Profile = new EditProfile({
+          fields,
+          formName: 'formEditAll',
+          events: {
+            submit: handleSubmit
+          }
+        })
         break
       case 'changePassword':
-        this.children.InfoProfile = new EditProfile({ fields })
-        this.children.ButtonSavePass = new Button({ buttonName: 'savePass', label: 'Сохранить' })
+        this.children.Profile = new EditProfile({
+          fields,
+          formName: 'formChangePassword',
+          events: {
+            submit: handleSubmit
+          }
+        })
         break
       default:
         break
     }
 
-    this.children.Button = new ButtonCircle({ direction: 'left', alt: 'назад' })
+    this.children.ButtonBack = new ButtonCircle({
+      direction: 'left',
+      alt: 'назад',
+      events: {
+        click: handleClickBack
+      }
+    })
   }
 
   render() {
     const { fields } = this.getProps()
-    const nameUser = fields[2].value
+    const nameUser = fields[2].inputProps?.value
 
     return this.compile(template, {
       srcAvatar: DefaultAvatar,
-      ...this.props,
-      nameUser,
       backLink: ROUTE_LINK.CHATS,
+      nameUser,
+      ...this.props,
     })
   }
 }

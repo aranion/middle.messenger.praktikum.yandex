@@ -1,102 +1,109 @@
-import { Block, DefaultProps } from '../../utils/Block';
-import { validateValue as defaultValidateValue, TYPE_VALIDATE } from '../../utils/validateValue';
-import template from './template.hbs';
-import './styles.sass';
+import { Block, DefaultProps } from '../../utils/Block'
+import { validateValue as defaultValidateValue, ValidateValue } from '../../utils/validateValue'
+import { ErrorValidateInput } from '../ErrorValidateInput'
+import { Input, InputProps } from '../Input'
+import template from './template.hbs'
+import './styles.sass'
 
 export class FieldForm extends Block<FieldFormProps> {
   constructor(props: FieldFormProps) {
-    super(props);
+    super(props)
 
-    const FieldFormElement = this.getContent();
-    const { events = {}, validateValue = defaultValidateValue, fieldName } = this.getProps();
+    const FieldFormElement = this.getContent()
 
     if (FieldFormElement) {
-      const InputElement = FieldFormElement.querySelector('input');
-      const LabelElement = FieldFormElement.querySelector('label');
-      const SpanErrorElement = FieldFormElement.querySelector('span');
+      const ErrorValidateInput = this.children.ErrorValidateInput
+      const InputElement = FieldFormElement.querySelector('input')
+      const LabelElement = FieldFormElement.querySelector('label')
+      const isNotArrayElement = !Array.isArray(ErrorValidateInput)
+      const { events = {} } = this.getProps()
+      const { blur, focus } = events
 
-      if (LabelElement && InputElement) {
-        InputElement.addEventListener('keyup', (e) => {
-          const targetInput = e.target as HTMLInputElement;
-          const isHiddenLabel = targetInput && targetInput.value === '';
+      const handleFocus = (e: FocusEvent) => {
+        if (isNotArrayElement) {
+          ErrorValidateInput.setProps({ isInvisible: true })
+        }
 
-          if (isHiddenLabel) {
-            LabelElement.classList.add('hidden');
-          } else {
-            LabelElement.classList.remove('hidden');
-          }
-        });
+        if (focus) { focus(e) }
       }
 
-      if (InputElement && SpanErrorElement) {
-        const { blur, focus } = events;
+      const handleBlur = (e: FocusEvent) => {
+        if (e.target) {
+          if (isNotArrayElement) {
+            const isValidateValue = this.validate()
 
-        const defaultFocus = (e: FocusEvent) => {
-          debugger;
-          SpanErrorElement.classList.add('destroy');
-          InputElement.classList.remove('fieldForm__error');
-
-          if (focus) {
-            focus(e);
+            ErrorValidateInput.setProps({ isInvisible: isValidateValue })
           }
-        };
 
-        const defaultBlur = (e: FocusEvent) => {
-          debugger;
-          if (e.target) {
-            const targetInput = e.target as HTMLInputElement;
-            const inputValue = targetInput.value;
+          if (blur) { blur(e) }
+        }
+      }
 
-            if (validateValue && fieldName) {
-              const isValidateValue = validateValue(inputValue, fieldName);
+      const handleChangeInput = (e: KeyboardEvent) => {
+        const TargetInput = e.target as HTMLInputElement
+        const isHiddenLabel = TargetInput && TargetInput.value === ''
 
-              if (!isValidateValue) {
-                SpanErrorElement.classList.remove('destroy');
-                InputElement.classList.add('fieldForm__error');
-              }
-            }
+        if (isHiddenLabel) {
+          LabelElement?.classList.add('hidden')
+        } else {
+          LabelElement?.classList.remove('hidden')
+        }
+      }
 
-            if (blur) {
-              blur(e);
-            }
-          }
-        };
-
-        InputElement.addEventListener('blur', defaultBlur);
-        InputElement.addEventListener('focus', defaultFocus);
+      if (InputElement) {
+        InputElement.addEventListener('blur', handleBlur)
+        InputElement.addEventListener('focus', handleFocus)
+        InputElement.addEventListener('keyup', handleChangeInput)
       }
     }
   }
 
+  public validate(): boolean {
+    const { validateValue = defaultValidateValue, inputProps } = this.getProps()
+    const { fieldName } = inputProps
+    const InputElement = this.children.Input
+    const isNotArrayInputElement = !Array.isArray(InputElement)
+
+    if (fieldName && isNotArrayInputElement) {
+      const TargetInput = InputElement.getContent() as HTMLInputElement
+      const inputValue = TargetInput.value
+
+      return validateValue(inputValue, fieldName)
+    } else {
+      return true
+    }
+  }
+
+  protected init(): void {
+    const { errorMessage = 'Ошибка', inputProps, label } = this.getProps()
+
+    this.children.ErrorValidateInput = new ErrorValidateInput({ errorMessage })
+
+    this.children.Input = new Input({
+      placeholder: label,
+      ...inputProps
+    })
+  }
+
   render() {
+    const { classesList = [] } = this.props
+
     return this.compile(template, {
       ...this.props,
-      id: this.props.id || '',
-      typeField: this.props.typeField || 'text',
-      placeholder: this.props.placeholder || this.props.label,
-      errorMessage: this.props.errorMessage || 'Ошибка',
-    });
+      classes: classesList.join(' ')
+    })
   }
 }
 
 export type FieldFormProps = DefaultProps & {
-  label: string
-  fieldName?: keyof typeof TYPE_VALIDATE
-  id?: string
-  typeField?: keyof typeof TYPE_FIELD
-  placeholder?: string
+  label?: string
+  inputProps: InputProps
   errorMessage?: string
-  required?: boolean
-  validateValue?: (value: string, type: keyof typeof TYPE_VALIDATE) => boolean
+  validateValue?: ValidateValue
+  classesList?: string[]
   events?: {
     focus?: (e: FocusEvent) => any
     blur?: (e: FocusEvent) => any
   }
-};
-
-enum TYPE_FIELD {
-  password = 'password',
-  text = 'text',
-  email = 'email',
-  tel = 'tel',
 }
+

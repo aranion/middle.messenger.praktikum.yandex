@@ -1,75 +1,91 @@
-import { PropsButton } from '../../components/Button';
-import { FieldFormProps } from '../../components/FieldForm';
+import { PropsButton } from '../../components/Button'
+import { FieldFormProps } from '../../components/FieldForm'
 
 export const PROPS_FIELDS_REGISTRATION: FieldFormProps[] = [
   {
-    fieldName: 'email',
+    inputProps: {
+      fieldName: 'email',
+      id: 'email',
+      typeField: 'email',
+      placeholder: 'Почта',
+    },
     label: 'Почта',
-    id: 'email',
-    typeField: 'email',
-    placeholder: 'Почта',
     errorMessage: 'Ошибка',
   },
   {
-    fieldName: 'login',
+    inputProps: {
+      fieldName: 'login',
+      id: 'login',
+      typeField: 'text',
+      placeholder: 'Логин',
+    },
     label: 'Логин',
-    id: 'login',
-    typeField: 'text',
-    placeholder: 'Логин',
     errorMessage: 'Ошибка',
   },
   {
-    fieldName: 'first_name',
+    inputProps: {
+      fieldName: 'first_name',
+      id: 'first_name',
+      typeField: 'text',
+      placeholder: 'Имя',
+    },
     label: 'Имя',
-    id: 'first_name',
-    typeField: 'text',
-    placeholder: 'Имя',
     errorMessage: 'Ошибка',
   },
   {
-    fieldName: 'second_name',
+    inputProps: {
+      fieldName: 'second_name',
+      id: 'second_name',
+      typeField: 'text',
+      placeholder: 'Фамилия',
+    },
     label: 'Фамилия',
-    id: 'second_name',
-    typeField: 'text',
-    placeholder: 'Фамилия',
     errorMessage: 'Ошибка',
   },
   {
-    fieldName: 'display_name',
+    inputProps: {
+      fieldName: 'display_name',
+      id: 'display_name',
+      typeField: 'text',
+      placeholder: 'Отображаемое имя',
+    },
     label: 'Отображаемое имя',
-    id: 'display_name',
-    typeField: 'text',
-    placeholder: 'Отображаемое имя',
     errorMessage: 'Ошибка',
   },
   {
-    fieldName: 'phone',
+    inputProps: {
+      fieldName: 'phone',
+      id: 'phone',
+      typeField: 'tel',
+      placeholder: 'Телефон',
+    },
     label: 'Телефон',
-    id: 'phone',
-    typeField: 'tel',
-    placeholder: 'Телефон',
     errorMessage: 'Ошибка',
   },
   {
-    fieldName: 'password',
+    inputProps: {
+      fieldName: 'password',
+      id: 'password',
+      typeField: 'password',
+      placeholder: 'Пароль',
+    },
     label: 'Пароль',
-    id: 'password',
-    typeField: 'password',
-    placeholder: 'Пароль',
     errorMessage: 'Ошибка',
   },
   {
-    fieldName: 'password',
+    inputProps: {
+      fieldName: 'password',
+      id: 'password_second',
+      typeField: 'password',
+      placeholder: 'Пароль (ещё раз)',
+    },
     label: 'Пароль (ещё раз)',
-    id: 'password_second',
-    typeField: 'password',
-    placeholder: 'Пароль (ещё раз)',
     errorMessage: 'Пароли не совпадают',
   },
-];
+]
 
 export const PROPS_BUTTON_REGISTRATION: PropsButton = {
   label: 'Зарегистрироваться',
   buttonName: 'authorization',
   type: 'submit',
-};
+}

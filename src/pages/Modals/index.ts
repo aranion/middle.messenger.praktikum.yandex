@@ -1,20 +1,20 @@
-import { DefaultProps, Block } from './../../utils/Block';
-import template from './template.hbs';
+import { DefaultProps, Block } from './../../utils/Block'
+import template from './template.hbs'
 
-import './styles.sass';
-import { Button } from '../../components/Button';
+import './styles.sass'
+import { Button } from '../../components/Button'
 
 export class Modal extends Block<Props> {
   constructor(props: Props) {
-    super(props);
+    super(props)
   }
 
   protected init(): void {
-    this.children.Button = new Button({ label: this.props.btnLabel, buttonName: 'buttonModal' });
+    this.children.Button = new Button({ label: this.props.btnLabel, buttonName: 'buttonModal' })
   }
 
   render() {
-    return this.compile(template, { ...this.props });
+    return this.compile(template, { ...this.props })
   }
 }
 
@@ -23,4 +23,4 @@ type Props = DefaultProps & {
   BodyElement: string
   btnLabel: string
   errorMessage: string
-};
+}

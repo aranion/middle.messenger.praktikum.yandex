@@ -1,31 +1,36 @@
-import { Block, DefaultProps } from '../../utils/Block';
-import template from './template.hbs';
-import './styles.sass';
-import { SubMenuItem, SubMenuItemProps } from '../SubMenuItem';
+import { Block, DefaultProps } from '../../utils/Block'
+import { SubMenuItem, SubMenuItemProps } from '../SubMenuItem'
+import template from './template.hbs'
+import './styles.sass'
 
 export class ModalSubMenu extends Block<ModalSubMenuProps> {
   constructor(props: ModalSubMenuProps) {
-    super(props);
+    super(props)
   }
 
   protected init(): void {
-    const { menuItems } = this.getProps();
+    const { menuItems } = this.getProps()
+
+    const handleClickSubMenu = (e: Event) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      console.log('Click', e)
+    }
 
     this.children.MenuItems = menuItems.map((menuItem) => {
       return new SubMenuItem({
         ...menuItem, events: {
-          click: (e) => {
-            console.log('Click', e);
-          },
+          click: handleClickSubMenu
         },
-      });
-    });
+      })
+    })
   }
 
   render() {
     return this.compile(template, {
       ...this.props,
-    });
+    })
   }
 }
 
@@ -39,4 +44,4 @@ export type ModalSubMenuProps = DefaultProps & {
     right: string,
   }
   menuItems: SubMenuItemProps[]
-};
+}

@@ -1,10 +1,10 @@
-import MenuIcon from '../../assets/imgs/MenuIcon.svg';
-import CrossIcon from '../../assets/imgs/CrossIcon.svg';
-import AttachIcon from '../../assets/imgs/AttachIcon.svg';
-import PhotoIcon from '../../assets/imgs/PhotoIcon.svg';
-import AddFileIcon from '../../assets/imgs/AddFileIcon.svg';
-import AddLocationIcon from '../../assets/imgs/AddLocationIcon.svg';
-import { ChatItemProps, MessagesProps, ModalSubMenuProps } from '../../components';
+import MenuIcon from '../../assets/imgs/MenuIcon.svg'
+import CrossIcon from '../../assets/imgs/CrossIcon.svg'
+import AttachIcon from '../../assets/imgs/AttachIcon.svg'
+import PhotoIcon from '../../assets/imgs/PhotoIcon.svg'
+import AddFileIcon from '../../assets/imgs/AddFileIcon.svg'
+import AddLocationIcon from '../../assets/imgs/AddLocationIcon.svg'
+import { ChatItemProps, MessagesProps, ModalSubMenuProps } from '../../components'
 
 export const CHATS_LIST: ChatItemProps[] = [
   { srcAvatar: 'src', login: 'User1', lastMessage: '...', dateMessage: '00:00', newMessageCounter: '2', chatId: '1' },
@@ -18,7 +18,7 @@ export const CHATS_LIST: ChatItemProps[] = [
   { srcAvatar: 'src', login: 'User9', lastMessage: '...', dateMessage: '00:00', newMessageCounter: '1', chatId: '9' },
   { srcAvatar: 'src', login: 'User10', lastMessage: '...', dateMessage: '00:00', newMessageCounter: '2', chatId: '11' },
   { srcAvatar: 'src', login: 'User11', lastMessage: '...', dateMessage: '00:00', newMessageCounter: '2', chatId: '11' },
-];
+]
 
 export const MENU_CHANGE_FRIENDS: ModalSubMenuProps = {
   srcImgButton: MenuIcon,
@@ -28,7 +28,7 @@ export const MENU_CHANGE_FRIENDS: ModalSubMenuProps = {
     { srcImg: CrossIcon, title: 'Добавить пользователя' },
     { srcImg: CrossIcon, title: 'Удалить пользователя', rotateDeg: 45 },
   ],
-};
+}
 
 export const MENU_ADD_CONTENT_MESSAGE: ModalSubMenuProps = {
   srcImgButton: AttachIcon,
@@ -39,7 +39,7 @@ export const MENU_ADD_CONTENT_MESSAGE: ModalSubMenuProps = {
     { srcImg: AddFileIcon, title: 'Файл' },
     { srcImg: AddLocationIcon, title: 'Локация' },
   ],
-};
+}
 
 export const META_MESSAGES: MessagesProps[] = [
   {
@@ -57,4 +57,4 @@ export const META_MESSAGES: MessagesProps[] = [
     idMessage: 4,
   },
   { textMessage: 'Ага!', createMessage: '11:52', myMessageFlag: true, idMessage: 5 },
-];
+]

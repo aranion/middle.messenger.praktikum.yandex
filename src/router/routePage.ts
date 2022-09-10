@@ -15,7 +15,6 @@ import { ROUTE_LINK } from './routeLink'
 export const routePage = (): Block => {
   const isAuth = true // пока нет авторизации
   const path = (document.location.pathname).toLowerCase()
-  console.log('pagePath = ', path)
 
   switch (path) {
     case ROUTE_LINK.HOME:
@@ -37,4 +36,8 @@ export const routePage = (): Block => {
     default:
       return new ErrorPage(propsNotFound)
   }
+}
+
+export const Link = (link: keyof typeof ROUTE_LINK): void => {
+  document.location.pathname = link.toLowerCase()
 }

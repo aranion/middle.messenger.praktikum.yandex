@@ -1,12 +1,12 @@
 <main class="chats">
-    {{{ ChatsLeftBox }}}
+    {{{ChatsLeftBox}}}
     <div class="chats__correspondence">
         <div class="hidden">Выберите чат чтобы отправить сообщение</div>
-        <div class="chats__correspondence_header ">
-            <div class="chats__correspondence_info ">
-                {{{ AvatarInterlocutor }}}
+        <div class="chats__correspondence_header">
+            <div class="chats__correspondence_info">
+                {{{AvatarInterlocutor}}}
                 <div class="chats__correspondence_info_name">Вадим</div>
-                {{{ ModalSubMenuChangeFriends }}}
+                {{{ModalSubMenuChangeFriends}}}
             </div>
         </div>
         <div class="chats__correspondence_messages">
@@ -19,9 +19,13 @@
             {{/each}}
         </div>
         <form class="chats__correspondence_footer">
-            {{{ ModalSubMenuAddContent }}}
-            <input class="chats__correspondence_footer_text" placeholder="Сообщение" name="message"></input>
-            {{{ ButtonCircle }}}
+            {{{ModalSubMenuAddContent}}}
+            <input
+                class="chats__correspondence_footer_text"
+                placeholder="Сообщение"
+                name="message"
+            />
+            {{{ButtonCircle}}}
         </form>
     </div>
 </main>

@@ -2,20 +2,20 @@ import { Block, DefaultProps } from '../../utils/Block'
 import template from './template.hbs'
 import './styles.sass'
 
-export class SubMenuItem extends Block<SubMenuItemProps> {
-  constructor(props: SubMenuItemProps) {
+export class ErrorValidateInput extends Block<Props> {
+  constructor(props: Props) {
     super(props)
   }
 
   render() {
     return this.compile(template, {
+      isInvisible: true,
       ...this.props,
     })
   }
 }
 
-export type SubMenuItemProps = DefaultProps & {
-  rotateDeg?: number
-  srcImg: string
-  title: string
+type Props = DefaultProps & {
+  errorMessage: string
+  isInvisible?: boolean
 }
