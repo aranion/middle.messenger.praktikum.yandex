@@ -9,13 +9,9 @@
     "eslint:fix": "npx eslint . --fix",
     "lint": "stylelint src/**/*.{css,sass}",
     "lint:fix": "stylelint src/**/*.{css,sass} --fix",
-    "build": "parcel build ./static/index.hbs",
+    "build": "parcel build ./static/index.html",
     "server": "set PORT=3000 && node ./server/index.ts",
     "serverLinux": "PORT=3000 node ./server/index.ts"
-  },
-  "engines": {
-    "npm": "8.15.0",
-    "node": "16.13.2"
   },
   "keywords": [],
   "author": "",
