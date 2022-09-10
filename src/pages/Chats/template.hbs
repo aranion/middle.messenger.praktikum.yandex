@@ -1,0 +1,27 @@
+<main class="chats">
+    {{{ ChatsLeftBox }}}
+    <div class="chats__correspondence">
+        <div class="hidden">Выберите чат чтобы отправить сообщение</div>
+        <div class="chats__correspondence_header ">
+            <div class="chats__correspondence_info ">
+                {{{ AvatarInterlocutor }}}
+                <div class="chats__correspondence_info_name">Вадим</div>
+                {{{ ModalSubMenuChangeFriends }}}
+            </div>
+        </div>
+        <div class="chats__correspondence_messages">
+            <div class="chats__correspondence_messages_date">
+                <div class="chats__correspondence_messages_date_line"></div>
+                <span class="chats__correspondence_messages_date_text">19 июня</span>
+            </div>
+            {{#each Messages}}
+                {{{this}}}
+            {{/each}}
+        </div>
+        <form class="chats__correspondence_footer">
+            {{{ ModalSubMenuAddContent }}}
+            <input class="chats__correspondence_footer_text" placeholder="Сообщение" name="message"></input>
+            {{{ ButtonCircle }}}
+        </form>
+    </div>
+</main>

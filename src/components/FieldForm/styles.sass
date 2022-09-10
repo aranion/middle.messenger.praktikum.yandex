@@ -1,0 +1,31 @@
+@import '../../constants/var/vars.sass'
+
+.fieldForm
+	display: flex
+	flex-direction: column
+	width: 280px
+	margin: 0 auto 5px
+
+	&__error
+		color: $colorErorr
+
+	&__input
+		border: none
+		border-bottom: $borderInput
+
+		&_label
+			font-size: 9px
+			line-height: 9px
+			color: $colorSecondary
+
+	&__validation
+		&_message
+			color: $colorErorr
+			font-size: 8px
+			line-height: 8px
+			margin-top: 5px
+			visibility: visible
+
+		&_hidden
+			visibility: hidden
+			display: none

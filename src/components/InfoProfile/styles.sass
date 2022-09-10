@@ -1,0 +1,33 @@
+@import '../../constants/var/vars.sass'
+
+.infoProfile
+	&__row
+		&_params
+			flex-direction: column
+			align-items: stretch
+
+		&_change
+			margin-top: 60px
+
+			a:hover
+				text-decoration: underline
+
+	&__name
+		color: $colorMain
+		margin-top: 20px
+		margin-bottom: 60px
+
+	&__change
+		display: flex
+		justify-content: space-between
+		padding: 10px 0
+		font-size: 13px
+		line-height: 13px
+		color: $colorPrimary
+		cursor: pointer
+
+		&:not(:first-child)
+			border-top: $borderDefault
+
+		&_exit
+			color: $colorErorr
