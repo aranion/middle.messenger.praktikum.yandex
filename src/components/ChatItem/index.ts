@@ -1,22 +1,22 @@
-import { Block, DefaultProps } from '../../utils/Block'
-import { Avatar } from '../'
-import template from './template.hbs'
-import './styles.sass'
+import { Block, DefaultProps } from '../../utils/Block';
+import { Avatar } from '../';
+import template from './template.hbs';
+import './styles.sass';
 
 export class ChatItem extends Block<ChatItemProps> {
   constructor(props: ChatItemProps) {
-    super(props)
+    super(props);
   }
 
   protected init(): void {
-    this.children.Avatar = new Avatar({})
+    this.children.Avatar = new Avatar({});
   }
 
   render() {
     return this.compile(template, {
       linkChat: '#chat',
-      ...this.props
-    })
+      ...this.props,
+    });
   }
 }
 
@@ -28,5 +28,5 @@ export type ChatItemProps = DefaultProps & {
   lastMessage: string
   dateMessage: string
   newMessageCounter: string
-} 
+};
 

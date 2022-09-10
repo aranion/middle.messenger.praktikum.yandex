@@ -1,14 +1,46 @@
 {
-  "extends": "airbnb",
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:import/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "plugins": [
     "@typescript-eslint"
   ],
   "rules": {
-    "max-len": [
-      2,
-      150
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "no-param-reassign": "off",
+    "import/prefer-default-export": "off",
+    "dot-notation": "off",
+    "arrow-body-style": "off",
+    "no-unused-vars": "off",
+    "no-console": "off",
+    "max-classes-per-file": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-useless-constructor": "off",
+    "semi": [
+      "off",
+      "never"
     ],
-    "@typescript-eslint/no-unused-vars": 2
+    "@typescript-eslint/dot-notation": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "@typescript-eslint/no-useless-constructor": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
+    ]
   }
 }

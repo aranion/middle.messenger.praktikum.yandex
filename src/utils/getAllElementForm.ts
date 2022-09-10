@@ -1,4 +1,4 @@
-import { ROUTE_LINK } from '../router/routePage'
+import { ROUTE_LINK } from '../router/routeLink'
 
 export const getAllElementForm = (e: SubmitEvent) => {
   e.preventDefault()

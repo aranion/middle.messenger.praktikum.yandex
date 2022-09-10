@@ -1,10 +1,10 @@
-import { DefaultProps } from './../../utils/Block'
+import { DefaultProps, Block } from './../../utils/Block'
 import template from './template.hbs'
-import { Block } from '../../utils/Block'
+
 import './styles.sass'
-import { Button, ButtonCircle, FieldProfile, FieldProfileProps, EditProfile, InfoProfile } from '../../components'
+import { Button, ButtonCircle, FieldProfileProps, EditProfile, InfoProfile } from '../../components'
 import DefaultAvatar from '../../assets/imgs/AvatarNoneIcon.svg'
-import { ROUTE_LINK } from '../../router/routePage'
+import { ROUTE_LINK } from '../../router/routeLink'
 
 export class Profile extends Block<ProfileProps> {
   constructor(props: ProfileProps) {
@@ -41,7 +41,7 @@ export class Profile extends Block<ProfileProps> {
       srcAvatar: DefaultAvatar,
       ...this.props,
       nameUser,
-      backLink: ROUTE_LINK.CHATS
+      backLink: ROUTE_LINK.CHATS,
     })
   }
 }

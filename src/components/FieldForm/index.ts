@@ -1,69 +1,69 @@
-import { Block, DefaultProps } from '../../utils/Block'
-import { validateValue as defaultValidateValue, TYPE_VALIDATE } from '../../utils/validateValue'
-import template from './template.hbs'
-import './styles.sass'
+import { Block, DefaultProps } from '../../utils/Block';
+import { validateValue as defaultValidateValue, TYPE_VALIDATE } from '../../utils/validateValue';
+import template from './template.hbs';
+import './styles.sass';
 
 export class FieldForm extends Block<FieldFormProps> {
   constructor(props: FieldFormProps) {
-    super(props)
+    super(props);
 
-    const FieldFormElement = this.getContent()
-    const { events = {}, validateValue = defaultValidateValue, fieldName } = this.getProps()
+    const FieldFormElement = this.getContent();
+    const { events = {}, validateValue = defaultValidateValue, fieldName } = this.getProps();
 
     if (FieldFormElement) {
-      const InputElement = FieldFormElement.querySelector('input')
-      const LabelElement = FieldFormElement.querySelector('label')
-      const SpanErrorElement = FieldFormElement.querySelector('span')
+      const InputElement = FieldFormElement.querySelector('input');
+      const LabelElement = FieldFormElement.querySelector('label');
+      const SpanErrorElement = FieldFormElement.querySelector('span');
 
       if (LabelElement && InputElement) {
         InputElement.addEventListener('keyup', (e) => {
-          const targetInput = e.target as HTMLInputElement
-          const isHiddenLabel = targetInput && targetInput.value === ''
+          const targetInput = e.target as HTMLInputElement;
+          const isHiddenLabel = targetInput && targetInput.value === '';
 
           if (isHiddenLabel) {
-            LabelElement.classList.add('hidden')
+            LabelElement.classList.add('hidden');
           } else {
-            LabelElement.classList.remove('hidden')
+            LabelElement.classList.remove('hidden');
           }
-        })
+        });
       }
 
       if (InputElement && SpanErrorElement) {
-        const { blur, focus } = events
+        const { blur, focus } = events;
 
         const defaultFocus = (e: FocusEvent) => {
-          debugger
-          SpanErrorElement.classList.add('destroy')
-          InputElement.classList.remove('fieldForm__error')
+          debugger;
+          SpanErrorElement.classList.add('destroy');
+          InputElement.classList.remove('fieldForm__error');
 
           if (focus) {
-            focus(e)
+            focus(e);
           }
-        }
+        };
 
         const defaultBlur = (e: FocusEvent) => {
-          debugger
+          debugger;
           if (e.target) {
-            const targetInput = e.target as HTMLInputElement
-            const inputValue = targetInput.value
+            const targetInput = e.target as HTMLInputElement;
+            const inputValue = targetInput.value;
 
             if (validateValue && fieldName) {
-              const isValidateValue = validateValue(inputValue, fieldName)
+              const isValidateValue = validateValue(inputValue, fieldName);
 
               if (!isValidateValue) {
-                SpanErrorElement.classList.remove('destroy')
-                InputElement.classList.add('fieldForm__error')
+                SpanErrorElement.classList.remove('destroy');
+                InputElement.classList.add('fieldForm__error');
               }
             }
 
             if (blur) {
-              blur(e)
+              blur(e);
             }
           }
-        }
+        };
 
-        InputElement.addEventListener('blur', defaultBlur)
-        InputElement.addEventListener('focus', defaultFocus)
+        InputElement.addEventListener('blur', defaultBlur);
+        InputElement.addEventListener('focus', defaultFocus);
       }
     }
   }
@@ -75,7 +75,7 @@ export class FieldForm extends Block<FieldFormProps> {
       typeField: this.props.typeField || 'text',
       placeholder: this.props.placeholder || this.props.label,
       errorMessage: this.props.errorMessage || 'Ошибка',
-    })
+    });
   }
 }
 
@@ -92,11 +92,11 @@ export type FieldFormProps = DefaultProps & {
     focus?: (e: FocusEvent) => any
     blur?: (e: FocusEvent) => any
   }
-}
+};
 
 enum TYPE_FIELD {
   password = 'password',
   text = 'text',
   email = 'email',
-  tel = 'tel'
+  tel = 'tel',
 }

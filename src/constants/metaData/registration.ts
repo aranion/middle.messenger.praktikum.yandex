@@ -1,5 +1,5 @@
-import { PropsButton } from '../../components/Button'
-import { FieldFormProps } from '../../components/FieldForm'
+import { PropsButton } from '../../components/Button';
+import { FieldFormProps } from '../../components/FieldForm';
 
 export const PROPS_FIELDS_REGISTRATION: FieldFormProps[] = [
   {
@@ -66,10 +66,10 @@ export const PROPS_FIELDS_REGISTRATION: FieldFormProps[] = [
     placeholder: 'Пароль (ещё раз)',
     errorMessage: 'Пароли не совпадают',
   },
-]
+];
 
 export const PROPS_BUTTON_REGISTRATION: PropsButton = {
   label: 'Зарегистрироваться',
   buttonName: 'authorization',
-  type: 'submit'
-}
+  type: 'submit',
+};

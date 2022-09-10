@@ -1,19 +1,20 @@
-import { Block, DefaultProps } from '../../utils/Block'
-import template from './template.hbs'
-import './styles.sass'
+import { Block, DefaultProps } from '../../utils/Block';
+import template from './template.hbs';
+import './styles.sass';
 
 export class FieldProfile extends Block<FieldProfileProps> {
   constructor(props: FieldProfileProps) {
-    super(props)
+    super(props);
   }
+
   render() {
     return this.compile(template, {
-      ...this.props
-    })
+      ...this.props,
+    });
   }
 }
 
 export type FieldProfileProps = DefaultProps & {
   label: string
   value: string
-}
+};

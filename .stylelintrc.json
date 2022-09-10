@@ -12,7 +12,7 @@
     "value-keyword-case": null,
     "scss/selector-no-redundant-nesting-selector": true,
     "scss/dollar-variable-pattern": "^[a-z][a-zA-Z]+$",
-    "indentation": "tab",
+    "indentation": null,
     "selector-class-pattern": [
       "^([a-z-A-Z]+)+(__([a-z-A-Z]+)+)?(_[a-zA-Z]+([a-zA-Z-]+)*){0,3}$",
       {

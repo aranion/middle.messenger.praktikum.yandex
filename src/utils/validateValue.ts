@@ -14,13 +14,13 @@ export const validateValue = (value: string, typeInput: keyof typeof TYPE_VALIDA
     //от 10 до 15 символов, состоит из цифр, может начинается с плюса            
     phone: (value) => (regExp || /^([+]?[0-9]{10,15})*$/i).test(value),
     //Не пустой
-    message: (value) => (regExp || /^./).test(value)
-  }
+    message: (value) => (regExp || /^./).test(value),
+  };
 
-  return listValidateFn[typeInput](value)
-}
+  return listValidateFn[typeInput](value);
+};
 
-type ValidateValue = Record<keyof typeof TYPE_VALIDATE, (v: string) => boolean>
+type ValidateValue = Record<keyof typeof TYPE_VALIDATE, (v: string) => boolean>;
 export enum TYPE_VALIDATE {
   password = 'password',
   first_name = 'first_name',

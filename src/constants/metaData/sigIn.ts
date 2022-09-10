@@ -1,5 +1,5 @@
-import { PropsButton } from '../../components/Button'
-import { FieldFormProps } from '../../components/FieldForm'
+import { PropsButton } from '../../components/Button';
+import { FieldFormProps } from '../../components/FieldForm';
 
 export const PROPS_FIELDS_SIGN_IN: FieldFormProps[] = [
   {
@@ -17,11 +17,11 @@ export const PROPS_FIELDS_SIGN_IN: FieldFormProps[] = [
     typeField: 'password',
     placeholder: 'Пароль',
     errorMessage: 'Ошибка',
-  }
-]
+  },
+];
 
 export const PROPS_BUTTON_SIGN_IN: PropsButton = {
   label: 'Авторизоваться',
   buttonName: 'authorization',
-  type: 'submit'
-}
+  type: 'submit',
+};
