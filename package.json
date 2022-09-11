@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "messenger",
   "scripts": {
-    "start": "parcel build ./static/index.html && parcel -p 3000 ./static/index.html",
+    "start": "parcel -p 3000 ./static/index.html",
     "go": "npx eslint . --fix && parcel -p 3000 ./static/index.html --open",
     "eslint": "npx eslint .",
     "eslint:fix": "npx eslint . --fix",
