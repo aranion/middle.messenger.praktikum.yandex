@@ -1,0 +1,37 @@
+@import '../../constants/var/vars.sass'
+
+.message
+	&__box
+		min-width: 150px
+		min-height: 40px
+		max-height: 400px
+		max-width: 300px
+		padding: 10px
+		box-sizing: border-box
+
+	&__my
+		background: $colorHover
+		border-radius: 20px 20px 0
+
+	&__interlocutor
+		background: $colorMessage
+		border-radius: 20px
+
+		&_text
+			margin: 0
+			padding: 5px
+
+	&__time
+		display: inline-block
+		width: 100%
+		text-align: end
+		font-size: 9px
+		color: $colorSecondary
+
+	&__row
+		display: flex
+		width: 100%
+		margin-top: 10px
+
+		&_my
+			justify-content: end

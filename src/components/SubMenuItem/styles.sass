@@ -1,0 +1,22 @@
+@import '../../constants/var/vars.sass'
+
+.subMenuItem
+	@include centerFlex()
+	color: $colorMain
+	padding: 7px 25px
+	text-align: left
+	border: none
+	background: none
+
+	&:hover
+		background: $colorHover
+		cursor: pointer
+
+	&__text
+		min-width: 145px
+		color: $colorMain
+		margin-left: 15px
+
+	&__icon
+		width: 22px
+		height: 22px
