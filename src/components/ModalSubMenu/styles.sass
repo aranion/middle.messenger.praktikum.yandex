@@ -1,0 +1,19 @@
+@import '../../constants/var/vars.sass'
+
+.modalSubMenu
+	@include centerFlex()
+	width: 25px
+	height: 25px
+	border-radius: 50%
+	min-width: 25px
+	position: relative
+
+	&:hover
+		background: $colorHoverMenu
+
+	&__wrapper
+		padding: 10px 0
+		background: $colorDefault
+		border-radius: 12px
+		position: absolute
+		box-shadow: $boxShadowDefault

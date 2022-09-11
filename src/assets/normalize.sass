@@ -3,6 +3,7 @@
 
 input, textarea
   outline: 0
+
   &:active
     outline: 0
     outline-offset: 0
@@ -10,7 +11,7 @@ input, textarea
 html
   line-height: 1.15
   /* 1 */
-  -webkit-text-size-adjust: 100%
+  text-size-adjust: 100%
   /* 2 */
 
 /* Sections
@@ -196,7 +197,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"]
-  -webkit-appearance: button
+  appearance: button
 
 /**
  * Remove the inner border and padding in Firefox.
@@ -287,7 +288,7 @@ textarea
  */
 
 [type="search"]
-  -webkit-appearance: textfield
+  appearance: textfield
   /* 1 */
   outline-offset: -2px
   /* 2 */
@@ -297,7 +298,7 @@ textarea
  */
 
 [type="search"]::-webkit-search-decoration
-  -webkit-appearance: none
+  appearance: none
 
 /**
  * 1. Correct the inability to style clickable types in iOS and Safari.
@@ -305,7 +306,7 @@ textarea
  */
 
 ::-webkit-file-upload-button
-  -webkit-appearance: button
+  appearance: button
   /* 1 */
   font: inherit
   /* 2 */

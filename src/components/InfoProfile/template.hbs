@@ -1,0 +1,24 @@
+<div>
+    <div class="infoProfile__name">{{nameUser}}</div>
+    <div class="infoProfile__row infoProfile__row_params">
+        {{#each Fields}}
+            {{{this}}}
+        {{/each}}
+    </div>
+    <div
+        class="infoProfile__row infoProfile__row_params infoProfile__row_change"
+    >
+        <a href="{{linkProfileAllEdit}}" class="infoProfile__change">
+            Изменить данные
+        </a>
+        <a href="{{linkProfilePasswordEdit}}" class="infoProfile__change">
+            Изменить пароль
+        </a>
+        <a
+            href="{{linkExit}}"
+            class="infoProfile__change infoProfile__change_exit"
+        >
+            Выйти
+        </a>
+    </div>
+</div>

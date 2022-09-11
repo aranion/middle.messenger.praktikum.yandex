@@ -1,25 +1,39 @@
-@import './constants/var/_vat.sass'
-@import './components/index.sass'
-@import './pages/index.sass'
+@import './constants/var/vars.sass'
 
 #root
-  position: relative
-  @include centerFlex()
-  width: 100vw
-  height: 100vh
-  font-family: sans-serif
-  background: $colorDefault
-  color: $colorMain
-  overflow-x: hidden
-
-.circleBtn
-  @include centerFlex()
-  width: 30px
-  height: 30px
-  min-width: 30px
-  border-radius: 30px
-  background: $colorPrimary
+	position: relative
+	width: 100vw
+	height: 100vh
+	font-family: sans-serif
+	@include centerFlex()
+	background: $colorDefault
+	color: $colorMain
+	overflow-x: hidden
 
 .hidden
-  display: none
-  visibility: hidden
+	// display: none
+	visibility: hidden
+
+.destroy
+	visibility: hidden
+	display: none
+	opacity: 0
+
+.tooltip
+	display: none
+	padding: 5px
+	border: 1px solid black
+
+.tooltip.tooltip_active
+	display: block
+	position: absolute
+
+.left_bottom
+	position: fixed
+	bottom: 5px
+	left: 0
+
+.divider
+	width: 96%
+	margin: 2px 0
+	border-top: $borderDefault
