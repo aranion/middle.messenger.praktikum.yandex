@@ -14,7 +14,7 @@ export const validateValue: ValidateValue = (value, typeInput, regExp) => {
   return listValidateFn[typeInput](value)
 }
 
-export enum TYPE_VALIDATE {
+export enum TypeValidate {
   password = 'password',
   first_name = 'first_name',
   second_name = 'second_name',
@@ -25,5 +25,5 @@ export enum TYPE_VALIDATE {
   message = 'message',
   notEmpty = 'notEmpty',
 }
-export type ValidateValue = (value: string, typeInput: keyof typeof TYPE_VALIDATE, regExp?: RegExp) => boolean
-type ListValidateFn = Record<keyof typeof TYPE_VALIDATE, (v: string) => boolean>
+export type ValidateValue = (value: string, typeInput: keyof typeof TypeValidate, regExp?: RegExp) => boolean
+type ListValidateFn = Record<keyof typeof TypeValidate, (v: string) => boolean>

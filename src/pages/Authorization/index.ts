@@ -1,7 +1,7 @@
 import { Button, PropsButton } from '../../components/Button'
 import { FieldForm, FieldFormProps } from '../../components/FieldForm'
 import { Block, DefaultProps } from './../../utils/Block'
-import { ROUTE_LINK } from '../../router/routeLink'
+import { RouteLink } from '../../router/routeLink'
 import template from './template.hbs'
 import { Link } from '../../router/routePage'
 import './styles.sass'
@@ -65,7 +65,7 @@ export type AuthorizationProps = DefaultProps & {
   title: string
   linkData: {
     title: string
-    link: ROUTE_LINK
+    link: RouteLink
   },
   events?: {
     submit: (e: SubmitEvent) => void

@@ -27,5 +27,5 @@ export const PROPS_FIELDS_SIGN_IN: FieldFormProps[] = [
 export const PROPS_BUTTON_SIGN_IN: PropsButton = {
   label: 'Авторизоваться',
   buttonName: 'authorization',
-  type: 'submit',
+  typeButton: 'submit',
 }

@@ -1,7 +1,7 @@
 import { Block, DefaultProps } from '../../utils/Block'
 import { FieldProfile, FieldProfileProps } from '../FieldProfile'
 import template from './template.hbs'
-import { ROUTE_LINK } from '../../router/routeLink'
+import { RouteLink } from '../../router/routeLink'
 import './styles.sass'
 
 export class InfoProfile extends Block<InfoProfileProps> {
@@ -24,9 +24,9 @@ export class InfoProfile extends Block<InfoProfileProps> {
     return this.compile(template, {
       ...this.props,
       nameUser,
-      linkProfileAllEdit: ROUTE_LINK.PROFILE_EDIT,
-      linkProfilePasswordEdit: ROUTE_LINK.PROFILE_PASSWORD,
-      linkExit: ROUTE_LINK.CHATS,
+      linkProfileAllEdit: RouteLink.PROFILE_EDIT,
+      linkProfilePasswordEdit: RouteLink.PROFILE_PASSWORD,
+      linkExit: RouteLink.CHATS,
     })
   }
 }

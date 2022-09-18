@@ -1,4 +1,4 @@
-export enum ROUTE_LINK {
+export enum RouteLink {
   HOME = '/',
   SIGN_IN = '/signin',
   REGISTRATION = '/registration',

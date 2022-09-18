@@ -1,6 +1,6 @@
 import { Block, DefaultProps } from '../../utils/Block'
 import template from './template.hbs'
-import { TYPE_VALIDATE } from '../../utils/validateValue'
+import { TypeValidate } from '../../utils/validateValue'
 import './styles.sass'
 
 export class Input extends Block<InputProps> {
@@ -18,16 +18,16 @@ export class Input extends Block<InputProps> {
 }
 
 export type InputProps = DefaultProps & {
-  fieldName?: keyof typeof TYPE_VALIDATE
+  fieldName?: keyof typeof TypeValidate
   id?: string
-  typeField?: keyof typeof TYPE_FIELD
+  typeField?: keyof typeof TypeField
   placeholder?: string
   required?: boolean
   classesList?: string[]
   value?: string
 }
 
-enum TYPE_FIELD {
+enum TypeField {
   password = 'password',
   text = 'text',
   email = 'email',

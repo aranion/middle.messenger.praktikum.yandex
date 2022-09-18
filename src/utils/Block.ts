@@ -15,11 +15,6 @@ export class Block<P extends DefaultProps = any> {
   private eventBus: () => EventBus<EventsList>
   private _element: HTMLElement | null = null;
 
-  /** JSDoc
-   * @param {Object} propsWitchChildren
-   *
-   * @returns {void}
-   */
   constructor(propsWitchChildren = {}) {
     const eventBus = new EventBus<EventsList>()
     const { props, children } = this._getChildrenAndProps(propsWitchChildren)
@@ -74,23 +69,21 @@ export class Block<P extends DefaultProps = any> {
   }
 
   private _makePropsProxy(props: P) {
-    const self = this
-
     return new Proxy(props, {
-      get(target, prop) {
+      get: (target, prop) => {
         const value = target[prop as keyof typeof target]
 
         return typeof value === 'function' ? value.bind(target) : value
       },
-      set(newProps, prop, value) {
+      set: (newProps, prop, value) => {
         const oldProps = { ...newProps }
 
         newProps[prop as keyof typeof newProps] = value
 
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, newProps)
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, newProps)
         return true
       },
-      deleteProperty() {
+      deleteProperty: () => {
         throw new Error('Нет доступа')
       },
     })

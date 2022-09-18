@@ -4,7 +4,7 @@ import template from './template.hbs'
 import arrowLinkImg from '../../assets/imgs/PolygonIcon.svg'
 import searchIconImg from '../../assets/imgs/SearchIcon.svg'
 import './styles.sass'
-import { ROUTE_LINK } from '../../router/routeLink'
+import { RouteLink } from '../../router/routeLink'
 
 export class ChatsLeftBox extends Block<Props> {
   constructor(props: Props) {
@@ -24,7 +24,7 @@ export class ChatsLeftBox extends Block<Props> {
       ...this.props,
       arrowLinkImg,
       searchIconImg,
-      profileLink: ROUTE_LINK.PROFILE,
+      profileLink: RouteLink.PROFILE,
     })
   }
 }

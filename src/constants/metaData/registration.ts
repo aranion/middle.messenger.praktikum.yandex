@@ -87,5 +87,5 @@ export const PROPS_FIELDS_REGISTRATION: FieldFormProps[] = [
 export const PROPS_BUTTON_REGISTRATION: PropsButton = {
   label: 'Зарегистрироваться',
   buttonName: 'authorization',
-  type: 'submit',
+  typeButton: 'submit',
 }

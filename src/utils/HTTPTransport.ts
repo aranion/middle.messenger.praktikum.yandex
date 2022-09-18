@@ -1,18 +1,10 @@
-enum METHODS {
+import { queryStringify } from './queryStringify'
+
+enum Methods {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
   DELETE = 'DELETE',
-}
-
-function queryStringify(data: XMLHttpRequestBodyInit) {
-  const keys = Object.keys(data) as (keyof XMLHttpRequestBodyInit)[]
-
-  if (typeof data !== 'object') {
-    throw new Error('data не объект')
-  }
-
-  return keys.reduce((res, key, i) => `${res}${key}=${data[key]}${i < keys.length - 1 ? '&' : ''}`, '?')
 }
 
 export class HTTPTransport {
@@ -21,25 +13,25 @@ export class HTTPTransport {
       url = `${url}${queryStringify(options.data)}`
     }
 
-    return this.request(url, { ...options, method: METHODS.GET })
+    return this.request(url, { ...options, method: Methods.GET })
   };
 
   public post = (url: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
-    return this.request(url, { ...options, method: METHODS.POST })
+    return this.request(url, { ...options, method: Methods.POST })
   }
 
   public put = (url: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
-    return this.request(url, { ...options, method: METHODS.PUT })
+    return this.request(url, { ...options, method: Methods.PUT })
   }
 
   public delete = (url: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
-    return this.request(url, { ...options, method: METHODS.DELETE })
+    return this.request(url, { ...options, method: Methods.DELETE })
   }
 
   private request = (url: string, options?: RequestOptions): Promise<any> => {
     const {
       headers = {},
-      method = METHODS.GET,
+      method = Methods.GET,
       data,
       timeout = 5000,
     } = options || {}
@@ -75,7 +67,7 @@ export class HTTPTransport {
 }
 
 type RequestOptions = {
-  method?: METHODS
+  method?: Methods
   headers?: Header
   timeout?: number
   data?: XMLHttpRequestBodyInit

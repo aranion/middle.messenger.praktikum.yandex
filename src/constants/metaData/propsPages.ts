@@ -1,5 +1,5 @@
 import { AuthorizationProps, ChatsProps, ErrorProps, ProfileProps } from '../../pages'
-import { ROUTE_LINK } from '../../router/routeLink'
+import { RouteLink } from '../../router/routeLink'
 import { getAllValuesForm } from '../../utils/getAllElementForm'
 import { CHATS_LIST, MENU_ADD_CONTENT_MESSAGE, MENU_CHANGE_FRIENDS } from './chats'
 import { PROFILE_FIELDS, PROFILE_FIELDS_EDIT, PROFILE_FIELDS_PASSWORD } from './profile'
@@ -12,7 +12,7 @@ export const propsSignIn: AuthorizationProps = {
   fieldsProps: PROPS_FIELDS_SIGN_IN,
   buttonProps: PROPS_BUTTON_SIGN_IN,
   linkData: {
-    link: ROUTE_LINK.REGISTRATION,
+    link: RouteLink.REGISTRATION,
     title: 'Нет аккаунта?',
   },
   events: {
@@ -27,7 +27,7 @@ export const propsRegistration: AuthorizationProps = {
   fieldsProps: PROPS_FIELDS_REGISTRATION,
   buttonProps: PROPS_BUTTON_REGISTRATION,
   linkData: {
-    link: ROUTE_LINK.HOME,
+    link: RouteLink.HOME,
     title: 'Войти',
   },
   events: {
@@ -37,7 +37,7 @@ export const propsRegistration: AuthorizationProps = {
 
 export const propsServerError: ErrorProps = {
   title: '500',
-  href: ROUTE_LINK.CHATS,
+  href: RouteLink.CHATS,
   text: 'Мы уже фиксим',
   labelLink: 'Назад к чатам',
 }
@@ -65,7 +65,7 @@ export const propsProfilePassword: ProfileProps = {
 
 export const propsNotFound: ErrorProps = {
   title: '404',
-  href: ROUTE_LINK.CHATS,
+  href: RouteLink.CHATS,
   text: 'Не туда попали',
   labelLink: 'Назад к чатам',
 }

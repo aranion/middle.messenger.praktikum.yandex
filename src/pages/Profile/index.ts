@@ -2,7 +2,7 @@ import { Link } from './../../router/routePage'
 import { DefaultProps, Block } from './../../utils/Block'
 import { ButtonCircle, FieldProfileProps, EditProfile, InfoProfile } from '../../components'
 import DefaultAvatar from '../../assets/imgs/AvatarNoneIcon.svg'
-import { ROUTE_LINK } from '../../router/routeLink'
+import { RouteLink } from '../../router/routeLink'
 import { getAllValuesForm } from '../../utils/getAllElementForm'
 import template from './template.hbs'
 import './styles.sass'
@@ -67,7 +67,7 @@ export class Profile extends Block<ProfileProps> {
 
     return this.compile(template, {
       srcAvatar: DefaultAvatar,
-      backLink: ROUTE_LINK.CHATS,
+      backLink: RouteLink.CHATS,
       nameUser,
       ...this.props,
     })
