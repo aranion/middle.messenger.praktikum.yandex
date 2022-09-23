@@ -20,7 +20,8 @@ export class ModalSubMenu extends Block<ModalSubMenuProps> {
 
     this.children.MenuItems = menuItems.map((menuItem) => {
       return new SubMenuItem({
-        ...menuItem, events: {
+        ...menuItem,
+        events: {
           click: handleClickSubMenu
         },
       })
@@ -46,4 +47,5 @@ export type ModalSubMenuProps = DefaultProps & {
     right: string,
   }
   menuItems: SubMenuItemProps[]
+  isVisibleModal: boolean
 }

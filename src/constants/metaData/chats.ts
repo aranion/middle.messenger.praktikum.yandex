@@ -20,7 +20,7 @@ export const CHATS_LIST: ChatItemProps[] = [
   { srcAvatar: 'src', login: 'User11', lastMessage: '...', dateMessage: '00:00', newMessageCounter: '2', chatId: '11' },
 ]
 
-export const MENU_CHANGE_FRIENDS: ModalSubMenuProps = {
+export const MENU_CHANGE_FRIENDS: Omit<ModalSubMenuProps, 'isVisibleModal'> = {
   srcImgButton: MenuIcon,
   srcAltButton: 'Изменение статуса',
   position: { top: '50px', right: '0px', left: 'auto', bottom: 'auto' },
@@ -30,7 +30,7 @@ export const MENU_CHANGE_FRIENDS: ModalSubMenuProps = {
   ],
 }
 
-export const MENU_ADD_CONTENT_MESSAGE: ModalSubMenuProps = {
+export const MENU_ADD_CONTENT_MESSAGE: Omit<ModalSubMenuProps, 'isVisibleModal'> = {
   srcImgButton: AttachIcon,
   srcAltButton: 'Прикрепить',
   position: { top: '-150px', left: '-20px', right: 'auto', bottom: 'auto' },
