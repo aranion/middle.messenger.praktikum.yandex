@@ -5,6 +5,7 @@ import arrowLinkImg from '../../assets/imgs/PolygonIcon.svg'
 import searchIconImg from '../../assets/imgs/SearchIcon.svg'
 import './styles.sass'
 import { RouteLink } from '../../router/routeLink'
+import { Link } from '../Link'
 
 export class ChatsLeftBox extends Block<Props> {
   constructor(props: Props) {
@@ -14,17 +15,19 @@ export class ChatsLeftBox extends Block<Props> {
   protected init(): void {
     const { chatsList } = this.getProps()
 
+    this.children.Link = new Link({ to: RouteLink.SETTINGS, label: 'Профиль' })
     this.children.ChatsList = chatsList.map((chat, tempKey) => {
       return new ChatItem({ ...chat, chatId: `${tempKey}` })
     })
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
-      ...this.props,
+      ...props,
       arrowLinkImg,
       searchIconImg,
-      profileLink: RouteLink.PROFILE,
     })
   }
 }

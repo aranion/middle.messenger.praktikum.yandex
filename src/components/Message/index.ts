@@ -9,9 +9,11 @@ export class Message extends Block<MessagesProps> {
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
-      ...this.props,
       checkReadingImg,
+      ...props,
     })
   }
 }

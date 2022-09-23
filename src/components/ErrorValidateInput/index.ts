@@ -8,9 +8,11 @@ export class ErrorValidateInput extends Block<Props> {
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
       isInvisible: true,
-      ...this.props,
+      ...props,
     })
   }
 }

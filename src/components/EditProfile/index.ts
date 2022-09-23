@@ -1,11 +1,12 @@
 import { FieldForm } from './../FieldForm/index'
 import { Block, DefaultProps } from '../../utils/Block'
 import { FieldProfileProps, Button, EditProfileField } from '../'
-import { Link } from '../../router/routePage'
 import template from './template.hbs'
 import './styles.sass'
+import { PropsWithRouter, withRouter } from '../../hock/withRouter'
+import { RouteLink } from '../../router/routeLink'
 
-export class EditProfile extends Block<Props> {
+export class BaseEditProfile extends Block<Props> {
   constructor(props: Props) {
     super(props)
   }
@@ -37,19 +38,19 @@ export class EditProfile extends Block<Props> {
       }, true)
 
       if (isValidate) {
-        Link('PROFILE')
+        const { router } = this.getProps()
+
+        router?.go(RouteLink.SETTINGS)
       }
     }
 
-    this.children.EditProfileField = fields.map(field => {
-      return new EditProfileField({ ...field })
-    })
+    this.children.EditProfileField = fields.map(field => new EditProfileField({ ...field }))
 
     this.children.ButtonSave = new Button({
       formName,
       buttonName: 'saveProfile',
       label: 'Сохранить',
-      type: 'submit',
+      typeButton: 'submit',
       events: {
         click: handleSubmitButton
       }
@@ -57,16 +58,18 @@ export class EditProfile extends Block<Props> {
   }
 
   render() {
-    const { fields } = this.props
+    const props = this.getProps()
 
     return this.compile(template, {
-      nameUser: fields[2].inputProps?.value || '',
-      ...this.props,
+      nameUser: 'NAME...',
+      ...props,
     })
   }
 }
 
-type Props = DefaultProps & {
+export const EditProfile = withRouter(BaseEditProfile)
+
+type Props = DefaultProps & PropsWithRouter & {
   fields: FieldProfileProps[]
   formName: string
 }

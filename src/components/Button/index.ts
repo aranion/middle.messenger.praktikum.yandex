@@ -8,10 +8,12 @@ export class Button extends Block<PropsButton> {
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
       formName: '',
       typeButton: 'button',
-      ...this.props,
+      ...props,
     })
   }
 }

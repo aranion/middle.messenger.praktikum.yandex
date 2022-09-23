@@ -5,11 +5,13 @@ export const getAllValuesForm = (e: SubmitEvent) => {
   const FormElement = e.target as HTMLFormElement
   const inputsList = FormElement.querySelectorAll('input')
   const dataForm = Object.values(inputsList).reduce((res, input) => {
-    res[input.id] = input.value
+    res.push([input.id, input.value])
 
     return res
-  }, {} as Record<string, string>)
+  }, [] as [string, string][])
+  const dataFormObj = Object.fromEntries(dataForm)
 
-  console.log('FORM NAME: ', FormElement.id)
-  console.log(dataForm)
+  console.log('FORM NAME: ', FormElement.id, ' DATA: ', dataForm, dataFormObj)
+
+  return dataFormObj
 }

@@ -1,19 +1,19 @@
 import './assets/normalize.sass'
 import './index.sass'
-import { routePage } from './router/routePage'
+import { Messenger, NotFound, ServerError, SignIn, SignUp, Settings, SettingsEdit, SettingsPassword } from './pages'
+import { RouteLink } from './router/routeLink'
+import Router from './router/Router'
 
 window.addEventListener('DOMContentLoaded', () => {
-  const root: HTMLDivElement | null = document.querySelector('#root')
-
-  if (root) {
-
-    const Page = routePage().getContent()
-
-    if (Page) {
-      root.append(Page)
-    }
-
-  } else {
-    throw new Error('Элемент с id = "root" не найден')
-  }
+  Router
+    .use(RouteLink.HOME, SignIn)
+    .use(RouteLink.SIGN_IN, SignIn)
+    .use(RouteLink.SIGN_UP, SignUp)
+    .use(RouteLink.MESSENGER, Messenger)
+    .use(RouteLink.SETTINGS, Settings)
+    .use(RouteLink.SETTINGS_EDIT, SettingsEdit)
+    .use(RouteLink.SETTINGS_PASSWORD, SettingsPassword)
+    .use(RouteLink.NOT_FOUND, NotFound)
+    .use(RouteLink.SERVER_ERROR, ServerError)
+    .start()
 })

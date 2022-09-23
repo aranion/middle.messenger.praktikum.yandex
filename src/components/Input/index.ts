@@ -8,11 +8,33 @@ export class Input extends Block<InputProps> {
     super(props)
   }
 
+  public getName() {
+    const Element = this.element as HTMLInputElement | null
+
+    if (Element) {
+      return Element.name
+    } else {
+      throw new Error('Input элемент не найден, name не доступно')
+    }
+  }
+
+  public getValue() {
+    const Element = this.element as HTMLInputElement | null
+
+    if (Element) {
+      return Element.value
+    } else {
+      throw new Error('Input элемент не найден, value не доступно')
+    }
+  }
+
   render() {
+    const { classesList, ...props } = this.getProps()
+
     return this.compile(template, {
       isInvisible: true,
-      classes: this.props.classesList?.join(' '),
-      ...this.props,
+      classes: classesList?.join(' ') || '',
+      ...props,
     })
   }
 }

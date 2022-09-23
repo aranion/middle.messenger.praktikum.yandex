@@ -13,9 +13,11 @@ export class ChatItem extends Block<ChatItemProps> {
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
       linkChat: '#chat',
-      ...this.props,
+      ...props,
     })
   }
 }

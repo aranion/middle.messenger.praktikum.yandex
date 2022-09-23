@@ -3,6 +3,7 @@ import { FieldProfile, FieldProfileProps } from '../FieldProfile'
 import template from './template.hbs'
 import { RouteLink } from '../../router/routeLink'
 import './styles.sass'
+import { Link } from '../Link'
 
 export class InfoProfile extends Block<InfoProfileProps> {
   constructor(props: InfoProfileProps) {
@@ -15,18 +16,31 @@ export class InfoProfile extends Block<InfoProfileProps> {
     this.children.Fields = fields.map(field => {
       return new FieldProfile({ ...field })
     })
+    this.children.LinkEdit = new Link({
+      label: 'Изменить данные',
+      to: RouteLink.SETTINGS_EDIT
+    })
+    this.children.LinkEditPassword = new Link({
+      label: 'Изменить пароль',
+      to: RouteLink.SETTINGS_PASSWORD
+    })
+    this.children.LinkExit = new Link({
+      label: 'Выйти',
+      to: RouteLink.MESSENGER
+    })
   }
 
   render() {
-    const { fields } = this.getProps()
-    const nameUser = fields[2].value
+    const nameUser = 'NAME...'
+    const props = this.getProps()
 
     return this.compile(template, {
-      ...this.props,
+      linkProfileAllEdit: RouteLink.SETTINGS_EDIT,
+      linkProfilePasswordEdit: RouteLink.SETTINGS_PASSWORD,
+      linkExit: RouteLink.MESSENGER,
       nameUser,
-      linkProfileAllEdit: RouteLink.PROFILE_EDIT,
-      linkProfilePasswordEdit: RouteLink.PROFILE_PASSWORD,
-      linkExit: RouteLink.CHATS,
+      ...props,
+
     })
   }
 }

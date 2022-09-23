@@ -10,7 +10,7 @@ export class Block<P extends DefaultProps = any> {
   } as const;
 
   public id: string = nanoid(6);
-  protected props: P
+  private props: P
   protected children: Children = {};
   private eventBus: () => EventBus<EventsList>
   private _element: HTMLElement | null = null;

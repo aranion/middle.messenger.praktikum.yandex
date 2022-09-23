@@ -28,8 +28,10 @@ export class ModalSubMenu extends Block<ModalSubMenuProps> {
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
-      ...this.props,
+      ...props,
     })
   }
 }
