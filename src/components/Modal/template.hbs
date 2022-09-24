@@ -2,9 +2,13 @@
     <div class="modal__box">
         <h2 class="modal__box_title">{{title}}</h2>
         <div class="modal__body">{{{BodyElement}}}</div>
+        <span>{{file}}</span>
         <div class="modal__footer">
             {{{Button}}}
-            <span class="modal__footer_error">{{errorMessage}}</span>
+            <span class="modal__footer_error">
+                {{#if error.isVisible}}
+                    {{error.message}}
+                {{/if}}</span>
         </div>
     </div>
 </div>

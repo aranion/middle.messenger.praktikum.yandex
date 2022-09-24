@@ -1,0 +1,29 @@
+@import '../../constants/var/vars.sass'
+
+.editAvatar
+	&__row
+		@include centerFlex()
+
+	&__avatar
+		@include centerFlex()
+		width: 130px
+		height: 130px
+		border-radius: 130px
+		background: $colorAvatar
+		position: relative
+		overflow: hidden
+
+		&_add
+			@include centerFlex()
+			visibility: hidden
+			position: absolute
+			height: 100%
+			width: 100%
+			padding: 30px
+			background: #000000
+			color: $colorDefault
+
+		&:hover &_add
+			opacity: 0.5
+			visibility: visible
+			cursor: pointer

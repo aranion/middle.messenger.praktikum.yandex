@@ -1,8 +1,6 @@
 import { PROFILE_FIELDS_PASSWORD, PROFILE_FIELDS, PROFILE_FIELDS_EDIT } from './../../constants/metaData/profile'
-import { EditProfile } from './../EditProfile/index'
 import { DefaultProps, Block } from '../../utils/Block'
-import { ButtonCircle, InfoProfile } from '..'
-import DefaultAvatar from '../../assets/imgs/AvatarNoneIcon.svg'
+import { ButtonCircle, InfoProfile, EditAvatar, EditProfile, Modal } from '..'
 import { RouteLink } from '../../router/routeLink'
 import { getAllValuesForm } from '../../utils/getAllElementForm'
 import template from './template.hbs'
@@ -50,9 +48,26 @@ export class Profile extends Block<Props> {
         break
     }
 
+    this.children.EditAvatar = new EditAvatar({
+      events: {
+        click: () => {
+          const Modal = this.getChildren().Modal as Modal
+
+          Modal.show('flex')
+        }
+      }
+    })
+
     this.children.ButtonBack = new ButtonCircle({
       direction: 'left',
       to: RouteLink.MESSENGER,
+    })
+
+    this.children.Modal = new Modal({
+      title: 'Загрузите файл',
+      btnLabel: 'Поменять',
+      BodyElement: '<label for="avatar">Выбрать файл на компьютере</label><input name="avatar" id="avatar" type="file" style="display: none"}>',
+      error: { message: 'Нужно выбрать файл', isVisible: false }
     })
   }
 
@@ -60,7 +75,6 @@ export class Profile extends Block<Props> {
     const props = this.getProps()
 
     return this.compile(template, {
-      srcAvatar: DefaultAvatar,
       ...props,
     })
   }

@@ -125,22 +125,6 @@ export class Block<P extends DefaultProps = any> {
     return new DocumentFragment()
   }
 
-  protected show() {
-    const element = this.getContent()
-
-    if (element) {
-      element.style.display = 'block'
-    }
-  }
-
-  protected hide() {
-    const element = this.getContent()
-
-    if (element) {
-      element.style.display = 'none'
-    }
-  }
-
   protected compile(template: TemplateDelegate, context: P & ContextTemplate) {
     const contextAndStubs = { ...context } as ContextTemplate
 
@@ -209,6 +193,21 @@ export class Block<P extends DefaultProps = any> {
     return this.props
   }
 
+  public show(displayType: CssDisplayType = 'block') {
+    const element = this.getContent()
+
+    if (element) {
+      element.style.display = displayType
+    }
+  }
+
+  public hide() {
+    const element = this.getContent()
+
+    if (element) {
+      element.style.display = 'none'
+    }
+  }
 }
 
 export interface DefaultProps {
@@ -219,3 +218,11 @@ type Children = Record<string, Block | Block[]>
 type ContextTemplate = Record<string, unknown>
 type TemplateDelegate = (context: ContextTemplate) => string
 type EventsList = keyof typeof Block.EVENTS
+type CssDisplayType = 'block'
+  | 'inline'
+  | 'flex'
+  | 'grid'
+  | 'inline-bloc'
+  | 'inline-flex'
+  | 'inline-grid'
+

@@ -10,13 +10,12 @@ export class Messenger extends Block {
     super()
   }
 
-  handleShowModal = (Element: ModalSubMenu) => {
+  handleShowModal(Element: ModalSubMenu) {
     const props = Element.getProps() as ModalSubMenuProps
 
     if (!Array.isArray(Element)) {
       Element.setProps({ ...props, isVisibleModal: !props.isVisibleModal })
     }
-
   }
 
   protected init(): void {

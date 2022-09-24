@@ -32,6 +32,7 @@ export class ModalSubMenu extends Block<ModalSubMenuProps> {
     const props = this.getProps()
 
     return this.compile(template, {
+      isVisibleModal: false,
       ...props,
     })
   }
@@ -47,5 +48,5 @@ export type ModalSubMenuProps = DefaultProps & {
     right: string,
   }
   menuItems: SubMenuItemProps[]
-  isVisibleModal: boolean
+  isVisibleModal?: boolean
 }
