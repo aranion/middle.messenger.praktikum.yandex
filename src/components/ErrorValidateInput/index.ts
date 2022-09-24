@@ -2,8 +2,8 @@ import { Block, DefaultProps } from '../../utils/Block'
 import template from './template.hbs'
 import './styles.sass'
 
-export class ErrorValidateInput extends Block<Props> {
-  constructor(props: Props) {
+export class ErrorValidateInput extends Block<PropsErrorValidateInput> {
+  constructor(props: PropsErrorValidateInput) {
     super(props)
   }
 
@@ -17,7 +17,7 @@ export class ErrorValidateInput extends Block<Props> {
   }
 }
 
-type Props = DefaultProps & {
+export type PropsErrorValidateInput = DefaultProps & {
   errorMessage: string
   isInvisible?: boolean
 }

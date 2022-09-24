@@ -1,4 +1,4 @@
-import { PROPS_FIELDS_SIGN_IN, PROPS_BUTTON_SIGN_IN } from '../../constants/metaData/sigIn'
+import { PROPS_FIELDS_SIGN_IN, PROPS_BUTTON_SIGN_IN } from '../../constants/metaData/signIn'
 import { Block } from '../../utils/Block'
 import { Authorization, AuthorizationProps } from '../../components/Authorization'
 import './styles.sass'

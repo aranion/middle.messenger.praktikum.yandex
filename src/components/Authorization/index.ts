@@ -1,11 +1,13 @@
+import { PropsErrorValidateInput } from './../ErrorValidateInput/index'
 import { Button, PropsButton } from '../Button'
 import { FieldForm, FieldFormProps } from '../FieldForm'
 import { Block, DefaultProps } from '../../utils/Block'
 import { RouteLink } from '../../router/routeLink'
-import template from './template.hbs'
-import './styles.sass'
 import { Link, LinkProps } from '../Link'
 import { PropsWithRouter, withRouter } from '../../hock/withRouter'
+import { IdInputProps } from '../../constants/metaData/signUp'
+import template from './template.hbs'
+import './styles.sass'
 
 class BaseAuthorization extends Block<AuthorizationProps> {
   constructor(props: AuthorizationProps) {
@@ -18,21 +20,48 @@ class BaseAuthorization extends Block<AuthorizationProps> {
     const onClickSubmitButton = () => {
       const FieldsForm = this.children.FieldsForm as FieldForm[] | FieldForm
       const fields = Array.isArray(FieldsForm) ? FieldsForm : []
+      const [passwords, password_second] = fields.reduce<string[]>((res, field) => {
+        const { inputProps } = field.getProps()
+        const id = inputProps.id as IdInputProps
 
-      const isValidate = fields.reduce((res, field) => {
-        const { ErrorValidateInput } = field.getChildren()
-        const isArrayErrorValidateInput = Array.isArray(ErrorValidateInput)
-        const isValidateValue = field.validate()
+        if (id === 'password' || id === 'password_second') {
+          const Element = field.getContent()
+          const value = Element?.querySelector('input')?.value
 
-        if (!isArrayErrorValidateInput) {
-          const propsErrorValidateInput = ErrorValidateInput.getProps()
-
-          ErrorValidateInput.setProps({ ...propsErrorValidateInput, isInvisible: isValidateValue })
+          if (value !== undefined) {
+            res.push(value)
+          }
         }
+
+        return res
+      }, [])
+      const isPasswordEqual = passwords === password_second
+      const isValidate = fields.reduce((res, Field) => {
+        const { ErrorValidateInput } = Field.getChildren()
+        const { inputProps } = Field.getProps()
+        const id = inputProps.id as IdInputProps
+        const isValidateValue = Field.validate()
+
+        if (!Array.isArray(ErrorValidateInput)) {
+          const propsErrorValidateInput = ErrorValidateInput.getProps() as PropsErrorValidateInput
+
+          if (id === 'password_second') {
+            ErrorValidateInput.setProps({
+              ...propsErrorValidateInput,
+              isInvisible: isValidateValue && isPasswordEqual,
+              errorMessage: isPasswordEqual ? 'Ошибка' : 'Пароли не совпадают'
+            })
+          } else {
+            ErrorValidateInput.setProps({ ...propsErrorValidateInput, isInvisible: isValidateValue })
+          }
+
+        }
+
         return res && isValidateValue
       }, true)
 
-      if (isValidate) {
+
+      if (password_second ? isValidate && isPasswordEqual : isValidate) {
         const { router } = this.getProps()
 
         router!.go(RouteLink.MESSENGER)
@@ -42,9 +71,7 @@ class BaseAuthorization extends Block<AuthorizationProps> {
     this.children.Link = new Link({ ...linkData })
 
     if (fieldsProps) {
-      this.children.FieldsForm = fieldsProps.map((fieldProps) => {
-        return new FieldForm({ ...fieldProps })
-      })
+      this.children.FieldsForm = fieldsProps.map(fieldProps => new FieldForm({ ...fieldProps }))
     }
 
     if (buttonProps) {

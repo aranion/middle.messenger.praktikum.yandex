@@ -1,11 +1,16 @@
 import { PropsButton } from '../../components/Button'
 import { FieldFormProps } from '../../components/FieldForm'
 
+enum IdInputPropsSignIn {
+  login = 'login',
+  password = 'password',
+}
+
 export const PROPS_FIELDS_SIGN_IN: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'login',
-      id: 'login',
+      id: IdInputPropsSignIn.login,
       typeField: 'text',
       placeholder: 'Логин',
     },
@@ -15,12 +20,12 @@ export const PROPS_FIELDS_SIGN_IN: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'notEmpty',
-      id: 'password',
+      id: IdInputPropsSignIn.password,
       typeField: 'password',
       placeholder: 'Пароль',
     },
     label: 'Пароль',
-    errorMessage: 'Ошибка',
+    errorMessage: 'Введите пароль',
   },
 ]
 

@@ -1,11 +1,24 @@
 import { PropsButton } from '../../components/Button'
 import { FieldFormProps } from '../../components/FieldForm'
 
+enum IdInputAuth {
+  email = 'email',
+  login = 'login',
+  first_name = 'first_name',
+  second_name = 'second_name',
+  display_name = 'display_name',
+  phone = 'phone',
+  password = 'password',
+  password_second = 'password_second',
+}
+
+export type IdInputProps = keyof typeof IdInputAuth
+
 export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'email',
-      id: 'email',
+      id: IdInputAuth.email,
       typeField: 'email',
       placeholder: 'Почта',
     },
@@ -15,7 +28,7 @@ export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'login',
-      id: 'login',
+      id: IdInputAuth.login,
       typeField: 'text',
       placeholder: 'Логин',
     },
@@ -25,7 +38,7 @@ export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'first_name',
-      id: 'first_name',
+      id: IdInputAuth.first_name,
       typeField: 'text',
       placeholder: 'Имя',
     },
@@ -35,7 +48,7 @@ export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'second_name',
-      id: 'second_name',
+      id: IdInputAuth.second_name,
       typeField: 'text',
       placeholder: 'Фамилия',
     },
@@ -45,7 +58,7 @@ export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'display_name',
-      id: 'display_name',
+      id: IdInputAuth.display_name,
       typeField: 'text',
       placeholder: 'Отображаемое имя',
     },
@@ -55,7 +68,7 @@ export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'phone',
-      id: 'phone',
+      id: IdInputAuth.phone,
       typeField: 'tel',
       placeholder: 'Телефон',
     },
@@ -65,7 +78,7 @@ export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'password',
-      id: 'password',
+      id: IdInputAuth.password,
       typeField: 'password',
       placeholder: 'Пароль',
     },
@@ -75,12 +88,12 @@ export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
   {
     inputProps: {
       fieldName: 'password',
-      id: 'password_second',
+      id: IdInputAuth.password_second,
       typeField: 'password',
       placeholder: 'Пароль (ещё раз)',
     },
     label: 'Пароль (ещё раз)',
-    errorMessage: 'Пароли не совпадают',
+    errorMessage: 'Ошибка',
   },
 ]
 

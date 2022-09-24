@@ -89,8 +89,8 @@ export class FieldForm extends Block<FieldFormProps> {
     const { classesList = [], ...props } = this.getProps()
 
     return this.compile(template, {
+      classes: classesList.join(' '),
       ...props,
-      classes: classesList.join(' ')
     })
   }
 }
