@@ -13,6 +13,7 @@ export class Button extends Block<PropsButton> {
     return this.compile(template, {
       formName: '',
       typeButton: 'button',
+      classes: props.classesList?.join(' '),
       ...props,
     })
   }
@@ -23,6 +24,7 @@ export type PropsButton = DefaultProps & {
   buttonName: string
   typeButton?: TypeButton
   formName?: string
+  classesList?: string[]
 }
 
 type TypeButton = 'submit' | 'reset' | 'button' | 'menu'

@@ -1,0 +1,10 @@
+<div class="notification 
+    {{#if isError}} notification__error{{/if}}
+    {{#if isAccess}} notification__access{{/if}}
+    "
+>
+    <h5>
+        {{#if isError}} Ошибка{{/if}}
+    </h5>
+    <span>{{message}}</span>
+</div>

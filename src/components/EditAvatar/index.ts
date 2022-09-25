@@ -1,5 +1,4 @@
-import { DefaultProps } from './../../utils/Block'
-import { Block } from '../../utils/Block'
+import { DefaultProps, Block } from './../../utils/Block'
 import template from './template.hbs'
 import DefaultAvatar from '../../assets/imgs/AvatarNoneIcon.svg'
 import './styles.sass'
@@ -7,9 +6,6 @@ import './styles.sass'
 export class EditAvatar extends Block<Props> {
   constructor(props: Props) {
     super(props)
-  }
-  protected init(): void {
-
   }
 
   protected render() {

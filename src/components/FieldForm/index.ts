@@ -5,8 +5,8 @@ import { Input, InputProps } from '../Input'
 import template from './template.hbs'
 import './styles.sass'
 
-export class FieldForm extends Block<FieldFormProps> {
-  constructor(props: FieldFormProps) {
+export class FieldForm extends Block<PropsFieldForm> {
+  constructor(props: PropsFieldForm) {
     super(props)
 
     const FieldFormElement = this.getContent()
@@ -95,7 +95,7 @@ export class FieldForm extends Block<FieldFormProps> {
   }
 }
 
-export type FieldFormProps = DefaultProps & {
+export type PropsFieldForm = DefaultProps & {
   label?: string
   inputProps: InputProps
   errorMessage?: string

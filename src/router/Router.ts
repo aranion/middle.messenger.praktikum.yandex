@@ -28,9 +28,9 @@ class Router<R> {
   public start() {
     window.onpopstate = ((event: PopStateEvent) => {
       const target = event.currentTarget as Window
-      debugger
+
       this._onRoute(target.location.pathname as R)
-    }).bind(this)
+    })
 
     this._onRoute(window.location.pathname as R)
   }

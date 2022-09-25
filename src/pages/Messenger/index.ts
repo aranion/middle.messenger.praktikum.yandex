@@ -1,9 +1,9 @@
 import { CHATS_LIST, MENU_ADD_CONTENT_MESSAGE, MENU_CHANGE_FRIENDS, META_MESSAGES } from '../../constants/metaData/chats'
-import { ModalSubMenu, ModalSubMenuProps } from '../../components/ModalSubMenu/index'
 import template from './template.hbs'
 import { Block } from '../../utils/Block'
-import { Avatar, ButtonCircle, ChatsLeftBox, Message } from '../../components'
+import { Avatar, ButtonCircle, ChatsLeftBox, Message, ModalSubMenu, ModalSubMenuProps } from '../../components'
 import './styles.sass'
+import ChatsController from '../../controllers/ChatsController'
 
 export class Messenger extends Block {
   constructor() {
@@ -52,6 +52,8 @@ export class Messenger extends Block {
 
   render() {
     const props = this.getProps()
+
+    ChatsController.fetchChats()
 
     return this.compile(template, {
       ...props,

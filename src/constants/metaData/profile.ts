@@ -4,7 +4,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
   {
     label: 'Почта',
     inputProps: {
-      value: 'pochta@yandex.ru',
+      value: '',
       typeField: 'email',
       id: 'email',
       fieldName: 'email',
@@ -13,7 +13,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
   {
     label: 'Логин',
     inputProps: {
-      value: 'ivanivanov',
+      value: '',
       id: 'login',
       fieldName: 'login',
     }
@@ -21,7 +21,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
   {
     label: 'Имя',
     inputProps: {
-      value: 'Иван',
+      value: '',
       id: 'first_name',
       fieldName: 'first_name',
     }
@@ -29,7 +29,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
   {
     label: 'Фамилия',
     inputProps: {
-      value: 'Фамилия',
+      value: '',
       id: 'second_name',
       fieldName: 'second_name',
     }
@@ -37,7 +37,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
   {
     label: 'Имя в чате',
     inputProps: {
-      value: 'Иван',
+      value: '',
       id: 'display_name',
       fieldName: 'display_name',
     }
@@ -45,7 +45,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
   {
     label: 'Телефон',
     inputProps: {
-      value: '+79099673030',
+      value: '',
       typeField: 'tel',
       id: 'phone',
       fieldName: 'phone',

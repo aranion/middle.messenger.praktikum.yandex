@@ -4,8 +4,10 @@ import template from './template.hbs'
 import { RouteLink } from '../../router/routeLink'
 import './styles.sass'
 import { Link } from '../Link'
+import AuthController from '../../controllers/AuthController'
+import { withStore } from '../../hock/withStore'
 
-export class InfoProfile extends Block<InfoProfileProps> {
+class BaseInfoProfile extends Block<InfoProfileProps> {
   constructor(props: InfoProfileProps) {
     super(props)
   }
@@ -16,17 +18,25 @@ export class InfoProfile extends Block<InfoProfileProps> {
     this.children.Fields = fields.map(field => {
       return new FieldProfile({ ...field })
     })
+
     this.children.LinkEdit = new Link({
       label: 'Изменить данные',
       to: RouteLink.SETTINGS_EDIT
     })
+
     this.children.LinkEditPassword = new Link({
       label: 'Изменить пароль',
       to: RouteLink.SETTINGS_PASSWORD
     })
+
     this.children.LinkExit = new Link({
       label: 'Выйти',
-      to: RouteLink.MESSENGER
+      to: RouteLink.HOME,
+      events: {
+        click: () => {
+          AuthController.logout()
+        }
+      }
     })
   }
 
@@ -44,6 +54,7 @@ export class InfoProfile extends Block<InfoProfileProps> {
     })
   }
 }
+export const InfoProfile = withStore<InfoProfileProps>((state) => ({ user: { ...state.user } }))(BaseInfoProfile)
 
 export type InfoProfileProps = DefaultProps & {
   fields: FieldProfileProps[]

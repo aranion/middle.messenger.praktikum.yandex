@@ -24,7 +24,7 @@ export class AuthAPI extends BaseAPI {
     return this.http.post(Api.logout)
   }
 
-  read(): Promise<User> {
+  read(): Promise<ResponseUser> {
     return this.http.get(Api.user)
   }
 
@@ -47,13 +47,13 @@ export type SignUpData = {
   password: string
   phone: string
 }
-export type User = {
-  id: string
-  first_name: string
-  second_name: string
-  login: string
+export type ResponseUser = {
+  avatar: string | null
+  display_name: string | null
   email: string
-  password: string
+  first_name: string
+  id: number
+  login: string
   phone: string
-  avatar: string
+  second_name: string
 }

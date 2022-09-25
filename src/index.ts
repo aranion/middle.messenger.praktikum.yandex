@@ -1,10 +1,11 @@
 import './assets/normalize.sass'
+import AuthController from './controllers/AuthController'
 import './index.sass'
 import { Messenger, NotFound, ServerError, SignIn, SignUp, Settings, SettingsEdit, SettingsPassword } from './pages'
 import { RouteLink } from './router/routeLink'
 import Router from './router/Router'
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
   Router
     .use(RouteLink.HOME, SignIn)
     .use(RouteLink.SIGN_IN, SignIn)
@@ -16,4 +17,13 @@ window.addEventListener('DOMContentLoaded', () => {
     .use(RouteLink.NOT_FOUND, NotFound)
     .use(RouteLink.SERVER_ERROR, ServerError)
     .start()
+
+
+  try {
+    await AuthController.fetchUser()
+    Router.start()
+    Router.go(RouteLink.MESSENGER)
+  } catch (error) {
+    Router.go(RouteLink.HOME)
+  }
 })

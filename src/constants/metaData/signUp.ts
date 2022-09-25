@@ -1,5 +1,5 @@
 import { PropsButton } from '../../components/Button'
-import { FieldFormProps } from '../../components/FieldForm'
+import { PropsFieldForm } from '../../components/FieldForm'
 
 enum IdInputAuth {
   email = 'email',
@@ -14,7 +14,7 @@ enum IdInputAuth {
 
 export type IdInputProps = keyof typeof IdInputAuth
 
-export const PROPS_FIELDS_SIGN_UP: FieldFormProps[] = [
+export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'email',

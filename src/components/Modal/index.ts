@@ -3,6 +3,7 @@ import template from './template.hbs'
 
 import './styles.sass'
 import { Button } from '../Button'
+import UsersController from '../../controllers/UsersController'
 
 export class Modal extends Block<Props> {
   constructor(props: Props) {
@@ -59,7 +60,6 @@ export class Modal extends Block<Props> {
                   }
                 })
               }
-              console.log(files)
 
               if (isValide) {
                 if (props.error.isVisible) {
@@ -69,25 +69,10 @@ export class Modal extends Block<Props> {
                 this.setProps({ ...props, file: files[0].name })
 
                 const formData = new FormData()
+
                 formData.append('avatar', files[0])
 
-                // fench
-                setTimeout(() => {
-                  this.setProps({
-                    ...props, title: 'Файл загружен', BodyElement: '', btnLabel: 'Закрыть', events: {
-                      click: (e) => {
-                        e.stopPropagation()
-
-                        const element = e.target as HTMLElement
-
-                        if (element.classList.value === 'modal') {
-                          this.hide()
-                        }
-                      }
-                    }
-                  })
-                  this.hide()
-                }, 2000)
+                UsersController.putAvatar(formData)
 
               } else {
                 if (!props.error.isVisible) {
@@ -95,10 +80,7 @@ export class Modal extends Block<Props> {
                 }
               }
             }
-
-
           }
-
         }
       }
     })

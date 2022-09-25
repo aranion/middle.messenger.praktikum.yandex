@@ -10,7 +10,7 @@ export class Block<P extends DefaultProps = any> {
   } as const;
 
   public id: string = nanoid(6);
-  private props: P
+  protected props: P
   protected children: Children = {};
   private eventBus: () => EventBus<EventsList>
   private _element: HTMLElement | null = null;
@@ -115,7 +115,7 @@ export class Block<P extends DefaultProps = any> {
 
   protected componentDidUpdate(oldProps: P, newProps: P) {
     if (oldProps === newProps) {
-      console.log('oldProps =', oldProps, 'newProps =', newProps)
+      console.log('componentDidUpdate::', 'oldProps =', oldProps, 'newProps =', newProps)
     }
 
     return true

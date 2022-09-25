@@ -5,10 +5,13 @@ import { RouteLink } from '../../router/routeLink'
 import { getAllValuesForm } from '../../utils/getAllElementForm'
 import template from './template.hbs'
 import './styles.sass'
+import { withStore } from '../../hock/withStore'
+import AuthController from '../../controllers/AuthController'
+import ResourcesController from '../../controllers/ResourcesController'
 
-export class Profile extends Block<Props> {
+export class BaseProfile extends Block<ProfileProps> {
 
-  constructor(props: Props) {
+  constructor(props: ProfileProps) {
     super(props)
   }
 
@@ -16,7 +19,12 @@ export class Profile extends Block<Props> {
     e.preventDefault()
     e.stopPropagation()
 
-    getAllValuesForm(e)
+    const form = e.target as HTMLFormElement | null
+
+    if (form) {
+      getAllValuesForm(form)
+    }
+
   }
 
   protected init(): void {
@@ -49,6 +57,7 @@ export class Profile extends Block<Props> {
     }
 
     this.children.EditAvatar = new EditAvatar({
+      // srcAvatar: this.props.avatar,
       events: {
         click: () => {
           const Modal = this.getChildren().Modal as Modal
@@ -74,13 +83,21 @@ export class Profile extends Block<Props> {
   render() {
     const props = this.getProps()
 
+    AuthController.fetchUser()
+    ResourcesController.getAvatar((props as any).user.avatar)
+
     return this.compile(template, {
       ...props,
     })
   }
 }
 
-type Props = DefaultProps & {
+export const Profile = withStore<ProfileProps>((state) => ({
+  user: { ...state.user },
+  avatar: state.avatar
+}))(BaseProfile)
+
+export type ProfileProps = DefaultProps & {
   switchType: SwitchTypeBodyProfile
 }
 

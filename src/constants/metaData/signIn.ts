@@ -1,12 +1,12 @@
 import { PropsButton } from '../../components/Button'
-import { FieldFormProps } from '../../components/FieldForm'
+import { PropsFieldForm } from '../../components/FieldForm'
 
 enum IdInputPropsSignIn {
   login = 'login',
   password = 'password',
 }
 
-export const PROPS_FIELDS_SIGN_IN: FieldFormProps[] = [
+export const PROPS_FIELDS_SIGN_IN: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'login',

@@ -15,6 +15,11 @@ export class ChatsLeftBox extends Block<Props> {
   protected init(): void {
     const { chatsList } = this.getProps()
 
+    // this.children.ButtonCreateChat = new Button({
+    //   buttonName: 'createChat',
+    //   label: '+ Создать новый чат',
+    //   classesList: ['chatsLeftBox__button']
+    // })
     this.children.Link = new Link({ to: RouteLink.SETTINGS, label: 'Профиль' })
     this.children.ChatsList = chatsList.map((chat, tempKey) => {
       return new ChatItem({ ...chat, chatId: `${tempKey}` })

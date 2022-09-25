@@ -1,18 +1,21 @@
-import { Block } from '../utils/Block'
+import { ResponseUser } from '../api/AuthAPI'
 import { EventBus } from '../utils/EventBus'
 import { set } from '../utils/helpers'
 
-enum StoreEvents {
+export enum StoreEvents {
   Updated = 'Updated'
 }
 
 export class Store extends EventBus<keyof typeof StoreEvents> {
-  private state: State = {}
+  private state: State = {
+    user: null,
+    avatar: ''
+  }
 
   public set(keypath: string, data: unknown) {
     set(this.state, keypath, data)
 
-    this.emit('Updated', this.getState())
+    this.emit(StoreEvents.Updated, this.getState())
   }
 
   public getState() {
@@ -22,24 +25,9 @@ export class Store extends EventBus<keyof typeof StoreEvents> {
 
 const store = new Store()
 
-export function withStore(mapStateToProps: (state: State) => any) {
-  return function wrap(Component: typeof Block) {
-    return class WithStore extends Component {
-      constructor(props: any) {
-        const stateProps = mapStateToProps(store.getState)
-
-        super({ ...props, ...stateProps })
-
-        store.on('Updated', () => {
-          const stateProps = mapStateToProps(store.getState)
-
-          this.setProps({ ...stateProps })
-        })
-      }
-    }
-  }
-}
-
 export default store
 
-type State = any
+export type State = {
+  user: ResponseUser | null,
+  avatar: ''
+}

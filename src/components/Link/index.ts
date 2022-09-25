@@ -8,7 +8,13 @@ class BaseLink<T extends RouteLink> extends Block<LinkProps<T>> {
     super({
       ...props,
       events: {
-        click: () => this.navigate()
+        click: () => {
+          if (props.events && props.events.click) {
+            props.events.click()
+          }
+
+          this.navigate()
+        }
       }
     })
   }
