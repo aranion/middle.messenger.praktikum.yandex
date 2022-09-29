@@ -1,27 +1,25 @@
 import { DefaultProps, Block } from './../utils/Block'
 import store, { State } from '../store'
-import { isEqual } from '../utils/helpers'
+import { cloneDeep, isEqual } from '../utils/helpers'
 
-export function withStore<P extends DefaultProps>(mapStateToProps: (state: State) => any) {
+export function withStore<P extends DefaultProps>(mapStateToProps: (state: State) => Partial<State>) {
   return function wrap(Component: typeof Block<P>) {
-    let previousState: any
+    let oldState: Partial<State>
 
     return class WithStore<P> extends Component {
       constructor(props: P) {
-        previousState = mapStateToProps(store.getState())
+        oldState = cloneDeep(mapStateToProps(store.getState())) as Partial<State>
 
-        super({ ...props, ...previousState })
+        super({ ...props, ...oldState })
 
         store.on('Updated', () => {
           const stateProps = mapStateToProps(store.getState())
 
-          if (isEqual(previousState, stateProps)) {
-            return
+          if (!isEqual(oldState, stateProps)) {
+            this.setProps({ ...stateProps } as any)
           }
 
-          previousState = stateProps
-
-          this.setProps({ ...stateProps })
+          oldState = cloneDeep(stateProps) as Partial<State>
         })
       }
     }

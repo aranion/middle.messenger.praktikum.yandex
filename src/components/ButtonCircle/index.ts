@@ -1,6 +1,5 @@
 import { Block, DefaultProps } from '../../utils/Block'
 import template from './template.hbs'
-import AarrowIcon from '../../assets/imgs/AarrowIcon.svg'
 import './styles.sass'
 import { PropsWithRouter, withRouter } from '../../hock/withRouter'
 import { RouteLink } from '../../router/routeLink'
@@ -10,7 +9,12 @@ class BaseButtonCircle extends Block<Props> {
     super({
       ...props,
       events: {
-        click: () => this.navigate()
+        click: (e: Event) => {
+          e.preventDefault()
+          e.stopPropagation()
+
+          this.navigate()
+        }
       }
     })
   }
@@ -29,7 +33,6 @@ class BaseButtonCircle extends Block<Props> {
     return this.compile(template, {
       typeButton: 'button',
       direction: 'right',
-      srcIcon: AarrowIcon,
       ...props,
     })
   }
@@ -37,11 +40,9 @@ class BaseButtonCircle extends Block<Props> {
 
 export const ButtonCircle = withRouter<Props>(BaseButtonCircle)
 
-
-type Props = DefaultProps & PropsWithRouter
-  & {
-    typeButton?: 'submit' | 'button'
-    direction?: Direction
+type Props = DefaultProps & PropsWithRouter & {
+  typeButton?: 'submit' | 'button'
+  direction?: Direction
   to?: RouteLink
 }
 

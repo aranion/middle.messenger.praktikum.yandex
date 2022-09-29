@@ -10,7 +10,7 @@
   &__button
     min-width: 150px
     padding: 6px
-    height: auto 
+    height: auto
 
   &__list
     display: flex
@@ -35,6 +35,9 @@
         line-height: 12px
         color: $colorSecondary
         cursor: pointer
+        background-image: url('../../assets/imgs/PolygonIcon.svg')
+        background-repeat: no-repeat
+        background-position: right
 
         &:hover
           text-decoration: underline
@@ -63,9 +66,14 @@
         font-size: 12px
         line-height: 12px
         color: $colorSecondary
+        background-image: url('../../assets/imgs/SearchIcon.svg')
+        background-repeat: no-repeat
+        padding-left: 15px
 
       &:focus-within &_placeholder
         left: 15px
+        width: 15px
+        height: 15px
 
       &:focus-within &_placeholder span
         display: none

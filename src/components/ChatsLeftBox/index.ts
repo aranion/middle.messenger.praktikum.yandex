@@ -1,11 +1,9 @@
 import { ChatItem, ChatItemProps } from './../ChatItem'
 import { Block, DefaultProps } from '../../utils/Block'
-import template from './template.hbs'
-import arrowLinkImg from '../../assets/imgs/PolygonIcon.svg'
-import searchIconImg from '../../assets/imgs/SearchIcon.svg'
-import './styles.sass'
 import { RouteLink } from '../../router/routeLink'
 import { Link } from '../Link'
+import template from './template.hbs'
+import './styles.sass'
 
 export class ChatsLeftBox extends Block<Props> {
   constructor(props: Props) {
@@ -31,8 +29,6 @@ export class ChatsLeftBox extends Block<Props> {
 
     return this.compile(template, {
       ...props,
-      arrowLinkImg,
-      searchIconImg,
     })
   }
 }

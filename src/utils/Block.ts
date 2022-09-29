@@ -1,5 +1,6 @@
 import { EventBus } from './EventBus'
 import { nanoid } from 'nanoid'
+import { cloneDeep, isEqual } from './helpers'
 
 export class Block<P extends DefaultProps = any> {
   static EVENTS = {
@@ -76,7 +77,7 @@ export class Block<P extends DefaultProps = any> {
         return typeof value === 'function' ? value.bind(target) : value
       },
       set: (newProps, prop, value) => {
-        const oldProps = { ...newProps }
+        const oldProps = cloneDeep(newProps)
 
         newProps[prop as keyof typeof newProps] = value
 
@@ -114,10 +115,9 @@ export class Block<P extends DefaultProps = any> {
   protected componentDidMount() { }
 
   protected componentDidUpdate(oldProps: P, newProps: P) {
-    if (oldProps === newProps) {
-      console.log('componentDidUpdate::', 'oldProps =', oldProps, 'newProps =', newProps)
+    if (!isEqual(oldProps, newProps)) {
+      console.log('componentDidUpdate:', 'oldProps =', oldProps, 'newProps =', newProps)
     }
-
     return true
   }
 

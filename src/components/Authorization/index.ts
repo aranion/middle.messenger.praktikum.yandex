@@ -9,7 +9,6 @@ import { PropsWithRouter, withRouter } from '../../hock/withRouter'
 import { IdInputProps } from '../../constants/metaData/signUp'
 import template from './template.hbs'
 import './styles.sass'
-import { Notification, PropsNotification } from '../Notification'
 
 export class BaseAuthorization extends Block<AuthorizationProps> {
   constructor(props: AuthorizationProps) {
@@ -70,9 +69,8 @@ export class BaseAuthorization extends Block<AuthorizationProps> {
   }
 
   protected init(): void {
-    const { buttonProps, fieldsProps, formName, linkData, notificationProps } = this.getProps()
+    const { buttonProps, fieldsProps, formName, linkData } = this.getProps()
 
-    this.children.Notification = new Notification({ ...notificationProps })
     this.children.Link = new Link({ ...linkData })
 
     if (fieldsProps) {
@@ -100,7 +98,6 @@ export type AuthorizationProps = DefaultProps & PropsWithRouter & {
   formName: string
   buttonProps: PropsButton
   fieldsProps: PropsFieldForm[]
-  notificationProps: PropsNotification
   title: string
   linkData: LinkProps<RouteLink>,
   events?: {

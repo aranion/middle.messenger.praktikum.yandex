@@ -1,9 +1,12 @@
+import { BaseController } from './BaseController'
 import API, { ChatsAPI } from '../api/ChatsAPI'
 
-export class ChatsController {
+export class ChatsController extends BaseController {
   private readonly api: ChatsAPI
 
   constructor() {
+    super()
+
     this.api = API
   }
 
@@ -11,8 +14,8 @@ export class ChatsController {
     try {
       await this.api.read()
 
-    } catch (error) {
-      console.log(error)
+    } catch (e) {
+      this.error(e)
     }
   }
 }

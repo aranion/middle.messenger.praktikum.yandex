@@ -1,9 +1,14 @@
+import { MonitorStore } from './components/MonitorStore/index'
 import './assets/normalize.sass'
+import { Notification } from './components'
 import AuthController from './controllers/AuthController'
 import './index.sass'
 import { Messenger, NotFound, ServerError, SignIn, SignUp, Settings, SettingsEdit, SettingsPassword } from './pages'
 import { RouteLink } from './router/routeLink'
 import Router from './router/Router'
+import store from './store'
+
+(window as any).store = store
 
 window.addEventListener('DOMContentLoaded', async () => {
   Router
@@ -25,5 +30,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     Router.go(RouteLink.MESSENGER)
   } catch (error) {
     Router.go(RouteLink.HOME)
+    store.set('notification', { message: 'Требуется авторизация' })
   }
+
+  const root = document.querySelector('#root')
+  const notification = new Notification({}).getContent()
+  const monitorStore = new MonitorStore({}).getContent()
+
+  if (root && notification && monitorStore) {
+    root.after(notification)
+    root.after(monitorStore)
+  }
+
 })

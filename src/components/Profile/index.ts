@@ -6,8 +6,7 @@ import { getAllValuesForm } from '../../utils/getAllElementForm'
 import template from './template.hbs'
 import './styles.sass'
 import { withStore } from '../../hock/withStore'
-import AuthController from '../../controllers/AuthController'
-import ResourcesController from '../../controllers/ResourcesController'
+import { State } from '../../store'
 
 export class BaseProfile extends Block<ProfileProps> {
 
@@ -57,7 +56,6 @@ export class BaseProfile extends Block<ProfileProps> {
     }
 
     this.children.EditAvatar = new EditAvatar({
-      // srcAvatar: this.props.avatar,
       events: {
         click: () => {
           const Modal = this.getChildren().Modal as Modal
@@ -75,16 +73,17 @@ export class BaseProfile extends Block<ProfileProps> {
     this.children.Modal = new Modal({
       title: 'Загрузите файл',
       btnLabel: 'Поменять',
-      BodyElement: '<label for="avatar">Выбрать файл на компьютере</label><input name="avatar" id="avatar" type="file" style="display: none"}>',
-      error: { message: 'Нужно выбрать файл', isVisible: false }
+      BodyElement: `
+        <label for="avatar">
+          Выбрать файл на компьютере
+        </label>
+        <input name="avatar" id="avatar" type="file" style="display: none" accept="image/*">`,
+      error: null
     })
   }
 
   render() {
     const props = this.getProps()
-
-    AuthController.fetchUser()
-    ResourcesController.getAvatar((props as any).user.avatar)
 
     return this.compile(template, {
       ...props,
@@ -93,11 +92,10 @@ export class BaseProfile extends Block<ProfileProps> {
 }
 
 export const Profile = withStore<ProfileProps>((state) => ({
-  user: { ...state.user },
-  avatar: state.avatar
+  user: state.user ? { ...state.user } : null,
 }))(BaseProfile)
 
-export type ProfileProps = DefaultProps & {
+export type ProfileProps = DefaultProps & Partial<State> & {
   switchType: SwitchTypeBodyProfile
 }
 

@@ -2,13 +2,14 @@
     <div class="modal__box">
         <h2 class="modal__box_title">{{title}}</h2>
         <div class="modal__body">{{{BodyElement}}}</div>
-        <span>{{file}}</span>
+        <span class="modal__fileName">{{file}}</span>
         <div class="modal__footer">
             {{{Button}}}
-            <span class="modal__footer_error">
-                {{#if error.isVisible}}
-                    {{error.message}}
-                {{/if}}</span>
+            {{#if error}}
+                <span class="modal__footer_error">
+                    {{error}}
+                </span>
+            {{/if}}
         </div>
     </div>
 </div>

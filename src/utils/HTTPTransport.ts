@@ -16,33 +16,33 @@ export class HTTPTransport {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`
   }
 
-  public get = <Response>(path: string = '/', options?: RequestOptions): Promise<Response> => {
+  public get = <R extends XMLHttpRequest>(path: string = '/', options?: RequestOptions): Promise<R> => {
     if (!!options && !!options.data) {
       path = `${path}${queryStringify(options.data)}`
     }
 
-    return this.request<Response>(this.endpoint + path, { ...options, method: Methods.GET })
+    return this.request<R>(this.endpoint + path, { ...options, method: Methods.GET })
   };
 
-  public post = <Response = void>(path: string, options?: RequestOptions): Promise<Response> => {
-    return this.request<Response>(this.endpoint + path, { ...options, method: Methods.POST })
+  public post = <R extends XMLHttpRequest>(path: string, options?: RequestOptions): Promise<R> => {
+    return this.request<R>(this.endpoint + path, { ...options, method: Methods.POST })
   }
 
-  public put = <Response = void>(path: string, options?: RequestOptions): Promise<Response> => {
-    return this.request<Response>(this.endpoint + path, { ...options, method: Methods.PUT })
+  public put = <R extends XMLHttpRequest>(path: string, options?: RequestOptions): Promise<R> => {
+    return this.request<R>(this.endpoint + path, { ...options, method: Methods.PUT })
   }
 
-  public patch = <Response = void>(path: string, options?: RequestOptions): Promise<Response> => {
-    return this.request<Response>(this.endpoint + path, { ...options, method: Methods.PATCH })
+  public patch = <R extends XMLHttpRequest>(path: string, options?: RequestOptions): Promise<R> => {
+    return this.request<R>(this.endpoint + path, { ...options, method: Methods.PATCH })
   }
 
-  public delete = <Response>(path: string, options?: RequestOptions): Promise<Response> => {
-    return this.request<Response>(path, { ...options, method: Methods.DELETE })
+  public delete = <R extends XMLHttpRequest>(path: string, options?: RequestOptions): Promise<R> => {
+    return this.request<R>(path, { ...options, method: Methods.DELETE })
   }
 
-  private request = <Response>(url: string, options?: RequestOptions): Promise<Response> => {
+  private request = <R extends XMLHttpRequest>(url: string, options?: RequestOptions): Promise<R> => {
     const {
-      headers = { 'Content-Type': 'application/json' },
+      headers = {}, //'Content-Type': 'application/json'
       method = Methods.GET,
       data,
       timeout = 5000,
@@ -58,19 +58,16 @@ export class HTTPTransport {
       const headersKey = Object.keys(headers) as (keyof Header)[]
 
       xhr.open(method, url)
-      xhr.onreadystatechange = (e: Event) => {
-        console.log(e)
-
+      xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status < 400) {
-            resolve(xhr.response)
+            resolve(xhr as R)
           } else {
             reject(xhr.response)
           }
         }
       }
 
-      // xhr.onload = () => { resolve(xhr) }
       xhr.onabort = () => reject({ reason: 'abort' })
       xhr.onerror = () => reject({ reason: 'network error' })
       xhr.timeout = timeout
@@ -85,9 +82,10 @@ export class HTTPTransport {
 
       if (method === Methods.GET && !data) {
         xhr.send()
+      } else if (url.includes('avatar')) {
+        xhr.send(data as XMLHttpRequestBodyInit)
       } else {
         xhr.send(JSON.stringify(data))
-        // xhr.send(data)
       }
     })
   };

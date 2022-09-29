@@ -1,6 +1,5 @@
 import { DefaultProps, Block } from '../../utils/Block'
 import template from './template.hbs'
-
 import './styles.sass'
 import { Button } from '../Button'
 import UsersController from '../../controllers/UsersController'
@@ -16,6 +15,7 @@ export class Modal extends Block<Props> {
       const element = e.target as HTMLElement
 
       if (element.classList.value === 'modal') {
+        this.setProps({ ...this.props, error: null })
         this.hide()
       }
     })
@@ -39,14 +39,10 @@ export class Modal extends Block<Props> {
             if (files) {
               const isValide = files && files.length !== 0 && files[0]
 
-              const setVisibleError = (isVisible: boolean) => {
-                debugger
+              const setError = (message: string | null) => {
                 this.setProps({
                   ...props,
-                  error: {
-                    ...props.error,
-                    isVisible
-                  },
+                  error: message,
                   events: {
                     click: (e) => {
                       e.stopPropagation()
@@ -54,6 +50,7 @@ export class Modal extends Block<Props> {
                       const element = e.target as HTMLElement
 
                       if (element.classList.value === 'modal') {
+                        this.setProps({ ...this.props, error: null })
                         this.hide()
                       }
                     }
@@ -62,8 +59,8 @@ export class Modal extends Block<Props> {
               }
 
               if (isValide) {
-                if (props.error.isVisible) {
-                  setVisibleError(false)
+                if (props.error) {
+                  setError(null)
                 }
 
                 this.setProps({ ...props, file: files[0].name })
@@ -75,8 +72,8 @@ export class Modal extends Block<Props> {
                 UsersController.putAvatar(formData)
 
               } else {
-                if (!props.error.isVisible) {
-                  setVisibleError(true)
+                if (!props.error) {
+                  setError('Нужно выбрать файл')
                 }
               }
             }
@@ -99,11 +96,6 @@ type Props = DefaultProps & {
   title: string
   BodyElement: string
   btnLabel: string
-  error: ErrorMessageModal
+  error: string | null
   file?: string
-}
-
-type ErrorMessageModal = {
-  message: string
-  isVisible: boolean
 }

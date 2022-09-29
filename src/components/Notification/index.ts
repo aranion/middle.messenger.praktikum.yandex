@@ -1,43 +1,48 @@
+import { StateNotification } from './../../store/index'
 import { Block, DefaultProps } from '../../utils/Block'
 import template from './template.hbs'
 import './styles.sass'
+import { withStore } from '../../hock/withStore'
+import store, { State } from '../../store'
 
-export class Notification extends Block<PropsNotification> {
+export class BaseNotification extends Block<PropsNotification> {
   constructor(props: PropsNotification) {
-    super(props)
-    this.hide()
+    super({ ...props })
   }
 
-  private showTimer() {
-    const { message, timeShow = 2000 } = this.getProps()
+  render() {
+    const { notification } = this.props
+    let classes = notification?.typeMessage === 'error'
+      ? 'notification__error'
+      : notification?.typeMessage === 'access'
+        ? 'notification__access'
+        : ' '
 
-    if (message !== '') {
+
+    if (notification?.message && notification?.message !== '') {
+      const { timeShow = 3000 } = notification as StateNotification
+
       this.show()
 
       setTimeout(() => {
         this.hide()
+        store.set('notification', { message: null, title: null, typeMessage: 'info' })
       }, timeShow)
+    } else {
+      classes += ' hidden'
     }
-  }
-
-  render() {
-    const { message, ...props } = this.getProps()
-
-    this.showTimer()
 
     return this.compile(template, {
-      message,
-      isError: props.typeMessage === 'error',
-      isAccess: props.typeMessage === 'access',
-      ...props,
+      classes,
+      message: notification?.message,
+      title: notification?.title,
+      ...this.props,
     })
   }
 }
 
-export type PropsNotification = DefaultProps & {
-  message: string
-  typeMessage?: TypeMessage
-  timeShow?: number
-}
+export const Notification = withStore<PropsNotification>(state => ({
+  notification: state.notification
+}))(BaseNotification)
 
-type TypeMessage = 'error' | 'info' | 'access'
+export type PropsNotification = DefaultProps & Partial<State> 

@@ -9,12 +9,17 @@ export enum StoreEvents {
 export class Store extends EventBus<keyof typeof StoreEvents> {
   private state: State = {
     user: null,
-    avatar: ''
+    avatar: '',
+    notification: {
+      message: null,
+      title: null,
+      typeMessage: 'info',
+      timeShow: 2500
+    }
   }
 
-  public set(keypath: string, data: unknown) {
+  public set<T extends keyof State>(keypath: T, data: State[T]) {
     set(this.state, keypath, data)
-
     this.emit(StoreEvents.Updated, this.getState())
   }
 
@@ -29,5 +34,14 @@ export default store
 
 export type State = {
   user: ResponseUser | null,
-  avatar: ''
+  avatar: string
+  notification: StateNotification
 }
+
+export type StateNotification = {
+  message: string | null
+  typeMessage?: TypeMessage
+  timeShow?: number
+  title?: string | null
+}
+type TypeMessage = 'error' | 'info' | 'access'

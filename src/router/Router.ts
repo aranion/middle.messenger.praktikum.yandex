@@ -2,10 +2,10 @@ import { Block } from '../utils/Block'
 import { Route } from './Route'
 import { RouteLink } from './routeLink'
 
-class Router<R> {
+class Router<R extends string> {
   private static __instance: Router<any>
-  private routes: Route<R>[] = []
-  private currentRoute: Route<R> | null = null
+  private routes: Route[] = []
+  private currentRoute: Route | null = null
   private history: History = window.history
 
   constructor(private readonly rootQuery: Query = '#root') {
@@ -36,7 +36,7 @@ class Router<R> {
   }
 
   public go(pathname: R) {
-    this.history.pushState({}, '', pathname as URL)
+    this.history.pushState({}, '', pathname)
     this._onRoute(pathname)
   }
 

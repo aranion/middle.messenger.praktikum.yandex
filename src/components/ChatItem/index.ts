@@ -16,19 +16,18 @@ export class ChatItem extends Block<ChatItemProps> {
     const props = this.getProps()
 
     return this.compile(template, {
-      linkChat: '#chat',
       ...props,
     })
   }
 }
 
 export type ChatItemProps = DefaultProps & {
-  srcAvatar?: string
   chatId: string
-  linkChat?: string
   login: string
   lastMessage: string
   dateMessage: string
   newMessageCounter: string
+  srcAvatar?: string
+  linkChat?: string
 };
 

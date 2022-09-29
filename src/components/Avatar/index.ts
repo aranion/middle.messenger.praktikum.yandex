@@ -1,6 +1,5 @@
 import { Block, DefaultProps } from '../../utils/Block'
 import template from './template.hbs'
-import defaultAvatarImg from '../../assets/imgs/AvatarDefault.svg'
 import './styles.sass'
 
 export class Avatar extends Block<Props> {
@@ -11,7 +10,7 @@ export class Avatar extends Block<Props> {
   render() {
     const props = this.getProps()
 
-    return this.compile(template, { srcAvatar: defaultAvatarImg, ...props })
+    return this.compile(template, { ...props })
   }
 }
 

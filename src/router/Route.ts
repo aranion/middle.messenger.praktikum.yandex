@@ -2,17 +2,17 @@ import { Block } from '../utils/Block'
 import { Query } from './Router'
 import { renderContent } from './utils'
 
-export class Route<R>  {
+export class Route {
   private block: Block | null = null
 
   constructor(
-    private pathname: R,
+    private pathname: string,
     private readonly blockClass: typeof Block,
     private readonly query: Query
   ) { }
 
-  match(pathname: R) {
-    return (pathname as string).toLowerCase() === (this.pathname as string).toLowerCase()
+  match(pathname: string) {
+    return pathname.toLowerCase() === this.pathname.toLowerCase()
   }
 
   render() {
