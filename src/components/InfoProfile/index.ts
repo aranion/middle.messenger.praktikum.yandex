@@ -6,6 +6,7 @@ import './styles.sass'
 import { Link } from '../Link'
 import AuthController from '../../controllers/AuthController'
 import { withStore } from '../../hock/withStore'
+import { State } from '../../store'
 
 class BaseInfoProfile extends Block<InfoProfileProps> {
   constructor(props: InfoProfileProps) {
@@ -16,7 +17,7 @@ class BaseInfoProfile extends Block<InfoProfileProps> {
     const { fields } = this.getProps()
 
     this.children.Fields = fields.map(field => {
-      return new FieldProfile({ ...field })
+      return new FieldProfile(field)
     })
 
     this.children.LinkEdit = new Link({
@@ -41,21 +42,20 @@ class BaseInfoProfile extends Block<InfoProfileProps> {
   }
 
   render() {
-    const nameUser = 'NAME...'
     const props = this.getProps()
+    const nameUser = props.user?.first_name
 
     return this.compile(template, {
-      linkProfileAllEdit: RouteLink.SETTINGS_EDIT,
-      linkProfilePasswordEdit: RouteLink.SETTINGS_PASSWORD,
-      linkExit: RouteLink.MESSENGER,
       nameUser,
       ...props,
 
     })
   }
 }
-export const InfoProfile = withStore<InfoProfileProps>((state) => ({ user: { ...state.user } }))(BaseInfoProfile)
+export const InfoProfile = withStore<InfoProfileProps>((state) => ({
+  user: state.user ? { ...state.user } : null
+}))(BaseInfoProfile)
 
-export type InfoProfileProps = DefaultProps & {
+export type InfoProfileProps = DefaultProps & Partial<State> & {
   fields: FieldProfileProps[]
 }

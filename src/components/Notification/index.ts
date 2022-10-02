@@ -14,7 +14,7 @@ export class BaseNotification extends Block<PropsNotification> {
     const { notification } = this.props
     let classes = notification?.typeMessage === 'error'
       ? 'notification__error'
-      : notification?.typeMessage === 'access'
+      : notification?.typeMessage === 'success'
         ? 'notification__access'
         : ' '
 

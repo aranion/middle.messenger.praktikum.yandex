@@ -1,24 +1,52 @@
 import { BaseController } from './BaseController'
-import API, { UsersAPI } from '../api/UsersAPI'
+import API, { RequestPutPassword, RequestPutProfile, UsersAPI } from '../api/UsersAPI'
 import store from '../store'
 import ResourcesController from './ResourcesController'
+import Router from '../router/Router'
+import { RouteLink } from '../router/routeLink'
 
 export class UsersController extends BaseController {
   private readonly api: UsersAPI
 
   constructor() {
     super()
+
     this.api = API
   }
 
-  async putAvatar(data: any) {
+  async putAvatar(data: FormData) {
     try {
-      const { response } = await this.api.putAvatar(data)
+      const { response }: { response: ResponseUser } = await this.api.putAvatar(data)
 
       store.set('user', response)
-      store.set('notification', { message: 'Фотография успешно загружена', title: 'Загрузка', typeMessage: 'access' })
+      this.success('Фотография успешно загружена', 'Загрузка')
 
-      ResourcesController.getAvatar(response.avatar)
+      if (response.avatar) {
+        ResourcesController.getAvatar(response.avatar)
+      }
+    } catch (e) {
+      this.error(e)
+    }
+  }
+
+  async putPassword(data: RequestPutPassword) {
+    try {
+      await this.api.putPassword(data)
+
+      Router?.go(RouteLink.SETTINGS)
+      this.success('Пароль успешно изменен', 'Изменение')
+    } catch (e) {
+      this.error(e)
+    }
+  }
+
+  async putProfile(data: RequestPutProfile) {
+    try {
+      const { response }: { response: ResponseUser } = await this.api.putProfile(data)
+
+      store.set('user', response)
+      this.success('Данные успешно обновлены', 'Изменение')
+      Router?.go(RouteLink.SETTINGS)
     } catch (e) {
       this.error(e)
     }
@@ -26,3 +54,14 @@ export class UsersController extends BaseController {
 }
 
 export default new UsersController()
+
+export type ResponseUser = {
+  avatar: string | null
+  display_name: string | null
+  email: string
+  first_name: string
+  id: number
+  login: string
+  phone: string
+  second_name: string
+}

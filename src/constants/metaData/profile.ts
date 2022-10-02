@@ -54,7 +54,15 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
 ]
 
 export const PROFILE_FIELDS: FieldProfileProps[] =
-  PROFILE_FIELDS_EDIT.map(field => ({ label: field.label, value: field.inputProps?.value || '' }))
+  PROFILE_FIELDS_EDIT.map(field => {
+    return { label: field.label, value: field.inputProps?.value || '', inputProps: field.inputProps }
+  })
+
+export enum IdInputFieldPassword {
+  oldPassword = "oldPassword",
+  newPassword = "newPassword",
+  newTwoPassword = 'newTwoPassword'
+}
 
 export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
   {
@@ -62,7 +70,7 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
     inputProps: {
       value: '',
       typeField: 'password',
-      id: 'password',
+      id: IdInputFieldPassword.oldPassword,
       fieldName: 'password',
     }
   },
@@ -71,7 +79,7 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
     inputProps: {
       value: '',
       typeField: 'password',
-      id: 'newPassword',
+      id: IdInputFieldPassword.newPassword,
       fieldName: 'password',
     }
   },
@@ -80,7 +88,7 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
     inputProps: {
       value: '',
       typeField: 'password',
-      id: 'newTwoPassword',
+      id: IdInputFieldPassword.newTwoPassword,
       fieldName: 'password',
     }
   },

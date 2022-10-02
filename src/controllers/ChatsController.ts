@@ -13,7 +13,6 @@ export class ChatsController extends BaseController {
   async fetchChats() {
     try {
       await this.api.read()
-
     } catch (e) {
       this.error(e)
     }

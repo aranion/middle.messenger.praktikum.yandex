@@ -9,7 +9,7 @@ export class ResourcesAPI extends BaseAPI {
     super('/resources')
   }
 
-  read(identifier: string): Promise<XMLHttpRequest> {
+  read(identifier: string) {
     return this.http.get(Api.resources + identifier)
   }
 

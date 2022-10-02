@@ -71,10 +71,10 @@ export class BaseAuthorization extends Block<AuthorizationProps> {
   protected init(): void {
     const { buttonProps, fieldsProps, formName, linkData } = this.getProps()
 
-    this.children.Link = new Link({ ...linkData })
+    this.children.Link = new Link(linkData)
 
     if (fieldsProps) {
-      this.children.FieldsForm = fieldsProps.map(fieldProps => new FieldForm({ ...fieldProps }))
+      this.children.FieldsForm = fieldsProps.map(fieldProps => new FieldForm(fieldProps))
     }
 
     if (buttonProps) {

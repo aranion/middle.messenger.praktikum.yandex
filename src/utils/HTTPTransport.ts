@@ -16,33 +16,33 @@ export class HTTPTransport {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`
   }
 
-  public get = <R extends XMLHttpRequest>(path: string = '/', options?: RequestOptions): Promise<R> => {
+  public get = (path: string = '/', options?: RequestOptions): Promise<XMLHttpRequest> => {
     if (!!options && !!options.data) {
       path = `${path}${queryStringify(options.data)}`
     }
 
-    return this.request<R>(this.endpoint + path, { ...options, method: Methods.GET })
+    return this.request(this.endpoint + path, { ...options, method: Methods.GET })
   };
 
-  public post = <R extends XMLHttpRequest>(path: string, options?: RequestOptions): Promise<R> => {
-    return this.request<R>(this.endpoint + path, { ...options, method: Methods.POST })
+  public post = (path: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
+    return this.request(this.endpoint + path, { ...options, method: Methods.POST })
   }
 
-  public put = <R extends XMLHttpRequest>(path: string, options?: RequestOptions): Promise<R> => {
-    return this.request<R>(this.endpoint + path, { ...options, method: Methods.PUT })
+  public put = (path: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
+    return this.request(this.endpoint + path, { ...options, method: Methods.PUT })
   }
 
-  public patch = <R extends XMLHttpRequest>(path: string, options?: RequestOptions): Promise<R> => {
-    return this.request<R>(this.endpoint + path, { ...options, method: Methods.PATCH })
+  public patch = (path: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
+    return this.request(this.endpoint + path, { ...options, method: Methods.PATCH })
   }
 
-  public delete = <R extends XMLHttpRequest>(path: string, options?: RequestOptions): Promise<R> => {
-    return this.request<R>(path, { ...options, method: Methods.DELETE })
+  public delete = (path: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
+    return this.request(path, { ...options, method: Methods.DELETE })
   }
 
-  private request = <R extends XMLHttpRequest>(url: string, options?: RequestOptions): Promise<R> => {
+  private request = (url: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
     const {
-      headers = {}, //'Content-Type': 'application/json'
+      headers = { 'Content-Type': 'application/json' }, //'Content-Type': 'application/json'
       method = Methods.GET,
       data,
       timeout = 5000,
@@ -61,7 +61,7 @@ export class HTTPTransport {
       xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status < 400) {
-            resolve(xhr as R)
+            resolve(xhr)
           } else {
             reject(xhr.response)
           }

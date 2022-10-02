@@ -9,7 +9,7 @@ export class ChatsAPI extends BaseAPI {
     super('/chats')
   }
 
-  read(): Promise<unknown> {
+  read() {
     return this.http.get(Api.chat)
   }
 

@@ -1,12 +1,14 @@
+import { RequestPutProfile } from './../../api/UsersAPI'
 import { PROFILE_FIELDS_PASSWORD, PROFILE_FIELDS, PROFILE_FIELDS_EDIT } from './../../constants/metaData/profile'
 import { DefaultProps, Block } from '../../utils/Block'
-import { ButtonCircle, InfoProfile, EditAvatar, EditProfile, Modal } from '..'
+import { ButtonCircle, InfoProfile, EditAvatar, EditProfile, Modal, FieldProfileProps, BaseEditProfile } from '..'
 import { RouteLink } from '../../router/routeLink'
-import { getAllValuesForm } from '../../utils/getAllElementForm'
 import template from './template.hbs'
 import './styles.sass'
 import { withStore } from '../../hock/withStore'
 import { State } from '../../store'
+import UsersController, { ResponseUser } from '../../controllers/UsersController'
+import { RequestPutPassword } from '../../api/UsersAPI'
 
 export class BaseProfile extends Block<ProfileProps> {
 
@@ -14,31 +16,66 @@ export class BaseProfile extends Block<ProfileProps> {
     super(props)
   }
 
-  handleSubmit(e: SubmitEvent) {
-    e.preventDefault()
-    e.stopPropagation()
-
-    const form = e.target as HTMLFormElement | null
-
-    if (form) {
-      getAllValuesForm(form)
-    }
-
-  }
-
   protected init(): void {
-    const { switchType } = this.getProps()
+    const { switchType, user } = this.getProps()
 
     switch (switchType) {
       case 'settingsInfo':
-        this.children.BodyProfile = new InfoProfile({ fields: PROFILE_FIELDS })
+        this.children.BodyProfile = new InfoProfile({
+          fields: PROFILE_FIELDS.map(item => {
+
+            if (user && item.inputProps && item.inputProps.id) {
+              const key = item.inputProps.id as keyof ResponseUser
+
+              return { ...item, value: user[key] }
+            }
+          })
+        })
         break
       case 'settingsEditFields':
         this.children.BodyProfile = new EditProfile({
-          fields: PROFILE_FIELDS_EDIT,
+          fields: PROFILE_FIELDS_EDIT.reduce<FieldProfileProps[]>((res, item) => {
+            const { inputProps } = item
+
+
+            if (user && inputProps && inputProps.id) {
+              const key = inputProps.id as keyof ResponseUser
+
+              if (user && key) {
+                const value = user[key] === null ? '' : user[key]
+
+                if (value || typeof value === 'string') {
+                  const field = {
+                    ...item,
+                    inputProps: {
+                      ...inputProps,
+                      value: typeof value === 'number' ? `${value}` : value
+                    }
+                  }
+
+                  res.push(field)
+                }
+              }
+            }
+            return res
+          }, []),
           formName: 'formSettingsEditFields',
           events: {
-            submit: this.handleSubmit
+            submit: (e: SubmitEvent) => {
+              e.preventDefault()
+              e.stopPropagation()
+
+              const { BodyProfile } = this.getChildren() as { BodyProfile: BaseEditProfile }
+
+              if (!Array.isArray(BodyProfile)) {
+                const isValidateFieldsForm = BodyProfile.validateFields()
+                const fieldsValue = BodyProfile.getFieldsFormValue<RequestPutProfile>()
+
+                if (isValidateFieldsForm) {
+                  UsersController.putProfile(fieldsValue)
+                }
+              }
+            }
           }
         })
         break
@@ -47,7 +84,21 @@ export class BaseProfile extends Block<ProfileProps> {
           fields: PROFILE_FIELDS_PASSWORD,
           formName: 'formSettingsEditPassword',
           events: {
-            submit: this.handleSubmit
+            submit: (e: SubmitEvent) => {
+              e.preventDefault()
+              e.stopPropagation()
+
+              const { BodyProfile } = this.getChildren() as { BodyProfile: BaseEditProfile }
+
+              if (!Array.isArray(BodyProfile)) {
+                const isValidateFieldsForm = BodyProfile.validateFields()
+                const { newPassword, oldPassword } = BodyProfile.getFieldsFormValue<RequestPutPassword>()
+
+                if (isValidateFieldsForm) {
+                  UsersController.putPassword({ newPassword, oldPassword, })
+                }
+              }
+            }
           }
         })
         break

@@ -1,4 +1,4 @@
-import { ResponseUser } from '../api/AuthAPI'
+import { ResponseUser } from '../controllers/UsersController'
 import { EventBus } from '../utils/EventBus'
 import { set } from '../utils/helpers'
 
@@ -44,4 +44,4 @@ export type StateNotification = {
   timeShow?: number
   title?: string | null
 }
-type TypeMessage = 'error' | 'info' | 'access'
+export type TypeMessage = 'error' | 'info' | 'success'

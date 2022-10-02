@@ -1,4 +1,4 @@
-import store from '../store'
+import store, { TypeMessage } from '../store'
 
 export class BaseController {
   protected error = (error: any) => {
@@ -7,6 +7,10 @@ export class BaseController {
 
     console.log(error)
     store.set('notification', { message, title: `Ошибка ${title}`, typeMessage: 'error' })
+  }
+
+  protected success = (message: string, title: string, typeMessage: TypeMessage = 'success') => {
+    store.set('notification', { message, title, typeMessage })
   }
 
 }

@@ -13,7 +13,7 @@ export class AuthAPI extends BaseAPI {
   }
 
   signIn(data: SignInData) {
-    return this.http.post(Api.signin, { data, headers: { 'Content-Type': 'application/json' } })
+    return this.http.post(Api.signin, { data })
   }
 
   signUp(data: SignUpData) {
@@ -24,7 +24,7 @@ export class AuthAPI extends BaseAPI {
     return this.http.post(Api.logout)
   }
 
-  read(): Promise<XMLHttpRequest> {
+  read() {
     return this.http.get(Api.user)
   }
 
@@ -46,14 +46,4 @@ export type SignUpData = {
   email: string
   password: string
   phone: string
-}
-export type ResponseUser = {
-  avatar: string | null
-  display_name: string | null
-  email: string
-  first_name: string
-  id: number
-  login: string
-  phone: string
-  second_name: string
 }
