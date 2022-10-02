@@ -13,6 +13,10 @@ export class ChatsAPI extends BaseAPI {
     return this.http.get(Api.chat)
   }
 
+  createChat(data: RequestCreateChat) {
+    return this.http.post(Api.chat, { data })
+  }
+
   create = undefined
   update = undefined
   delete = undefined
@@ -20,3 +24,6 @@ export class ChatsAPI extends BaseAPI {
 
 export default new ChatsAPI()
 
+export type RequestCreateChat = {
+  title: string
+}

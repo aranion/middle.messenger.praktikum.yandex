@@ -1,26 +1,49 @@
-import { ChatItem, ChatItemProps } from './../ChatItem'
 import { Block, DefaultProps } from '../../utils/Block'
 import { RouteLink } from '../../router/routeLink'
-import { Link } from '../Link'
+import { Link, Modal, Button, BodyModalAddChat, ChatItem } from '../'
 import template from './template.hbs'
 import './styles.sass'
+import { State } from '../../store'
+import { withStore } from '../../hock/withStore'
 
-export class ChatsLeftBox extends Block<Props> {
+export class BaseChatsLeftBox extends Block<Props> {
   constructor(props: Props) {
     super(props)
   }
 
-  protected init(): void {
-    const { chatsList } = this.getProps()
+  protected componentDidUpdate(): boolean {
+    const { chats = [] } = this.getProps()
 
-    // this.children.ButtonCreateChat = new Button({
-    //   buttonName: 'createChat',
-    //   label: '+ Создать новый чат',
-    //   classesList: ['chatsLeftBox__button']
-    // })
+    this.children.ChatsList = chats.map((chat) => {
+      return new ChatItem({ ...chat })
+    })
+
+    return true
+  }
+
+  protected init(): void {
+    const { chats = [] } = this.getProps()
+
     this.children.Link = new Link({ to: RouteLink.SETTINGS, label: 'Профиль' })
-    this.children.ChatsList = chatsList.map((chat, tempKey) => {
-      return new ChatItem({ ...chat, chatId: `${tempKey}` })
+    this.children.Modal = new Modal({ BodyElement: BodyModalAddChat })
+    this.children.ButtonCreateChat = new Button({
+      buttonName: 'createChat',
+      label: 'Создать чат',
+      classesList: ['chatsLeftBox__button'],
+      events: {
+        click: () => {
+          const Modal = this.getChildren().Modal
+
+          if (!Array.isArray(Modal)) {
+            const element = Modal.getContent()
+
+            element?.classList.remove('hidden')
+          }
+        }
+      }
+    })
+    this.children.ChatsList = chats.map((chat) => {
+      return new ChatItem({ ...chat })
     })
   }
 
@@ -33,6 +56,8 @@ export class ChatsLeftBox extends Block<Props> {
   }
 }
 
-type Props = DefaultProps & {
-  chatsList: ChatItemProps[]
-}
+export const ChatsLeftBox = withStore<Props>((state) => ({
+  chats: state.chats,
+}))(BaseChatsLeftBox)
+
+type Props = DefaultProps & Partial<State> 

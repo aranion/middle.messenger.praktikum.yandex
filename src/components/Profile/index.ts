@@ -10,7 +10,6 @@ import {
   FieldProfileProps,
   BaseEditProfile,
   BodyModalAvatar,
-  BodyModalAvatarProps
 } from '..'
 import { RouteLink } from '../../router/routeLink'
 import template from './template.hbs'
@@ -135,10 +134,7 @@ export class BaseProfile extends Block<ProfileProps> {
       to: RouteLink.MESSENGER,
     })
 
-    this.children.Modal = new Modal({
-      BodyElement: BodyModalAvatar,
-      propsBodyElement: {} as BodyModalAvatarProps
-    })
+    this.children.Modal = new Modal({ BodyElement: BodyModalAvatar })
   }
 
   render() {

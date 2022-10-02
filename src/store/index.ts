@@ -15,7 +15,8 @@ export class Store extends EventBus<keyof typeof StoreEvents> {
       title: null,
       typeMessage: 'info',
       timeShow: 2500
-    }
+    },
+    chats: []
   }
 
   public set<T extends keyof State>(keypath: T, data: State[T]) {
@@ -36,6 +37,7 @@ export type State = {
   user: ResponseUser | null,
   avatar: string
   notification: StateNotification
+  chats: ChatsState[]
 }
 
 export type StateNotification = {
@@ -45,3 +47,15 @@ export type StateNotification = {
   title?: string | null
 }
 export type TypeMessage = 'error' | 'info' | 'success'
+
+export type ChatsState = {
+  id: number
+  title: string
+  avatar: string
+  unread_count: number
+  last_message: {
+    user: ResponseUser
+    time: string
+    content: string
+  }
+}

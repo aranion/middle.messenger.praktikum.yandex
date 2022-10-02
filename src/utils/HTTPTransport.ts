@@ -42,7 +42,7 @@ export class HTTPTransport {
 
   private request = (url: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
     const {
-      headers = { 'Content-Type': 'application/json' }, //'Content-Type': 'application/json'
+      headers = { 'Content-Type': 'application/json' }, 
       method = Methods.GET,
       data,
       timeout = 5000,

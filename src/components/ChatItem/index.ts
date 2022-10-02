@@ -2,6 +2,7 @@ import { Block, DefaultProps } from '../../utils/Block'
 import { Avatar } from '../'
 import template from './template.hbs'
 import './styles.sass'
+import { ChatsState } from '../../store'
 
 export class ChatItem extends Block<ChatItemProps> {
   constructor(props: ChatItemProps) {
@@ -21,13 +22,5 @@ export class ChatItem extends Block<ChatItemProps> {
   }
 }
 
-export type ChatItemProps = DefaultProps & {
-  chatId: string
-  login: string
-  lastMessage: string
-  dateMessage: string
-  newMessageCounter: string
-  srcAvatar?: string
-  linkChat?: string
-};
+export type ChatItemProps = DefaultProps & ChatsState;
 

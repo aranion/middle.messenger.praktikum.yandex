@@ -1,7 +1,6 @@
 import { DefaultProps, Block } from '../../utils/Block'
 import template from './template.hbs'
 import './styles.sass'
-import { BodyModalAvatar } from '../'
 
 export class Modal extends Block<Props> {
   constructor(props: Props) {
@@ -43,6 +42,5 @@ export class Modal extends Block<Props> {
 }
 
 type Props = DefaultProps & {
-  BodyElement: typeof BodyModalAvatar
-  propsBodyElement: object & DefaultProps
+  BodyElement: typeof Block<any>
 }

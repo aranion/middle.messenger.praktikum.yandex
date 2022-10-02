@@ -118,6 +118,7 @@ export class Block<P extends DefaultProps = any> {
     if (!isEqual(oldProps, newProps)) {
       console.log('componentDidUpdate:', 'oldProps =', oldProps, 'newProps =', newProps)
     }
+
     return true
   }
 
