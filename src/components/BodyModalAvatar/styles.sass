@@ -1,0 +1,31 @@
+@import '../../constants/var/vars.sass'
+
+.bodyModalAvatar
+	max-width: 130px
+	font-size: 12px
+	line-height: 16px
+	text-align: center
+	color: $colorPrimary
+	@include centerFlex()
+	justify-content: space-between
+	flex-direction: column
+	height: 100%
+
+	&__label
+		text-decoration-line: underline
+
+	&__title
+		margin: 0
+
+	&__footer
+		flex-direction: column
+
+		button
+			min-width: 250px
+
+		&_error
+			@include centerFlex()
+			color: $colorErorr
+			font-size: 12px
+			margin-top: 14px
+			

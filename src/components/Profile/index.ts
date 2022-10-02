@@ -1,7 +1,17 @@
 import { RequestPutProfile } from './../../api/UsersAPI'
 import { PROFILE_FIELDS_PASSWORD, PROFILE_FIELDS, PROFILE_FIELDS_EDIT } from './../../constants/metaData/profile'
 import { DefaultProps, Block } from '../../utils/Block'
-import { ButtonCircle, InfoProfile, EditAvatar, EditProfile, Modal, FieldProfileProps, BaseEditProfile } from '..'
+import {
+  ButtonCircle,
+  InfoProfile,
+  EditAvatar,
+  EditProfile,
+  Modal,
+  FieldProfileProps,
+  BaseEditProfile,
+  BodyModalAvatar,
+  BodyModalAvatarProps
+} from '..'
 import { RouteLink } from '../../router/routeLink'
 import template from './template.hbs'
 import './styles.sass'
@@ -109,9 +119,13 @@ export class BaseProfile extends Block<ProfileProps> {
     this.children.EditAvatar = new EditAvatar({
       events: {
         click: () => {
-          const Modal = this.getChildren().Modal as Modal
+          const Modal = this.getChildren().Modal
 
-          Modal.show('flex')
+          if (!Array.isArray(Modal)) {
+            const element = Modal.getContent()
+
+            element?.classList.remove('hidden')
+          }
         }
       }
     })
@@ -122,14 +136,8 @@ export class BaseProfile extends Block<ProfileProps> {
     })
 
     this.children.Modal = new Modal({
-      title: 'Загрузите файл',
-      btnLabel: 'Поменять',
-      BodyElement: `
-        <label for="avatar">
-          Выбрать файл на компьютере
-        </label>
-        <input name="avatar" id="avatar" type="file" style="display: none" accept="image/*">`,
-      error: null
+      BodyElement: BodyModalAvatar,
+      propsBodyElement: {} as BodyModalAvatarProps
     })
   }
 

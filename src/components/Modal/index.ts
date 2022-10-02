@@ -1,86 +1,36 @@
 import { DefaultProps, Block } from '../../utils/Block'
 import template from './template.hbs'
 import './styles.sass'
-import { Button } from '../Button'
-import UsersController from '../../controllers/UsersController'
+import { BodyModalAvatar } from '../'
 
 export class Modal extends Block<Props> {
   constructor(props: Props) {
     super(props)
-    this.hide()
 
-    this.element?.addEventListener('click', (e: Event) => {
-      e.stopPropagation()
+    if (this.element) {
+      const elementClose = this.element.querySelector('.modal__close')
 
-      const element = e.target as HTMLElement
+      if (elementClose) {
+        elementClose.addEventListener('click', e => {
+          e.stopPropagation()
+          e.preventDefault()
 
-      if (element.classList.value === 'modal') {
-        this.setProps({ ...this.props, error: null })
-        this.hide()
+          const element = e.target as HTMLElement
+
+          if (element.parentNode) {
+            (element.parentNode.parentNode as HTMLDivElement).classList.add('hidden')
+          }
+        })
       }
-    })
+
+    }
+
   }
 
   protected init(): void {
-    const { btnLabel } = this.getProps()
+    const { BodyElement } = this.getProps()
 
-    this.children.Button = new Button({
-      label: btnLabel,
-      buttonName: 'buttonModal',
-      events: {
-        click: (e: Event) => {
-          e.preventDefault()
-
-          if (this.element) {
-            const props = this.getProps()
-            const inputAvatar = this.element.querySelector('#avatar') as HTMLInputElement
-            const files = inputAvatar?.files
-
-            if (files) {
-              const isValide = files && files.length !== 0 && files[0]
-
-              const setError = (message: string | null) => {
-                this.setProps({
-                  ...props,
-                  error: message,
-                  events: {
-                    click: (e) => {
-                      e.stopPropagation()
-
-                      const element = e.target as HTMLElement
-
-                      if (element.classList.value === 'modal') {
-                        this.setProps({ ...this.props, error: null })
-                        this.hide()
-                      }
-                    }
-                  }
-                })
-              }
-
-              if (isValide) {
-                if (props.error) {
-                  setError(null)
-                }
-
-                this.setProps({ ...props, file: files[0].name })
-
-                const formData = new FormData()
-
-                formData.append('avatar', files[0])
-
-                UsersController.putAvatar(formData)
-
-              } else {
-                if (!props.error) {
-                  setError('Нужно выбрать файл')
-                }
-              }
-            }
-          }
-        }
-      }
-    })
+    this.children.BodyElement = new BodyElement({})
   }
 
   render() {
@@ -93,9 +43,6 @@ export class Modal extends Block<Props> {
 }
 
 type Props = DefaultProps & {
-  title: string
-  BodyElement: string
-  btnLabel: string
-  error: string | null
-  file?: string
+  BodyElement: typeof BodyModalAvatar
+  propsBodyElement: object & DefaultProps
 }

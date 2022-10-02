@@ -1,15 +1,7 @@
-<div class="modal">
+<div class="modal hidden">
     <div class="modal__box">
-        <h2 class="modal__box_title">{{title}}</h2>
-        <div class="modal__body">{{{BodyElement}}}</div>
-        <span class="modal__fileName">{{file}}</span>
-        <div class="modal__footer">
-            {{{Button}}}
-            {{#if error}}
-                <span class="modal__footer_error">
-                    {{error}}
-                </span>
-            {{/if}}
+        {{{BodyElement}}}
+        <div class="modal__close">
         </div>
     </div>
 </div>
