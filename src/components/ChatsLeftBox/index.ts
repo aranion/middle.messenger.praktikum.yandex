@@ -12,7 +12,13 @@ export class BaseChatsLeftBox extends Block<Props> {
   }
 
   protected componentDidUpdate(): boolean {
-    const { chats = [] } = this.getProps()
+    const { messenger } = this.getProps()
+
+    if (!messenger) {
+      return false
+    }
+
+    const { chats = [] } = messenger
 
     this.children.ChatsList = chats.map((chat) => {
       return new ChatItem({ ...chat })
@@ -22,7 +28,14 @@ export class BaseChatsLeftBox extends Block<Props> {
   }
 
   protected init(): void {
-    const { chats = [] } = this.getProps()
+    const { messenger } = this.getProps()
+
+    if (!messenger) {
+      return
+    }
+
+    const { chats = [] } = messenger
+
 
     this.children.Link = new Link({ to: RouteLink.SETTINGS, label: 'Профиль' })
     this.children.Modal = new Modal({ BodyElement: BodyModalAddChat })
@@ -57,7 +70,7 @@ export class BaseChatsLeftBox extends Block<Props> {
 }
 
 export const ChatsLeftBox = withStore<Props>((state) => ({
-  chats: state.chats,
+  messenger: state.messenger,
 }))(BaseChatsLeftBox)
 
 type Props = DefaultProps & Partial<State> 

@@ -40,8 +40,9 @@ export class Input extends Block<InputProps> {
 }
 
 export type InputProps = DefaultProps & {
-  fieldName?: keyof typeof TypeValidate | string
+  fieldName?: string
   id?: string
+  typeValidate?: keyof typeof TypeValidate
   typeField?: keyof typeof TypeField
   placeholder?: string
   required?: boolean

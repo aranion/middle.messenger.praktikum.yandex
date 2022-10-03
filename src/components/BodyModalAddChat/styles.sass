@@ -1,12 +1,11 @@
 @import '../../constants/var/vars.sass'
 
 .bodyModalAddChat
-	max-width: 130px
+	@include centerFlex()
 	font-size: 12px
 	line-height: 16px
 	text-align: center
 	color: $colorPrimary
-	@include centerFlex()
 	justify-content: space-between
 	flex-direction: column
 	height: 100%
@@ -19,3 +18,5 @@
 
 		button
 			min-width: 250px
+	&__error
+		color: $colorErorr

@@ -10,11 +10,22 @@ export class BaseEditAvatar extends Block<Props> {
     super(props)
   }
 
-  protected componentDidMount(): void {
-    const { user } = this.getProps()
-    if (user && user.avatar) {
-      ResourcesController.getAvatar(user.avatar)
+  protected componentDidMount(): boolean {
+    const { settings } = this.getProps()
+
+    if (!settings) {
+      return false
     }
+
+    const { user, avatar } = settings
+
+    if (avatar === '' && user && user.avatar) {
+      ResourcesController.getAvatar(user.avatar)
+
+      return true
+    }
+
+    return false
   }
 
   protected render() {
@@ -22,13 +33,15 @@ export class BaseEditAvatar extends Block<Props> {
 
     this.dispatchComponentDidMount()
 
-    return this.compile(template, { srcAvatar: props.avatar, })
+    return this.compile(template, {
+      srcAvatar: props.settings?.avatar,
+    })
   }
 }
 
 export const EditAvatar = withStore<Props>((state) => ({
-  avatar: state.avatar,
-  user: state.user
+  settings: state.settings,
+  messenger: state.messenger
 }))(BaseEditAvatar)
 
 type Props = DefaultProps & Partial<State> 

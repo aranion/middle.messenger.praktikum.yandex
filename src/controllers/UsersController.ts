@@ -1,6 +1,6 @@
 import { BaseController } from './BaseController'
 import API, { RequestPutPassword, RequestPutProfile, UsersAPI } from '../api/UsersAPI'
-import store from '../store'
+import store, { UserInfo } from '../store'
 import ResourcesController from './ResourcesController'
 import Router from '../router/Router'
 import { RouteLink } from '../router/routeLink'
@@ -18,7 +18,7 @@ export class UsersController extends BaseController {
     try {
       const { response }: { response: ResponseUser } = await this.api.putAvatar(data)
 
-      store.set('user', response)
+      store.set('settings', { user: response })
       this.success('Фотография успешно загружена', 'Загрузка')
 
       if (response.avatar) {
@@ -44,7 +44,7 @@ export class UsersController extends BaseController {
     try {
       const { response }: { response: ResponseUser } = await this.api.putProfile(data)
 
-      store.set('user', response)
+      store.set('settings', { user: response })
       this.success('Данные успешно обновлены', 'Изменение')
       Router?.go(RouteLink.SETTINGS)
     } catch (e) {
@@ -55,13 +55,4 @@ export class UsersController extends BaseController {
 
 export default new UsersController()
 
-export type ResponseUser = {
-  avatar: string | null
-  display_name: string | null
-  email: string
-  first_name: string
-  id: number
-  login: string
-  phone: string
-  second_name: string
-}
+type ResponseUser = UserInfo

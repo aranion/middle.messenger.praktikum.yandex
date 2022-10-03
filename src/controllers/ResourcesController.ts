@@ -13,9 +13,11 @@ export class ResourcesController extends BaseController {
 
   async getAvatar(path: string) {
     try {
+      store.set('settings', { isLoadingAvatar: true })
+
       const { responseURL } = await this.api.read(path)
 
-      store.set('avatar', responseURL)
+      store.set('settings', { avatar: responseURL, isLoadingAvatar: false })
     } catch (e) {
       this.error(e)
     }

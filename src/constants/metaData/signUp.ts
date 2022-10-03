@@ -18,6 +18,7 @@ export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'email',
+      typeValidate: 'email',
       id: IdInputAuth.email,
       typeField: 'email',
       placeholder: 'Почта',
@@ -28,6 +29,7 @@ export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'login',
+      typeValidate: 'login',
       id: IdInputAuth.login,
       typeField: 'text',
       placeholder: 'Логин',
@@ -38,6 +40,7 @@ export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'first_name',
+      typeValidate: 'first_name',
       id: IdInputAuth.first_name,
       typeField: 'text',
       placeholder: 'Имя',
@@ -48,6 +51,7 @@ export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'second_name',
+      typeValidate: 'second_name',
       id: IdInputAuth.second_name,
       typeField: 'text',
       placeholder: 'Фамилия',
@@ -58,6 +62,7 @@ export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'display_name',
+      typeValidate: 'display_name',
       id: IdInputAuth.display_name,
       typeField: 'text',
       placeholder: 'Отображаемое имя',
@@ -68,6 +73,7 @@ export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'phone',
+      typeValidate: 'phone',
       id: IdInputAuth.phone,
       typeField: 'tel',
       placeholder: 'Телефон',
@@ -78,6 +84,7 @@ export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'password',
+      typeValidate: 'password',
       id: IdInputAuth.password,
       typeField: 'password',
       placeholder: 'Пароль',
@@ -88,6 +95,7 @@ export const PROPS_FIELDS_SIGN_UP: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'password',
+      typeValidate: 'password',
       id: IdInputAuth.password_second,
       typeField: 'password',
       placeholder: 'Пароль (ещё раз)',

@@ -8,6 +8,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
       typeField: 'email',
       id: 'email',
       fieldName: 'email',
+      typeValidate: 'email',
     }
   },
   {
@@ -16,6 +17,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
       value: '',
       id: 'login',
       fieldName: 'login',
+      typeValidate: 'login',
     }
   },
   {
@@ -24,6 +26,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
       value: '',
       id: 'first_name',
       fieldName: 'first_name',
+      typeValidate: 'first_name',
     }
   },
   {
@@ -32,6 +35,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
       value: '',
       id: 'second_name',
       fieldName: 'second_name',
+      typeValidate: 'second_name',
     }
   },
   {
@@ -40,6 +44,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
       value: '',
       id: 'display_name',
       fieldName: 'display_name',
+      typeValidate: 'display_name',
     }
   },
   {
@@ -49,6 +54,7 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
       typeField: 'tel',
       id: 'phone',
       fieldName: 'phone',
+      typeValidate: 'phone',
     }
   },
 ]
@@ -72,6 +78,7 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
       typeField: 'password',
       id: IdInputFieldPassword.oldPassword,
       fieldName: 'password',
+      typeValidate: 'password',
     }
   },
   {
@@ -81,6 +88,7 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
       typeField: 'password',
       id: IdInputFieldPassword.newPassword,
       fieldName: 'password',
+      typeValidate: 'password',
     }
   },
   {
@@ -90,6 +98,7 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
       typeField: 'password',
       id: IdInputFieldPassword.newTwoPassword,
       fieldName: 'password',
+      typeValidate: 'password',
     }
   },
 ]

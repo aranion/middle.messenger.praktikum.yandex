@@ -43,7 +43,7 @@ class BaseInfoProfile extends Block<InfoProfileProps> {
 
   render() {
     const props = this.getProps()
-    const nameUser = props.user?.first_name
+    const nameUser = props.settings?.user?.display_name || 'Имя не задано'
 
     return this.compile(template, {
       nameUser,
@@ -53,7 +53,7 @@ class BaseInfoProfile extends Block<InfoProfileProps> {
   }
 }
 export const InfoProfile = withStore<InfoProfileProps>((state) => ({
-  user: state.user ? { ...state.user } : null
+  settings: state.settings
 }))(BaseInfoProfile)
 
 export type InfoProfileProps = DefaultProps & Partial<State> & {

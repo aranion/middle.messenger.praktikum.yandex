@@ -1,7 +1,7 @@
 import API, { AuthAPI, SignInData, SignUpData } from '../api/AuthAPI'
 import { RouteLink } from '../router/routeLink'
 import Router from '../router/Router'
-import store from '../store'
+import store, { UserInfo } from '../store'
 import { BaseController } from './BaseController'
 
 export class AuthController extends BaseController {
@@ -43,10 +43,12 @@ export class AuthController extends BaseController {
   }
 
   async fetchUser() {
-    const { response } = await this.api.read()
+    const { response }: { response: ResponseUser} = await this.api.read()
 
-    store.set('user', response)
+    store.set('settings', { user: response })
   }
 }
 
 export default new AuthController()
+
+type ResponseUser = UserInfo

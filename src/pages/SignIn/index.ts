@@ -12,7 +12,6 @@ const propsSignIn: AuthorizationProps = {
   title: 'Вход',
   fieldsProps: PROPS_FIELDS_SIGN_IN,
   buttonProps: PROPS_BUTTON_SIGN_IN,
-  notificationProps: { message: '' },
   linkData: {
     to: RouteLink.SIGN_UP,
     label: 'Нет аккаунта?',

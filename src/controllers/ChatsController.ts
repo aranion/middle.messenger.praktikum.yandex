@@ -1,6 +1,6 @@
 import { BaseController } from './BaseController'
 import API, { ChatsAPI, RequestCreateChat } from '../api/ChatsAPI'
-import store, { ChatsState } from '../store'
+import store, { Chats } from '../store'
 
 export class ChatsController extends BaseController {
   private readonly api: ChatsAPI
@@ -29,9 +29,11 @@ export class ChatsController extends BaseController {
 
   async fetchChats() {
     try {
+      store.set('messenger', { isLoading: true })
+
       const { response }: { response: ResponseChats[] } = await this.api.read()
 
-      store.set('chats', response)
+      store.set('messenger', { chats: response, isLoading: false })
     } catch (e) {
       this.error(e)
     }
@@ -43,4 +45,4 @@ export default new ChatsController()
 type ResponseCreateChat = {
   id: number
 }
-type ResponseChats = ChatsState
+type ResponseChats = Chats

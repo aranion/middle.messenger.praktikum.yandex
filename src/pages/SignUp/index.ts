@@ -5,14 +5,13 @@ import { PROPS_BUTTON_SIGN_UP, PROPS_FIELDS_SIGN_UP } from '../../constants/meta
 import { RouteLink } from '../../router/routeLink'
 import AuthController from '../../controllers/AuthController'
 import { SignUpData } from '../../api/AuthAPI'
-import { Authorization, BaseAuthorization } from '../../components'
+import { Authorization, AuthorizationProps, BaseAuthorization } from '../../components'
 
-const propsSignUp = {
+const propsSignUp: AuthorizationProps = {
   formName: 'registration',
   title: 'Регистрация',
   fieldsProps: PROPS_FIELDS_SIGN_UP,
   buttonProps: PROPS_BUTTON_SIGN_UP,
-  notificationProps: { message: '' },
   linkData: {
     to: RouteLink.HOME,
     label: 'Войти',

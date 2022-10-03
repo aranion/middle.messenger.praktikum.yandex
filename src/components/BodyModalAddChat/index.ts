@@ -7,9 +7,37 @@ import ChatsController from '../../controllers/ChatsController'
 export class BodyModalAddChat extends Block<BodyModalAddChatProps> {
   constructor(props: BodyModalAddChatProps) {
     super(props)
+
+    this.props.events = {
+      submit: (e) => {
+        e.preventDefault()
+        this.handleCreateChat()
+      }
+    }
+  }
+
+  private handleCreateChat = () => {
+    const Input = this.children.Input
+
+    if (!Array.isArray(Input)) {
+      const value = (Input as Input).getValue()
+      const name = (Input as Input).getName()
+
+      if (value && name === 'title') {
+        ChatsController.createChat({ [name]: value })
+        this.setProps({ error: "" })
+        Input.setProps({ value: '' })
+      } else {
+        this.setProps({ error: "Необходимо ввести название чата" })
+      }
+    }
   }
 
   protected init(): void {
+    const formName = 'formName'
+
+    this.setProps({ formName })
+
     this.children.Input = new Input({
       id: 'title',
       placeholder: 'Введите название чата',
@@ -20,24 +48,8 @@ export class BodyModalAddChat extends Block<BodyModalAddChatProps> {
     this.children.Button = new Button({
       label: 'Создать',
       buttonName: 'buttonModal',
-      events: {
-        click: (e: Event) => {
-          e.stopPropagation()
-          e.preventDefault()
-
-          const Input = this.children.Input
-
-          if (!Array.isArray(Input)) {
-            const value = (Input as Input).getValue()
-            const name = (Input as Input).getName()
-
-            if (value && name === 'title') {
-              ChatsController.createChat({ [name]: value })
-            }
-          }
-
-        }
-      }
+      formName,
+      typeButton: 'submit'
     })
   }
 
@@ -54,5 +66,5 @@ export class BodyModalAddChat extends Block<BodyModalAddChatProps> {
 export type BodyModalAddChatProps = DefaultProps & {
   title?: string
   error?: string | null
-  file?: string
+  formName?: string
 }

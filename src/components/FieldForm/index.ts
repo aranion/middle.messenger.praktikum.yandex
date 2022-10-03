@@ -60,15 +60,15 @@ export class FieldForm extends Block<PropsFieldForm> {
 
   public validate(): boolean {
     const { validateValue = defaultValidateValue, inputProps } = this.getProps()
-    const { fieldName } = inputProps
+    const { typeValidate } = inputProps
     const InputElement = this.children.Input
     const isNotArrayInputElement = !Array.isArray(InputElement)
 
-    if (fieldName && isNotArrayInputElement) {
+    if (typeValidate && isNotArrayInputElement) {
       const TargetInput = InputElement.getContent() as HTMLInputElement
       const inputValue = TargetInput.value
 
-      return validateValue(inputValue, fieldName)
+      return validateValue(inputValue, typeValidate)
     } else {
       return true
     }

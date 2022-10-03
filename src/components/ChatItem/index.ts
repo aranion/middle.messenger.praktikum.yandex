@@ -2,7 +2,7 @@ import { Block, DefaultProps } from '../../utils/Block'
 import { Avatar } from '../'
 import template from './template.hbs'
 import './styles.sass'
-import { ChatsState } from '../../store'
+import { Chats } from '../../store'
 
 export class ChatItem extends Block<ChatItemProps> {
   constructor(props: ChatItemProps) {
@@ -22,5 +22,5 @@ export class ChatItem extends Block<ChatItemProps> {
   }
 }
 
-export type ChatItemProps = DefaultProps & ChatsState;
+export type ChatItemProps = DefaultProps & Chats;
 

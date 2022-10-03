@@ -15,8 +15,8 @@ import { RouteLink } from '../../router/routeLink'
 import template from './template.hbs'
 import './styles.sass'
 import { withStore } from '../../hock/withStore'
-import { State } from '../../store'
-import UsersController, { ResponseUser } from '../../controllers/UsersController'
+import { State, UserInfo } from '../../store'
+import UsersController from '../../controllers/UsersController'
 import { RequestPutPassword } from '../../api/UsersAPI'
 
 export class BaseProfile extends Block<ProfileProps> {
@@ -26,7 +26,13 @@ export class BaseProfile extends Block<ProfileProps> {
   }
 
   protected init(): void {
-    const { switchType, user } = this.getProps()
+    const { switchType, settings } = this.getProps()
+
+    if (!settings) {
+      return
+    }
+
+    const { user } = settings
 
     switch (switchType) {
       case 'settingsInfo':
@@ -34,7 +40,7 @@ export class BaseProfile extends Block<ProfileProps> {
           fields: PROFILE_FIELDS.map(item => {
 
             if (user && item.inputProps && item.inputProps.id) {
-              const key = item.inputProps.id as keyof ResponseUser
+              const key = item.inputProps.id as keyof UserInfo
 
               return { ...item, value: user[key] }
             }
@@ -48,7 +54,7 @@ export class BaseProfile extends Block<ProfileProps> {
 
 
             if (user && inputProps && inputProps.id) {
-              const key = inputProps.id as keyof ResponseUser
+              const key = inputProps.id as keyof UserInfo
 
               if (user && key) {
                 const value = user[key] === null ? '' : user[key]
@@ -147,7 +153,7 @@ export class BaseProfile extends Block<ProfileProps> {
 }
 
 export const Profile = withStore<ProfileProps>((state) => ({
-  user: state.user ? { ...state.user } : null,
+  settings: state.settings,
 }))(BaseProfile)
 
 export type ProfileProps = DefaultProps & Partial<State> & {

@@ -10,6 +10,7 @@ export const PROPS_FIELDS_SIGN_IN: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'login',
+      typeValidate: 'login',
       id: IdInputPropsSignIn.login,
       typeField: 'text',
       placeholder: 'Логин',
@@ -20,6 +21,7 @@ export const PROPS_FIELDS_SIGN_IN: PropsFieldForm[] = [
   {
     inputProps: {
       fieldName: 'notEmpty',
+      typeValidate: 'notEmpty',
       id: IdInputPropsSignIn.password,
       typeField: 'password',
       placeholder: 'Пароль',
