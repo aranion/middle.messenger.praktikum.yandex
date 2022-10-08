@@ -2,9 +2,9 @@ import { DefaultProps, Block } from '../../utils/Block'
 import template from './template.hbs'
 import './styles.sass'
 
-export class Loader extends Block<ProfileProps> {
+export class Loader extends Block<LoaderProps> {
 
-  constructor(props: ProfileProps) {
+  constructor(props: LoaderProps) {
     super(props)
   }
 
@@ -17,6 +17,6 @@ export class Loader extends Block<ProfileProps> {
   }
 }
 
-export type ProfileProps = DefaultProps & {
+export type LoaderProps = DefaultProps & {
   isLight?: boolean
 }

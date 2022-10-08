@@ -1,5 +1,5 @@
 import { BaseController } from './BaseController'
-import API, { RequestPutPassword, RequestPutProfile, UsersAPI } from '../api/UsersAPI'
+import API, { RequestPutPassword, RequestPutProfile, RequestSearchUsers, UsersAPI } from '../api/UsersAPI'
 import store, { UserInfo } from '../store'
 import ResourcesController from './ResourcesController'
 import Router from '../router/Router'
@@ -47,6 +47,16 @@ export class UsersController extends BaseController {
       store.set('settings', { user: response })
       this.success('Данные успешно обновлены', 'Изменение')
       Router?.go(RouteLink.SETTINGS)
+    } catch (e) {
+      this.error(e)
+    }
+  }
+
+  async searchUsers(data: RequestSearchUsers) {
+    try {
+      const { response }: { response: ResponseUser[] } = await this.api.searchUsers(data)
+
+      return response
     } catch (e) {
       this.error(e)
     }

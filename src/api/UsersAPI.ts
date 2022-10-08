@@ -30,6 +30,10 @@ export class UsersAPI extends BaseAPI {
     return this.http.get(Api.userId)
   }
 
+  searchUsers(data: RequestSearchUsers) {
+    return this.http.post(Api.search, { data })
+  }
+
   create = undefined
   update = undefined
   delete = undefined
@@ -38,13 +42,14 @@ export class UsersAPI extends BaseAPI {
 export default new UsersAPI()
 
 enum KeysFieldProfile {
-  first_name = "first_name",
-  second_name = "second_name",
-  display_name = "display_name",
-  login = "login",
-  email = "email",
-  phone = "phone",
+  first_name = 'first_name',
+  second_name = 'second_name',
+  display_name = 'display_name',
+  login = 'login',
+  email = 'email',
+  phone = 'phone',
 }
 
 export type RequestPutPassword = { [key in Exclude<keyof typeof IdInputFieldPassword, 'newTwoPassword'>]: string }
 export type RequestPutProfile = { [key in keyof typeof KeysFieldProfile]: string }
+export type RequestSearchUsers = { login: string }

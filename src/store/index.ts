@@ -20,7 +20,10 @@ export class Store extends EventBus<keyof typeof StoreEvents> {
     },
     messenger: {
       isLoading: false,
-      chats: []
+      isChatsListEmpty: true,
+      selectIdChat: null,
+      chats: [],
+      messages: {}
     }
   }
 
@@ -53,7 +56,10 @@ export type StateNotification = {
 
 export type StateMessenger = {
   isLoading: boolean
+  isChatsListEmpty: boolean
+  selectIdChat: number | null
   chats: Chats[]
+  messages: Record<number, MessageState[]>
 }
 
 export type StateSettings = {
@@ -80,10 +86,32 @@ export type UserInfo = {
   phone: string
   second_name: string
 }
+
 export type TypeMessage = 'error' | 'info' | 'success'
 
 type LastMessage = {
   user: UserInfo
   time: string
   content: string
+}
+
+export type MessageState = {
+  chat_id: number
+  time: string
+  type: string
+  user_id: number
+  content: string
+  file?: File
+  id: number,
+  is_read: boolean,
+}
+
+type File = {
+  id: number
+  user_id: number
+  path: string
+  filename: string
+  content_type: string
+  content_size: string
+  upload_date: string
 }

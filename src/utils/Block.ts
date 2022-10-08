@@ -116,7 +116,7 @@ export class Block<P extends DefaultProps = any> {
 
   protected componentDidUpdate(oldProps: P, newProps: P) {
     if (!isEqual(oldProps, newProps)) {
-      console.log('componentDidUpdate:', 'oldProps =', oldProps, 'newProps =', newProps)
+      console.log('componentDidUpdate')
     }
 
     return true

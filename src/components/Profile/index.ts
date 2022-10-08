@@ -1,4 +1,3 @@
-import { RequestPutProfile } from './../../api/UsersAPI'
 import { PROFILE_FIELDS_PASSWORD, PROFILE_FIELDS, PROFILE_FIELDS_EDIT } from './../../constants/metaData/profile'
 import { DefaultProps, Block } from '../../utils/Block'
 import {
@@ -17,7 +16,7 @@ import './styles.sass'
 import { withStore } from '../../hock/withStore'
 import { State, UserInfo } from '../../store'
 import UsersController from '../../controllers/UsersController'
-import { RequestPutPassword } from '../../api/UsersAPI'
+import { RequestPutPassword, RequestPutProfile } from '../../api/UsersAPI'
 
 export class BaseProfile extends Block<ProfileProps> {
 
@@ -51,7 +50,6 @@ export class BaseProfile extends Block<ProfileProps> {
         this.children.BodyProfile = new EditProfile({
           fields: PROFILE_FIELDS_EDIT.reduce<FieldProfileProps[]>((res, item) => {
             const { inputProps } = item
-
 
             if (user && inputProps && inputProps.id) {
               const key = inputProps.id as keyof UserInfo

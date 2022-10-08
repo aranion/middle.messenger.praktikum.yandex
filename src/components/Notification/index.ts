@@ -1,9 +1,8 @@
-import { StateNotification } from './../../store/index'
 import { Block, DefaultProps } from '../../utils/Block'
 import template from './template.hbs'
 import './styles.sass'
 import { withStore } from '../../hock/withStore'
-import store, { State } from '../../store'
+import store, { State, StateNotification } from '../../store'
 
 export class BaseNotification extends Block<PropsNotification> {
   constructor(props: PropsNotification) {
@@ -18,9 +17,8 @@ export class BaseNotification extends Block<PropsNotification> {
         ? 'notification__access'
         : ' '
 
-
     if (notification?.message && notification?.message !== '') {
-      const { timeShow = 3000 } = notification as StateNotification
+      const { timeShow = 3500 } = notification as StateNotification
 
       this.show()
 

@@ -1,5 +1,5 @@
 import { Block, DefaultProps } from '../../utils/Block'
-import { SubMenuItem, SubMenuItemProps } from '../SubMenuItem'
+import { SubMenuItem, SubMenuItemProps, Modal } from '../'
 import template from './template.hbs'
 import './styles.sass'
 
@@ -15,7 +15,26 @@ export class ModalSubMenu extends Block<ModalSubMenuProps> {
       e.preventDefault()
       e.stopPropagation()
 
-      console.log('Click', e)
+      const { modals } = this.getProps()
+      const { ModalAddUserChat, ModalDeleteUserChat } = modals
+      const idButton = (e.currentTarget as HTMLButtonElement)?.id
+
+      if (!idButton || !Modal || Array.isArray(Modal)) {
+        return
+      }
+
+      this.setProps({ ...this.getProps(), isVisibleModal: true })
+
+      switch (idButton) {
+        case 'addUser':
+          ModalAddUserChat.getContent()?.classList.remove('hidden')
+          break
+        case 'deleteUser':
+          ModalDeleteUserChat.getContent()?.classList.remove('hidden')
+          break
+        default:
+          break
+      }
     }
 
     this.children.MenuItems = menuItems.map((menuItem) => {
@@ -32,7 +51,7 @@ export class ModalSubMenu extends Block<ModalSubMenuProps> {
     const props = this.getProps()
 
     return this.compile(template, {
-      isVisibleModal: false,
+      isVisibleModal: true,
       ...props,
     })
   }
@@ -46,6 +65,10 @@ export type ModalSubMenuProps = DefaultProps & {
     bottom: string,
     left: string,
     right: string,
+  }
+  modals: {
+    ModalAddUserChat: Modal,
+    ModalDeleteUserChat: Modal
   }
   menuItems: SubMenuItemProps[]
   isVisibleModal?: boolean

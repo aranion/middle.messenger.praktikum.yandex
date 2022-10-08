@@ -1,33 +1,4 @@
 <main class="messenger">
     {{{ChatsLeftBox}}}
-    <div class="messenger__correspondence">
-        <div class="destroy">Выберите чат чтобы отправить сообщение</div>
-        <div class="messenger__correspondence_header">
-            <div class="messenger__correspondence_info">
-                {{{AvatarInterlocutor}}}
-                <div class="messenger__correspondence_info_name">Вадим</div>
-                {{{ModalSubMenuChangeFriends}}}
-            </div>
-        </div>
-        <div class="messenger__correspondence_messages">
-            <div class="messenger__correspondence_messages_date">
-                <div class="messenger__correspondence_messages_date_line"></div>
-                <time class="messenger__correspondence_messages_date_text">
-                    19 июня
-                </time>
-            </div>
-            {{#each Messages}}
-                {{{this}}}
-            {{/each}}
-        </div>
-        <form class="messenger__correspondence_footer">
-            {{{ModalSubMenuAddContent}}}
-            <input
-                class="messenger__correspondence_footer_text"
-                placeholder="Сообщение"
-                name="message"
-            />
-            {{{ButtonCircle}}}
-        </form>
-    </div>
+    {{{ChatsRightBox}}}
 </main>

@@ -1,7 +1,7 @@
 import { DefaultProps, Block } from '../../utils/Block'
 import template from './template.hbs'
 import './styles.sass'
-import { Button, Input } from '..'
+import { Button, Input } from '../'
 import ChatsController from '../../controllers/ChatsController'
 
 export class BodyModalAddChat extends Block<BodyModalAddChatProps> {
@@ -25,10 +25,10 @@ export class BodyModalAddChat extends Block<BodyModalAddChatProps> {
 
       if (value && name === 'title') {
         ChatsController.createChat({ [name]: value })
-        this.setProps({ error: "" })
+        this.setProps({ error: '' })
         Input.setProps({ value: '' })
       } else {
-        this.setProps({ error: "Необходимо ввести название чата" })
+        this.setProps({ error: 'Необходимо ввести название чата' })
       }
     }
   }
@@ -45,6 +45,7 @@ export class BodyModalAddChat extends Block<BodyModalAddChatProps> {
       required: true,
       typeField: 'text',
     })
+    
     this.children.Button = new Button({
       label: 'Создать',
       buttonName: 'buttonModal',

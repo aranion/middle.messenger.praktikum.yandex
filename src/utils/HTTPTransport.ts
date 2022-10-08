@@ -37,7 +37,7 @@ export class HTTPTransport {
   }
 
   public delete = (path: string, options?: RequestOptions): Promise<XMLHttpRequest> => {
-    return this.request(path, { ...options, method: Methods.DELETE })
+    return this.request(this.endpoint + path, { ...options, method: Methods.DELETE })
   }
 
   private request = (url: string, options?: RequestOptions): Promise<XMLHttpRequest> => {

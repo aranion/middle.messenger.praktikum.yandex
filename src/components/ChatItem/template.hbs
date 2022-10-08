@@ -1,20 +1,24 @@
-<div class="chatItem">
+<div class="chatItem {{#if isSelectedChat}}chatItem__selected{{/if}}">
     <div class="divider"></div>
-    <a href="chat/{{id}}" class="chatItem__wrapper">
+    <div class="chatItem__wrapper">
         {{{Avatar}}}
         <div class="chatItem__centerBox">
             <span class="chatItem__name">{{title}}</span>
             <span class="chatItem__message">
                 {{#if last_message}}
-                    {{last_message}}
+                    {{last_message.content}}
                 {{else}}
                     Сообщений нет
                 {{/if}}
             </span>
         </div>
         <div class="chatItem__rightBox">
-            <time class="chatItem__time">{{last_message.time}}</time>
-            {{#if unread_count}}<span class="chatItem__newMessage">{{unread_count}}</span> {{/if}}
+            <time class="chatItem__time">{{time}}</time>
+            {{#if unread_count}}
+                <span class="chatItem__newMessage">
+                    {{unread_count}}
+                </span>
+            {{/if}}
         </div>
-    </a>
+    </div>
 </div>

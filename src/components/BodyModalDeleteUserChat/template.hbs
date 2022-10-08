@@ -1,0 +1,15 @@
+<form id="{{formName}}" class="bodyModalDeleteUserChat">
+    <h2 class="bodyModalDeleteUserChat__title">{{title}}</h2>
+    <ul class="bodyModalDeleteUserChat__listUsers">
+        {{#each ItemSearchList}}
+            <li>
+                {{{this}}}
+            </li>
+        {{/each}}
+        {{#if isEmptyListUsers}} <li> Пользователей нет </li>{{/if}}
+    </ul>
+    <span class="bodyModalDeleteUserChat__error">{{error}}</span>
+    <div class="bodyModalDeleteUserChat__footer">
+        {{{Button}}}
+    </div>
+</form>

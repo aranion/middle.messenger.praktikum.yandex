@@ -12,13 +12,24 @@
             <input type="search" class="chatsLeftBox__top_search_input" />
         </div>
     </div>
-    <div>
+    <div class="chatsLeftBox__groupBtn">
         {{{ButtonCreateChat}}}
+        {{{ButtonDeleteChat}}}
     </div>
-    <div class="chatsLeftBox__list">
-        {{#each ChatsList}}
-            {{{this}}}
-        {{/each}}
+    <div id="chatsList" class="chatsLeftBox__list">
+        {{#if isLoading}}
+            {{{Loader}}}
+        {{else}}
+            {{#if isChatsListEmpty}}
+                <span class="chatsLeftBox__empty">Нет чатов</span>
+            {{else}}
+                {{#each ChatsList}}
+                    {{{this}}}
+                {{/each}}
+            {{/if}}
+
+        {{/if}}
     </div>
+
     {{{Modal}}}
 </sector>

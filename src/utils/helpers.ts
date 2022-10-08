@@ -74,7 +74,7 @@ export function isEqual(lhs: Indexed, rhs: Indexed) {
 
 export function cloneDeep<T extends object = object>(obj: T) {
   return (function _cloneDeep(item: T): T | Date | Set<unknown> | Map<unknown, unknown> | object | T[] {
-    if (item === null || typeof item !== "object") {
+    if (item === null || typeof item !== 'object') {
       return item
     }
 

@@ -1,10 +1,11 @@
 import { Block, DefaultProps } from '../../utils/Block'
 import { RouteLink } from '../../router/routeLink'
-import { Link, Modal, Button, BodyModalAddChat, ChatItem } from '../'
+import { Link, Modal, Button, BodyModalAddChat, ChatItem, Loader } from '../'
 import template from './template.hbs'
 import './styles.sass'
-import { State } from '../../store'
+import { State, StateMessenger } from '../../store'
 import { withStore } from '../../hock/withStore'
+import ChatsController from '../../controllers/ChatsController'
 
 export class BaseChatsLeftBox extends Block<Props> {
   constructor(props: Props) {
@@ -18,11 +19,7 @@ export class BaseChatsLeftBox extends Block<Props> {
       return false
     }
 
-    const { chats = [] } = messenger
-
-    this.children.ChatsList = chats.map((chat) => {
-      return new ChatItem({ ...chat })
-    })
+    this.children.ChatsList = this.createChatItem(messenger)
 
     return true
   }
@@ -34,9 +31,7 @@ export class BaseChatsLeftBox extends Block<Props> {
       return
     }
 
-    const { chats = [] } = messenger
-
-
+    this.children.Loader = new Loader({})
     this.children.Link = new Link({ to: RouteLink.SETTINGS, label: 'Профиль' })
     this.children.Modal = new Modal({ BodyElement: BodyModalAddChat })
     this.children.ButtonCreateChat = new Button({
@@ -55,15 +50,41 @@ export class BaseChatsLeftBox extends Block<Props> {
         }
       }
     })
-    this.children.ChatsList = chats.map((chat) => {
-      return new ChatItem({ ...chat })
+    this.children.ButtonDeleteChat = new Button({
+      buttonName: 'deleteChat',
+      label: 'Удалить чат',
+      classesList: ['chatsLeftBox__button'],
+      events: {
+        click: () => {
+          ChatsController.deleteChat()
+        }
+      }
+    })
+    this.children.ChatsList = this.createChatItem(messenger)
+  }
+
+  private createChatItem(messenger: StateMessenger) {
+    const { chats = [] } = messenger
+
+    return chats.map((chat) => {
+      return new ChatItem({
+        ...chat,
+        events: {
+          click: () => {
+            ChatsController.setSelectChat(chat.id)
+          }
+        }
+      })
     })
   }
 
   render() {
     const props = this.getProps()
+    const { messenger } = props
 
     return this.compile(template, {
+      isLoading: messenger?.isLoading,
+      isChatsListEmpty: messenger?.isChatsListEmpty,
       ...props,
     })
   }
@@ -73,4 +94,4 @@ export const ChatsLeftBox = withStore<Props>((state) => ({
   messenger: state.messenger,
 }))(BaseChatsLeftBox)
 
-type Props = DefaultProps & Partial<State> 
+type Props = DefaultProps & Partial<State>

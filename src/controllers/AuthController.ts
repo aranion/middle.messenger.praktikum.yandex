@@ -43,7 +43,7 @@ export class AuthController extends BaseController {
   }
 
   async fetchUser() {
-    const { response }: { response: ResponseUser} = await this.api.read()
+    const { response }: { response: ResponseUser } = await this.api.read()
 
     store.set('settings', { user: response })
   }

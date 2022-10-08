@@ -20,4 +20,5 @@ export type SubMenuItemProps = DefaultProps & {
   rotateDeg?: number
   srcImg: string
   title: string
+  typeButton: string
 }

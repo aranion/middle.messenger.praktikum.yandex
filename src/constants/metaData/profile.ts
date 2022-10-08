@@ -65,8 +65,8 @@ export const PROFILE_FIELDS: FieldProfileProps[] =
   })
 
 export enum IdInputFieldPassword {
-  oldPassword = "oldPassword",
-  newPassword = "newPassword",
+  oldPassword = 'oldPassword',
+  newPassword = 'newPassword',
   newTwoPassword = 'newTwoPassword'
 }
 

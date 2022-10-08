@@ -7,8 +7,14 @@
   background: $colorChats
   border-left: $borderDefault
 
+  &__groupBtn
+    display: flex
+    align-items: center
+    justify-content: space-evenly
+    margin-bottom: 10px
+
   &__button
-    min-width: 150px
+    min-width: 100px
     padding: 6px
     height: auto
 
@@ -19,9 +25,16 @@
     overflow-y: scroll
     height: calc(100vh - 95px)
     padding-bottom: 70px
+    position: relative
 
     &::-webkit-scrollbar
       width: 2px
+
+  &__empty
+    margin: auto
+    color: $colorSecondary
+    font-size: 12px
+    line-height: 12px
 
   &__top
     &_profile

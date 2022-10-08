@@ -10,7 +10,6 @@ class BaseButtonCircle extends Block<Props> {
       ...props,
       events: {
         click: (e: Event) => {
-          e.preventDefault()
           e.stopPropagation()
 
           this.navigate()

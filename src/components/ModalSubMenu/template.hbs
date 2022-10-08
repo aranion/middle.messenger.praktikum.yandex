@@ -1,18 +1,16 @@
 <div class="modalSubMenu modalSubMenu__active">
     <img src="{{srcImgButton}}" alt="{{srcAltButton}}" />
-    {{#if isVisibleModal}}
         <div
-            class="modalSubMenu__wrapper"
+            class="modalSubMenu__wrapper {{#if isVisibleModal}}hidden{{/if}}"
             style="
-            top:    {{position.top}};    
-            bottom: {{position.bottom}}; 
-            left:   {{position.left}};   
-            right:  {{position.right}};  
-            "
+        top:    {{position.top}};    
+        bottom: {{position.bottom}}; 
+        left:   {{position.left}};   
+        right:  {{position.right}};  
+        "
         >
             {{#each MenuItems}}
                 {{{this}}}
             {{/each}}
         </div>
-    {{/if}}
 </div>
