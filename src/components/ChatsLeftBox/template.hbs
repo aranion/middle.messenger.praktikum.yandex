@@ -1,24 +1,35 @@
 <sector class="chatsLeftBox">
     <div>
         <div class="chatsLeftBox__top_profile">
-            <a
-                href="{{profileLink}}"
-                alt="Профиль"
-                class="chatsLeftBox__top_profile_link"
-            >Профиль</a>
-            <img src="{{arrowLinkImg}}" alt="ссылка на профиль" />
+            <div class="chatsLeftBox__top_profile_link">
+                {{{Link}}}
+            </div>
         </div>
         <div class="chatsLeftBox__top_search">
             <div class="chatsLeftBox__top_search_placeholder">
-                <img src="{{searchIconImg}}" alt="search" />
                 <span>Поиск</span>
             </div>
             <input type="search" class="chatsLeftBox__top_search_input" />
         </div>
     </div>
-    <div class="chatsLeftBox__list">
-        {{#each ChatsList}}
-            {{{this}}}
-        {{/each}}
+    <div class="chatsLeftBox__groupBtn">
+        {{{ButtonCreateChat}}}
+        {{{ButtonDeleteChat}}}
     </div>
+    <div id="chatsList" class="chatsLeftBox__list">
+        {{#if isLoading}}
+            {{{Loader}}}
+        {{else}}
+            {{#if isChatsListEmpty}}
+                <span class="chatsLeftBox__empty">Нет чатов</span>
+            {{else}}
+                {{#each ChatsList}}
+                    {{{this}}}
+                {{/each}}
+            {{/if}}
+
+        {{/if}}
+    </div>
+
+    {{{Modal}}}
 </sector>

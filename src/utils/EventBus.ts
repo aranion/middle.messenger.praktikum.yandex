@@ -5,7 +5,7 @@ export class EventBus<T extends string> {
     this.listeners = {}
   }
 
-  on(event: T, callback: () => void) {
+  on(event: T, callback: (...args: unknown[]) => void) {
     if (!this.listeners[event]) {
       this.listeners[event] = []
     }
@@ -25,7 +25,7 @@ export class EventBus<T extends string> {
 
   emit(event: T, ...args: unknown[]) {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`)
+      return
     }
 
     this.listeners[event]?.forEach(function (listener) {

@@ -1,0 +1,22 @@
+<div class="bodyModalAvatar">
+    <h2 class="bodyModalAvatar__title">{{title}}</h2>
+    <div class="bodyModalAvatar__body">
+        <label for="avatar" class="bodyModalAvatar__label">
+            Выбрать файл на компьютере
+        </label>
+        <input
+            name="avatar"
+            id="avatar"
+            type="file"
+            accept="image/*"
+        />
+    </div>
+    <div class="bodyModalAvatar__footer">
+        {{{Button}}}
+        {{#if error}}
+            <span class="bodyModalAvatar__footer_error">
+                {{error}}
+            </span>
+        {{/if}}
+    </div>
+</div>

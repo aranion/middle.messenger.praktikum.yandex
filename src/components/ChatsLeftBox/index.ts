@@ -1,34 +1,97 @@
-import { ChatItem, ChatItemProps } from './../ChatItem'
 import { Block, DefaultProps } from '../../utils/Block'
+import { RouteLink } from '../../router/routeLink'
+import { Link, Modal, Button, BodyModalAddChat, ChatItem, Loader } from '../'
 import template from './template.hbs'
-import arrowLinkImg from '../../assets/imgs/PolygonIcon.svg'
-import searchIconImg from '../../assets/imgs/SearchIcon.svg'
 import './styles.sass'
-import { ROUTE_LINK } from '../../router/routeLink'
+import { State, StateMessenger } from '../../store'
+import { withStore } from '../../hock/withStore'
+import ChatsController from '../../controllers/ChatsController'
 
-export class ChatsLeftBox extends Block<Props> {
+export class BaseChatsLeftBox extends Block<Props> {
   constructor(props: Props) {
     super(props)
   }
 
-  protected init(): void {
-    const { chatsList } = this.getProps()
+  protected componentDidUpdate(): boolean {
+    const { messenger } = this.getProps()
 
-    this.children.ChatsList = chatsList.map((chat, tempKey) => {
-      return new ChatItem({ ...chat, chatId: `${tempKey}` })
+    if (!messenger) {
+      return false
+    }
+
+    this.children.ChatsList = this.createChatItem(messenger)
+
+    return true
+  }
+
+  protected init(): void {
+    const { messenger } = this.getProps()
+
+    if (!messenger) {
+      return
+    }
+
+    this.children.Loader = new Loader({})
+    this.children.Link = new Link({ to: RouteLink.SETTINGS, label: 'Профиль' })
+    this.children.Modal = new Modal({ BodyElement: BodyModalAddChat })
+    this.children.ButtonCreateChat = new Button({
+      buttonName: 'createChat',
+      label: 'Создать чат',
+      classesList: ['chatsLeftBox__button'],
+      events: {
+        click: () => {
+          const Modal = this.getChildren().Modal
+
+          if (!Array.isArray(Modal)) {
+            const element = Modal.getContent()
+
+            element?.classList.remove('hidden')
+          }
+        }
+      }
+    })
+    this.children.ButtonDeleteChat = new Button({
+      buttonName: 'deleteChat',
+      label: 'Удалить чат',
+      classesList: ['chatsLeftBox__button'],
+      events: {
+        click: () => {
+          ChatsController.deleteChat()
+        }
+      }
+    })
+    this.children.ChatsList = this.createChatItem(messenger)
+  }
+
+  private createChatItem(messenger: StateMessenger) {
+    const { chats = [] } = messenger
+
+    return chats.map((chat) => {
+      return new ChatItem({
+        ...chat,
+        events: {
+          click: () => {
+            ChatsController.setSelectChat(chat.id)
+          }
+        }
+      })
     })
   }
 
   render() {
+    const props = this.getProps()
+    const { messenger } = props
+
     return this.compile(template, {
-      ...this.props,
-      arrowLinkImg,
-      searchIconImg,
-      profileLink: ROUTE_LINK.PROFILE,
+      isLoading: messenger?.isLoading,
+      isChatsListEmpty: messenger?.isChatsListEmpty,
+      ...props,
     })
   }
 }
 
-type Props = DefaultProps & {
-  chatsList: ChatItemProps[]
-}
+export const ChatsLeftBox = withStore<Props>((state) => ({
+  messenger: state.messenger,
+}))(BaseChatsLeftBox)
+
+type Props = DefaultProps & Partial<State>

@@ -1,0 +1,27 @@
+@import '../../constants/var/vars.sass'
+
+.notification
+	background: $colorChats
+	font-size: 12px
+	line-height: 8px
+	margin: 5px
+	position: fixed
+	right: 10
+	bottom: 10
+	width: 350px
+	min-height: 70px
+	box-shadow: $boxShadowDefault
+	border-radius: 5px
+	padding: 15px
+
+	&__title
+		margin: 0
+		padding: 0
+		margin-bottom: 10px
+		text-transform: uppercase
+
+	&__error
+		color: $colorErorr
+
+	&__access
+		color: $colorAccess

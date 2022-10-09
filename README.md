@@ -47,3 +47,5 @@ https://gleeful-florentine-3e81be.netlify.app/
 ##### Git pull
 
 sprint_1: https://github.com/aranion/middle.messenger.praktikum.yandex/pull/1
+sprint_2: https://github.com/aranion/middle.messenger.praktikum.yandex/pull/5
+sprint_3: https://github.com/aranion/middle.messenger.praktikum.yandex/pull/6

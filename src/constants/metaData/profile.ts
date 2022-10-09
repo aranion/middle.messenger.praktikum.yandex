@@ -4,57 +4,71 @@ export const PROFILE_FIELDS_EDIT: EditProfileFieldProps[] = [
   {
     label: 'Почта',
     inputProps: {
-      value: 'pochta@yandex.ru',
+      value: '',
       typeField: 'email',
       id: 'email',
       fieldName: 'email',
+      typeValidate: 'email',
     }
   },
   {
     label: 'Логин',
     inputProps: {
-      value: 'ivanivanov',
+      value: '',
       id: 'login',
       fieldName: 'login',
+      typeValidate: 'login',
     }
   },
   {
     label: 'Имя',
     inputProps: {
-      value: 'Иван',
+      value: '',
       id: 'first_name',
       fieldName: 'first_name',
+      typeValidate: 'first_name',
     }
   },
   {
     label: 'Фамилия',
     inputProps: {
-      value: 'Фамилия',
+      value: '',
       id: 'second_name',
       fieldName: 'second_name',
+      typeValidate: 'second_name',
     }
   },
   {
     label: 'Имя в чате',
     inputProps: {
-      value: 'Иван',
+      value: '',
       id: 'display_name',
       fieldName: 'display_name',
+      typeValidate: 'display_name',
     }
   },
   {
     label: 'Телефон',
     inputProps: {
-      value: '+79099673030',
+      value: '',
       typeField: 'tel',
       id: 'phone',
       fieldName: 'phone',
+      typeValidate: 'phone',
     }
   },
 ]
 
 export const PROFILE_FIELDS: FieldProfileProps[] =
-  PROFILE_FIELDS_EDIT.map(field => ({ label: field.label, value: field.inputProps?.value || '' }))
+  PROFILE_FIELDS_EDIT.map(field => {
+    return { label: field.label, value: field.inputProps?.value || '', inputProps: field.inputProps }
+  })
+
+export enum IdInputFieldPassword {
+  oldPassword = 'oldPassword',
+  newPassword = 'newPassword',
+  newTwoPassword = 'newTwoPassword'
+}
 
 export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
   {
@@ -62,8 +76,9 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
     inputProps: {
       value: '',
       typeField: 'password',
-      id: 'password',
+      id: IdInputFieldPassword.oldPassword,
       fieldName: 'password',
+      typeValidate: 'password',
     }
   },
   {
@@ -71,8 +86,9 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
     inputProps: {
       value: '',
       typeField: 'password',
-      id: 'newPassword',
+      id: IdInputFieldPassword.newPassword,
       fieldName: 'password',
+      typeValidate: 'password',
     }
   },
   {
@@ -80,8 +96,9 @@ export const PROFILE_FIELDS_PASSWORD: EditProfileFieldProps[] = [
     inputProps: {
       value: '',
       typeField: 'password',
-      id: 'newTwoPassword',
+      id: IdInputFieldPassword.newTwoPassword,
       fieldName: 'password',
+      typeValidate: 'password',
     }
   },
 ]

@@ -7,6 +7,17 @@
   background: $colorChats
   border-left: $borderDefault
 
+  &__groupBtn
+    display: flex
+    align-items: center
+    justify-content: space-evenly
+    margin-bottom: 10px
+
+  &__button
+    min-width: 100px
+    padding: 6px
+    height: auto
+
   &__list
     display: flex
     align-items: center
@@ -14,9 +25,16 @@
     overflow-y: scroll
     height: calc(100vh - 95px)
     padding-bottom: 70px
+    position: relative
 
     &::-webkit-scrollbar
       width: 2px
+
+  &__empty
+    margin: auto
+    color: $colorSecondary
+    font-size: 12px
+    line-height: 12px
 
   &__top
     &_profile
@@ -30,6 +48,9 @@
         line-height: 12px
         color: $colorSecondary
         cursor: pointer
+        background-image: url('../../assets/imgs/PolygonIcon.svg')
+        background-repeat: no-repeat
+        background-position: right
 
         &:hover
           text-decoration: underline
@@ -58,9 +79,14 @@
         font-size: 12px
         line-height: 12px
         color: $colorSecondary
+        background-image: url('../../assets/imgs/SearchIcon.svg')
+        background-repeat: no-repeat
+        padding-left: 15px
 
       &:focus-within &_placeholder
         left: 15px
+        width: 15px
+        height: 15px
 
       &:focus-within &_placeholder span
         display: none

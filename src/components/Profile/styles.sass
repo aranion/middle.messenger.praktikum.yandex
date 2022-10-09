@@ -1,0 +1,27 @@
+@import '../../constants/var/vars.sass'
+
+.profile
+	@include centerFlex()
+	width: 100vw
+	box-sizing: border-box
+	overflow: hidden
+
+	&__leftBox
+		@include centerFlex()
+		width: 65px
+		height: 100vh
+		background: $colorChats
+		border-right: $borderDefault
+		box-sizing: border-box
+
+	&__info
+		width: calc( 100vw - 65px )
+		display: flex
+		justify-content: center
+		text-align: center
+		overflow-y: auto
+		height: 100vh
+		padding: 50px 0
+
+		&_wrapper
+			width: 510px

@@ -8,8 +8,10 @@ export class SubMenuItem extends Block<SubMenuItemProps> {
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
-      ...this.props,
+      ...props,
     })
   }
 }
@@ -18,4 +20,5 @@ export type SubMenuItemProps = DefaultProps & {
   rotateDeg?: number
   srcImg: string
   title: string
+  typeButton: string
 }
