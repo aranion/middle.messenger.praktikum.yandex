@@ -1,10 +1,10 @@
-<div class="message__row  {{#if myMessageFlag}} message__row_my {{/if}}" id="{{idMessage}}">
-  <div class="message__box {{#if myMessageFlag}} message__my {{else}} message__interlocutor {{/if}}">
+<div class="message__row  {{#if isMyMessage}} message__row_my {{/if}}" id="{{idMessage}}">
+  <div class="message__box {{#if isMyMessage}} message__my {{else}} message__interlocutor {{/if}}">
     <p class="message__message_text">
       {{ textMessage }}
     </p>
     <span class="message__time">
-      {{#if myMessageFlag}}<img src="{{checkReadingImg}}" alt="прочтение" />{{/if}}
+      {{#if isMyMessage}}<img src="{{checkReadingImg}}" alt="прочтение" />{{/if}}
       {{ createMessage }}
     </span>
   </div>

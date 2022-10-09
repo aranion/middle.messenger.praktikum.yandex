@@ -1,0 +1,31 @@
+<sector class="chatRightBox">
+    {{#if isSelectChat}}
+        <div class="chatRightBox__header">
+            <div class="chatRightBox__info">
+                {{{AvatarInterlocutor}}}
+                <div class="chatRightBox__info_name">Вадим</div>
+                {{{ModalSubMenuChangeFriends}}}
+            </div>
+        </div>
+        <div class="chatRightBox__messages">
+            <div class="chatRightBox__messages_date">
+                <div class="chatRightBox__messages_date_line"></div>
+                <time class="chatRightBox__messages_date_text">
+                    19 июня
+                </time>
+            </div>
+            {{#each Messages}}
+                {{{this}}}
+            {{/each}}
+        </div>
+        <div class="chatRightBox__bottom">
+            {{{ModalSubMenuAddContent}}}
+            {{{ChatRightBoxSubmit}}}
+        </div>
+    {{else}}
+        <div class="chatRightBox__empty">Выберите чат чтобы отправить сообщение</div>
+    {{/if}}
+
+    {{{ModalAddUserChat}}}
+    {{{ModalDeleteUserChat}}}
+</sector>

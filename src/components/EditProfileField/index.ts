@@ -24,8 +24,10 @@ export class EditProfileField extends Block<EditProfileFieldProps> {
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
-      ...this.props,
+      ...props,
     })
   }
 }

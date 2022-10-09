@@ -8,17 +8,14 @@
     <div
         class="infoProfile__row infoProfile__row_params infoProfile__row_change"
     >
-        <a href="{{linkProfileAllEdit}}" class="infoProfile__change">
-            Изменить данные
-        </a>
-        <a href="{{linkProfilePasswordEdit}}" class="infoProfile__change">
-            Изменить пароль
-        </a>
-        <a
-            href="{{linkExit}}"
-            class="infoProfile__change infoProfile__change_exit"
-        >
-            Выйти
-        </a>
+        <div class="infoProfile__change">
+            {{{LinkEdit}}}
+        </div>
+        <div class="infoProfile__change">
+            {{{LinkEditPassword}}}
+        </div>
+        <div class="infoProfile__change infoProfile__change_exit">
+            {{{LinkExit}}}
+        </div>
     </div>
 </div>

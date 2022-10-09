@@ -1,0 +1,46 @@
+@import '../../constants/var/vars.sass'
+
+.bodyModalAddUserChat
+	@include centerFlex()
+	font-size: 12px
+	line-height: 16px
+	text-align: center
+	color: $colorPrimary
+	justify-content: space-between
+	flex-direction: column
+	height: 100%
+
+	&__title
+		margin: 0
+
+	&__footer
+		flex-direction: column
+
+		button
+			min-width: 250px
+
+	&__error
+		color: $colorErorr
+
+	&__listUsers
+		list-style-type: none
+		padding: 0
+		overflow-y: auto
+		
+		&::-webkit-scrollbar
+			display: none
+
+		&_text
+			font-weight: bold
+
+		&_button
+			background: none
+			border: none
+			width: 100%
+			display: flex
+			justify-content: space-between
+			align-items: center
+			min-width: 235px
+
+			&:hover
+				background: $colorHover

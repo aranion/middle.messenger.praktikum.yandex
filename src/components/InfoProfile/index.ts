@@ -1,10 +1,14 @@
 import { Block, DefaultProps } from '../../utils/Block'
 import { FieldProfile, FieldProfileProps } from '../FieldProfile'
 import template from './template.hbs'
-import { ROUTE_LINK } from '../../router/routeLink'
+import { RouteLink } from '../../router/routeLink'
 import './styles.sass'
+import { Link } from '../Link'
+import AuthController from '../../controllers/AuthController'
+import { withStore } from '../../hock/withStore'
+import { State } from '../../store'
 
-export class InfoProfile extends Block<InfoProfileProps> {
+class BaseInfoProfile extends Block<InfoProfileProps> {
   constructor(props: InfoProfileProps) {
     super(props)
   }
@@ -13,24 +17,45 @@ export class InfoProfile extends Block<InfoProfileProps> {
     const { fields } = this.getProps()
 
     this.children.Fields = fields.map(field => {
-      return new FieldProfile({ ...field })
+      return new FieldProfile(field)
+    })
+
+    this.children.LinkEdit = new Link({
+      label: 'Изменить данные',
+      to: RouteLink.SETTINGS_EDIT
+    })
+
+    this.children.LinkEditPassword = new Link({
+      label: 'Изменить пароль',
+      to: RouteLink.SETTINGS_PASSWORD
+    })
+
+    this.children.LinkExit = new Link({
+      label: 'Выйти',
+      to: RouteLink.HOME,
+      events: {
+        click: () => {
+          AuthController.logout()
+        }
+      }
     })
   }
 
   render() {
-    const { fields } = this.getProps()
-    const nameUser = fields[2].value
+    const props = this.getProps()
+    const nameUser = props.settings?.user?.display_name || 'Имя не задано'
 
     return this.compile(template, {
-      ...this.props,
       nameUser,
-      linkProfileAllEdit: ROUTE_LINK.PROFILE_EDIT,
-      linkProfilePasswordEdit: ROUTE_LINK.PROFILE_PASSWORD,
-      linkExit: ROUTE_LINK.CHATS,
+      ...props,
+
     })
   }
 }
+export const InfoProfile = withStore<InfoProfileProps>((state) => ({
+  settings: state.settings
+}))(BaseInfoProfile)
 
-export type InfoProfileProps = DefaultProps & {
+export type InfoProfileProps = DefaultProps & Partial<State> & {
   fields: FieldProfileProps[]
 }

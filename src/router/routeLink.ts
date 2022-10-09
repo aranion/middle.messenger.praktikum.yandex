@@ -1,11 +1,11 @@
-export enum ROUTE_LINK {
+export enum RouteLink {
   HOME = '/',
-  SIGN_IN = '/signin',
-  REGISTRATION = '/registration',
-  NOT_FOUND = '/notfound',
-  SERVER_ERROR = '/servererror',
-  CHATS = '/chats',
-  PROFILE = '/profile',
-  PROFILE_EDIT = '/profileedit',
-  PROFILE_PASSWORD = '/profilepassword',
+  SIGN_IN = '/SignIn',
+  SIGN_UP = '/SignUp',
+  NOT_FOUND = '/NotFound',
+  SERVER_ERROR = '/ServerError',
+  MESSENGER = '/Messenger',
+  SETTINGS = '/Settings',
+  SETTINGS_EDIT = '/Settings/Edit',
+  SETTINGS_PASSWORD = '/Settings/Password',
 }

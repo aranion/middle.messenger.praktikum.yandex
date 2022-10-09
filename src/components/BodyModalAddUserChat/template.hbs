@@ -1,0 +1,18 @@
+<form id="{{formName}}" class="bodyModalAddUserChat">
+    <h2 class="bodyModalAddUserChat__title">{{title}}</h2>
+    <div class="bodyModalAddUserChat__body">
+        {{{Input}}}
+    </div>
+    <ul class="bodyModalAddUserChat__listUsers">
+        {{#each ItemSearchList}}
+            <li>
+                {{{this}}}
+            </li>
+        {{/each}}
+        {{#if isEmptyListUsers}} <li> Пользователь не найден </li>{{/if}}
+    </ul>
+    <span class="bodyModalAddUserChat__error">{{error}}</span>
+    <div class="bodyModalAddUserChat__footer">
+        {{{Button}}}
+    </div>
+</form>

@@ -1,15 +1,13 @@
-export const getAllValuesForm = (e: SubmitEvent) => {
-  e.preventDefault()
-  e.stopPropagation()
-
-  const FormElement = e.target as HTMLFormElement
+export const getAllValuesForm = <T>(form: HTMLFormElement): T => {
+  const FormElement = form
   const inputsList = FormElement.querySelectorAll('input')
   const dataForm = Object.values(inputsList).reduce((res, input) => {
-    res[input.id] = input.value
+    res.push([input.id, input.value])
 
     return res
-  }, {} as Record<string, string>)
+  }, [] as [string, string][])
 
-  console.log('FORM NAME: ', FormElement.id)
-  console.log(dataForm)
+  const dataFormObj = Object.fromEntries(dataForm) as T
+
+  return dataFormObj
 }

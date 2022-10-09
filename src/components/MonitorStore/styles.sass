@@ -1,0 +1,26 @@
+@import '../../constants/var/vars.sass'
+
+.monitorStore
+	z-index: 1
+	font-size: 9px
+	width: 75px
+	height: 75px
+	overflow: auto
+	background: gainsboro
+	position: fixed
+	top: 0
+	right: 100px
+	margin: 10px
+	border: 1px solid #000
+	opacity: 0.2
+
+	&::-webkit-scrollbar
+		display: none
+
+	&__title
+		margin: 0
+
+	&:hover
+		opacity: 1
+		height: 350px
+		width: 600px

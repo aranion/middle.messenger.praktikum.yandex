@@ -1,72 +1,112 @@
 import { FieldForm } from './../FieldForm/index'
 import { Block, DefaultProps } from '../../utils/Block'
 import { FieldProfileProps, Button, EditProfileField } from '../'
-import { Link } from '../../router/routePage'
 import template from './template.hbs'
 import './styles.sass'
+import { PropsWithRouter, withRouter } from '../../hock/withRouter'
+import { IdInputFieldPassword } from '../../constants/metaData/profile'
+import { getAllValuesForm } from '../../utils/getAllElementForm'
 
-export class EditProfile extends Block<Props> {
+export class BaseEditProfile extends Block<Props> {
   constructor(props: Props) {
     super(props)
+  }
+
+  public getFieldsFormValue<T>(): T {
+    const Form = this.element
+    const fieldsFormValue = getAllValuesForm(Form as HTMLFormElement) as T
+
+    return fieldsFormValue
+  }
+
+  private checkIdFields = (field: Block<any>) => {
+    const { inputProps } = field.getProps()
+    const id = inputProps.id as Exclude<keyof typeof IdInputFieldPassword, 'oldPassword'>
+
+    return id === 'newPassword' || id === 'newTwoPassword'
+  }
+
+  private getIsPasswordEqual = (fields: Block<any>[]) => {
+    const passwords = fields
+      .reduce<string[]>((res, field) => {
+        const isFieldPassword = this.checkIdFields(field)
+
+        if (isFieldPassword) {
+          const Element = field.getContent()
+          const value = Element?.querySelector('input')?.value
+
+          if (value !== undefined) {
+            res.push(value)
+          }
+        }
+
+        return res
+      }, [])
+
+    return passwords.every((password) => password === passwords[0])
+  }
+
+  public validateFields() {
+    let isFieldPassword = false
+    const { EditProfileField } = this.children
+    const fields = Array.isArray(EditProfileField) ? EditProfileField : []
+    const isPasswordEqual = this.getIsPasswordEqual(fields)
+    const isValidate = fields.reduce((res, field) => {
+      const children = field.getChildren()
+      const FieldForm = children.FieldForm as FieldForm
+      isFieldPassword = this.checkIdFields(field)
+
+      if (!Array.isArray(FieldForm)) {
+        const { ErrorValidateInput } = FieldForm.getChildren()
+        const isValidateValue = FieldForm.validate()
+
+        if (!Array.isArray(ErrorValidateInput)) {
+          const propsErrorValidateInput = ErrorValidateInput.getProps()
+
+          if (isFieldPassword) {
+            ErrorValidateInput.setProps({
+              ...propsErrorValidateInput,
+              isInvisible: isValidateValue && isPasswordEqual,
+              errorMessage: isPasswordEqual ? 'Ошибка' : 'Пароли не совпадают'
+            })
+          } else {
+            ErrorValidateInput.setProps({ ...propsErrorValidateInput, isInvisible: isValidateValue })
+          }
+        }
+        return res && isValidateValue
+      }
+    }, true)
+
+    return isFieldPassword ? isValidate && isPasswordEqual : isValidate
   }
 
   protected init(): void {
     const { fields, formName } = this.getProps()
 
-    const handleSubmitButton = () => {
-      const { EditProfileField } = this.children
-      const fields = Array.isArray(EditProfileField) ? EditProfileField : []
-
-      const isValidate = fields.reduce((res, field) => {
-        const children = field.getChildren()
-        const FieldForm = children.FieldForm as FieldForm
-        const isNotArrayFieldForm = !Array.isArray(FieldForm)
-
-        if (isNotArrayFieldForm) {
-          const { ErrorValidateInput } = FieldForm.getChildren()
-          const isArrayErrorValidateInput = Array.isArray(ErrorValidateInput)
-          const isValidateValue = FieldForm.validate()
-
-          if (!isArrayErrorValidateInput) {
-            const propsErrorValidateInput = ErrorValidateInput.getProps()
-
-            ErrorValidateInput.setProps({ ...propsErrorValidateInput, isInvisible: isValidateValue })
-          }
-          return res && isValidateValue
-        }
-      }, true)
-
-      if (isValidate) {
-        Link('PROFILE')
-      }
-    }
-
-    this.children.EditProfileField = fields.map(field => {
-      return new EditProfileField({ ...field })
-    })
+    this.children.EditProfileField = fields.map(field => new EditProfileField({ ...field }))
 
     this.children.ButtonSave = new Button({
       formName,
       buttonName: 'saveProfile',
       label: 'Сохранить',
-      type: 'submit',
-      events: {
-        click: handleSubmitButton
-      }
+      typeButton: 'submit',
     })
   }
 
   render() {
-    const { fields } = this.props
+    const props = this.getProps()
+    const nameUser = props.fields.find(({ inputProps }) => inputProps?.id === 'first_name')?.inputProps?.value
 
     return this.compile(template, {
-      nameUser: fields[2].inputProps?.value || '',
-      ...this.props,
+      nameUser,
+      ...props,
     })
   }
 }
 
-type Props = DefaultProps & {
+export const EditProfile = withRouter(BaseEditProfile)
+
+type Props = DefaultProps & PropsWithRouter & {
   fields: FieldProfileProps[]
   formName: string
 }

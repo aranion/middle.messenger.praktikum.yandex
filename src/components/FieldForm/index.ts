@@ -5,8 +5,8 @@ import { Input, InputProps } from '../Input'
 import template from './template.hbs'
 import './styles.sass'
 
-export class FieldForm extends Block<FieldFormProps> {
-  constructor(props: FieldFormProps) {
+export class FieldForm extends Block<PropsFieldForm> {
+  constructor(props: PropsFieldForm) {
     super(props)
 
     const FieldFormElement = this.getContent()
@@ -60,15 +60,15 @@ export class FieldForm extends Block<FieldFormProps> {
 
   public validate(): boolean {
     const { validateValue = defaultValidateValue, inputProps } = this.getProps()
-    const { fieldName } = inputProps
+    const { typeValidate } = inputProps
     const InputElement = this.children.Input
     const isNotArrayInputElement = !Array.isArray(InputElement)
 
-    if (fieldName && isNotArrayInputElement) {
+    if (typeValidate && isNotArrayInputElement) {
       const TargetInput = InputElement.getContent() as HTMLInputElement
       const inputValue = TargetInput.value
 
-      return validateValue(inputValue, fieldName)
+      return validateValue(inputValue, typeValidate)
     } else {
       return true
     }
@@ -86,16 +86,16 @@ export class FieldForm extends Block<FieldFormProps> {
   }
 
   render() {
-    const { classesList = [] } = this.props
+    const { classesList = [], ...props } = this.getProps()
 
     return this.compile(template, {
-      ...this.props,
-      classes: classesList.join(' ')
+      classes: classesList.join(' '),
+      ...props,
     })
   }
 }
 
-export type FieldFormProps = DefaultProps & {
+export type PropsFieldForm = DefaultProps & {
   label?: string
   inputProps: InputProps
   errorMessage?: string

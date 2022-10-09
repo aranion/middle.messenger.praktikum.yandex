@@ -9,8 +9,10 @@ export class FieldProfile extends Block<FieldProfileProps> {
   }
 
   render() {
+    const props = this.getProps()
+
     return this.compile(template, {
-      ...this.props,
+      ...props,
     })
   }
 }

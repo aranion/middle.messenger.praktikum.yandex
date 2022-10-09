@@ -1,5 +1,6 @@
 import { EventBus } from './EventBus'
 import { nanoid } from 'nanoid'
+import { cloneDeep, isEqual } from './helpers'
 
 export class Block<P extends DefaultProps = any> {
   static EVENTS = {
@@ -15,11 +16,6 @@ export class Block<P extends DefaultProps = any> {
   private eventBus: () => EventBus<EventsList>
   private _element: HTMLElement | null = null;
 
-  /** JSDoc
-   * @param {Object} propsWitchChildren
-   *
-   * @returns {void}
-   */
   constructor(propsWitchChildren = {}) {
     const eventBus = new EventBus<EventsList>()
     const { props, children } = this._getChildrenAndProps(propsWitchChildren)
@@ -74,23 +70,21 @@ export class Block<P extends DefaultProps = any> {
   }
 
   private _makePropsProxy(props: P) {
-    const self = this
-
     return new Proxy(props, {
-      get(target, prop) {
+      get: (target, prop) => {
         const value = target[prop as keyof typeof target]
 
         return typeof value === 'function' ? value.bind(target) : value
       },
-      set(newProps, prop, value) {
-        const oldProps = { ...newProps }
+      set: (newProps, prop, value) => {
+        const oldProps = cloneDeep(newProps)
 
         newProps[prop as keyof typeof newProps] = value
 
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, newProps)
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, newProps)
         return true
       },
-      deleteProperty() {
+      deleteProperty: () => {
         throw new Error('Нет доступа')
       },
     })
@@ -121,8 +115,8 @@ export class Block<P extends DefaultProps = any> {
   protected componentDidMount() { }
 
   protected componentDidUpdate(oldProps: P, newProps: P) {
-    if (oldProps === newProps) {
-      console.log('oldProps =', oldProps, 'newProps =', newProps)
+    if (!isEqual(oldProps, newProps)) {
+      console.log('componentDidUpdate')
     }
 
     return true
@@ -130,22 +124,6 @@ export class Block<P extends DefaultProps = any> {
 
   protected render(): DocumentFragment {
     return new DocumentFragment()
-  }
-
-  protected show() {
-    const element = this.getContent()
-
-    if (element) {
-      element.style.display = 'block'
-    }
-  }
-
-  protected hide() {
-    const element = this.getContent()
-
-    if (element) {
-      element.style.display = 'none'
-    }
   }
 
   protected compile(template: TemplateDelegate, context: P & ContextTemplate) {
@@ -216,6 +194,21 @@ export class Block<P extends DefaultProps = any> {
     return this.props
   }
 
+  public show(displayType: CssDisplayType = 'block') {
+    const element = this.getContent()
+
+    if (element) {
+      element.style.display = displayType
+    }
+  }
+
+  public hide() {
+    const element = this.getContent()
+
+    if (element) {
+      element.style.display = 'none'
+    }
+  }
 }
 
 export interface DefaultProps {
@@ -226,3 +219,11 @@ type Children = Record<string, Block | Block[]>
 type ContextTemplate = Record<string, unknown>
 type TemplateDelegate = (context: ContextTemplate) => string
 type EventsList = keyof typeof Block.EVENTS
+type CssDisplayType = 'block'
+  | 'inline'
+  | 'flex'
+  | 'grid'
+  | 'inline-bloc'
+  | 'inline-flex'
+  | 'inline-grid'
+

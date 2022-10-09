@@ -2,6 +2,10 @@
 
 .chatItem
   width: 100%
+  cursor: pointer
+
+  &__selected
+    background: $colorHover
 
   &__wrapper
     @include centerFlex()
@@ -22,11 +26,13 @@
 
   &__message
     max-width: 200px
-    height: 35px
-    font-weight: 500
-    font-size: 12px
-    line-height: 15px
+    height: 30px
     padding-right: 10px
+    font-size: 12px
+    font-weight: 500
+    line-height: 15px
+    overflow: hidden
+    max-height: 30px
 
   &__time
     max-width: 30px
