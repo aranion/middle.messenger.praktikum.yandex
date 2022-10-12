@@ -1,17 +1,16 @@
-const path = require("path");
-const express = require('express');
+const path = require("path")
+const express = require('express')
+const fallback = require('express-history-api-fallback')
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = express()
+const PORT = process.env.PORT || 3000
 
-app.use("/", express.static(path.resolve(__dirname, '../dist/')));
-app.get(`/api/v1/text`, (req, res) => {
-  res.status(200).send("Hello, World!");
+app.use(express.static(path.resolve(__dirname, '../dist')))
+app.use(fallback('/', { root: path.resolve(__dirname, '../dist') }))
+app.use("*", (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../dist'))
 })
-app.put(`/api/v1/json`, (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.status(201).send({ deleted: true });
-})
-app.listen(PORT, function () {
-  console.log(`Сервер запущен на порту ${PORT}`);
-}); 
+
+app.listen(PORT, () => {
+  console.log(`Сервер запущен на порту ${PORT}`)
+}) 

@@ -9,7 +9,9 @@
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
+    "moduleResolution": "Node",
     "lib": [
       "ESNext",
       "DOM"
@@ -19,5 +21,8 @@
     "node_modules",
     "dist",
     "server"
+  ],
+  "include": [
+    "./src/typings/"
   ]
 }

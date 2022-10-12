@@ -1,4 +1,4 @@
-export const getAllValuesForm = <T>(form: HTMLFormElement): T => {
+export const getAllValuesForm = (form: HTMLFormElement): unknown => {
   const FormElement = form
   const inputsList = FormElement.querySelectorAll('input')
   const dataForm = Object.values(inputsList).reduce((res, input) => {
@@ -7,7 +7,7 @@ export const getAllValuesForm = <T>(form: HTMLFormElement): T => {
     return res
   }, [] as [string, string][])
 
-  const dataFormObj = Object.fromEntries(dataForm) as T
+  const dataFormObj = Object.fromEntries(dataForm) 
 
   return dataFormObj
 }
