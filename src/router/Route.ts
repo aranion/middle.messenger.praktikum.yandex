@@ -1,4 +1,4 @@
-import { Block } from '../utils/Block'
+import { Block, DefaultProps } from '../utils/Block'
 import { Query } from './Router'
 import { renderContent } from './utils'
 
@@ -29,4 +29,8 @@ export class Route {
   leave() {
     this.block = null
   }
+}
+
+export interface BlockConstructable<P = any> {
+  new(props: P): Block<P & DefaultProps>;
 }

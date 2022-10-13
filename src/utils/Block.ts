@@ -168,7 +168,7 @@ export class Block<P extends DefaultProps = any> {
     return templateElement.content
   }
 
-  protected get element() {
+  public get element() {
     return this._element
   }
 

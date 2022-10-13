@@ -40,7 +40,7 @@ class Router<R extends string> {
     this._onRoute(pathname)
   }
 
-  public buck() {
+  public back() {
     this.history.back()
   }
 

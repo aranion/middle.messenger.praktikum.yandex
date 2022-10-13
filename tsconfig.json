@@ -3,7 +3,7 @@
     "outDir": "dist",
     "target": "es2016",
     "declaration": false,
-    "module": "commonjs",
+    "module": "CommonJS",
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "Node",
+    "forceConsistentCasingInFileNames": true,
     "lib": [
       "ESNext",
       "DOM"
@@ -22,7 +23,12 @@
     "dist",
     "server"
   ],
+  "ts-node": {
+    "files": true
+  },
   "include": [
-    "./src/typings/"
+    "src/**/*",
+    "src/**/*.test.ts",
+    "server/**/*"
   ]
 }
