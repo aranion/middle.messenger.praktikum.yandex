@@ -1,6 +1,6 @@
 import Router from './Router'
 import { expect } from 'chai'
-import sinon from 'sinon'
+import { fake } from 'sinon'
 import { Block } from '../utils/Block'
 
 describe('Router', () => {
@@ -16,7 +16,7 @@ describe('Router', () => {
     }
   }
 
-  const getContentFake = sinon.fake.returns(document.createElement('div'))
+  const getContentFake = fake.returns(document.createElement('div'))
 
   const BlockMock = class {
     getContent = getContentFake;

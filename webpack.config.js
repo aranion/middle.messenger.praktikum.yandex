@@ -40,7 +40,7 @@ const config = {
       },
       {
         test: /\.(sc|sa|c)ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
@@ -53,7 +53,7 @@ const config = {
       {
         test: /\.hbs$/,
         use: [{
-          loader: "handlebars-loader"
+          loader: 'handlebars-loader'
         }]
       },
     ],
