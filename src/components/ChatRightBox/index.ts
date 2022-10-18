@@ -45,6 +45,7 @@ export class BaseChatsRightBox extends Block<Props> {
       return true
     }
 
+    console.log(oldProps, newProps)
     return false
   }
 

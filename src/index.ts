@@ -1,4 +1,3 @@
-import { MonitorStore } from './components/MonitorStore/index'
 import './assets/normalize.sass'
 import { Notification } from './components'
 import AuthController from './controllers/AuthController'
@@ -35,11 +34,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   const root = document.querySelector('#root')
   const notification = new Notification({}).getContent()
-  const monitorStore = new MonitorStore({}).getContent()
 
-  if (root && notification && monitorStore) {
+  if (root && notification) {
     root.after(notification)
-    root.after(monitorStore)
   }
 
 })

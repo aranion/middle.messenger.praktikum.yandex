@@ -16,6 +16,11 @@ export class ModalSubMenu extends Block<ModalSubMenuProps> {
       e.stopPropagation()
 
       const { modals } = this.getProps()
+
+      if (!modals) {
+        return
+      }
+      
       const { ModalAddUserChat, ModalDeleteUserChat } = modals
       const idButton = (e.currentTarget as HTMLButtonElement)?.id
 
@@ -66,7 +71,7 @@ export type ModalSubMenuProps = DefaultProps & {
     left: string,
     right: string,
   }
-  modals: {
+  modals?: {
     ModalAddUserChat: Modal,
     ModalDeleteUserChat: Modal
   }
